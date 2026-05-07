@@ -13,6 +13,13 @@ MODELS = {
     "no_region": RESULTS_DIR / "Prediction_no_region.csv",
 }
 
+PREDICTION_RATE_MODELS = {
+    "un_m49": RESULTS_DIR / "Prediction_rate_un_m49.csv",
+    "wb": RESULTS_DIR / "Prediction_rate_wb.csv",
+    "who": RESULTS_DIR / "Prediction_rate_who.csv",
+    "no_region": RESULTS_DIR / "Prediction_rate_no_region.csv",
+}
+
 
 def load_prediction(path):
     df = pd.read_csv(path)
@@ -31,6 +38,25 @@ def load_prediction(path):
     df = df.dropna(subset=["Approval rate", "Prediction (Approval rate)"])
     df["Prediction_delta"] = df["Approval rate"] - df["Prediction (Approval rate)"]
     return df
+
+
+def load_prediction_rate(path):
+    df = pd.read_csv(path)
+    required = [
+        "Country",
+        "Approval rate",
+        "Prediction (Approval rate)",
+        "Prediction_delta",
+        "Prediction_rate",
+    ]
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        raise ValueError(f"{path} is missing required columns: {missing}")
+
+    df = df.copy()
+    for col in ["Approval rate", "Prediction (Approval rate)", "Prediction_delta", "Prediction_rate"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    return df.dropna(subset=["Prediction_rate"])
 
 
 def residual_summary(model_name, df):
@@ -119,6 +145,28 @@ def plot_residuals_vs_fitted(model_name, df, output_path):
     output_path.write_text("\n".join(parts), encoding="utf-8")
 
 
+def format_relative_residual_row(row):
+    return (
+        f"{row['Country']} "
+        f"(rate={row['Prediction_rate']:.3f}, "
+        f"delta={row['Prediction_delta']:.3f})"
+    )
+
+
+def relative_residual_table(direction, limit=15):
+    columns = {}
+    for model_name, path in PREDICTION_RATE_MODELS.items():
+        df = load_prediction_rate(path)
+        if direction == "positive":
+            selected = df[df["Prediction_rate"] > 1].sort_values("Prediction_rate", ascending=False)
+        elif direction == "negative":
+            selected = df[df["Prediction_rate"] < 1].sort_values("Prediction_rate", ascending=True)
+        else:
+            raise ValueError(f"Unknown direction: {direction}")
+        columns[model_name] = selected.head(limit).apply(format_relative_residual_row, axis=1).reset_index(drop=True)
+    return pd.DataFrame(columns)
+
+
 def main():
     SUPPORT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -134,6 +182,14 @@ def main():
 
     summary_df = pd.DataFrame(summaries)
     summary_df.to_csv(SUPPORT_DIR / "Residual_summary_by_model.csv", index=False)
+    relative_residual_table("positive").to_csv(
+        SUPPORT_DIR / "Relative_residuals_positive_by_model.csv",
+        index=False,
+    )
+    relative_residual_table("negative").to_csv(
+        SUPPORT_DIR / "Relative_residuals_negative_by_model.csv",
+        index=False,
+    )
 
 
 if __name__ == "__main__":

@@ -92,11 +92,13 @@ This does not mean that these parameters are substantively unimportant. Their bi
 
 The residual summaries and residuals-versus-fitted plots in `data/support/` provide an additional model check. Across all four specifications, mean residuals are approximately zero, which is expected for these fitted linear models. The residual spread follows the same ordering as the score tables: the UN M49 model has the smallest residual standard deviation (0.090) and mean absolute residual (0.069), followed by the World Bank regional model (0.108 and 0.082), the WHO regional model (0.115 and 0.087), and the no-region model (0.134 and 0.100). The largest absolute residual is also smallest in the UN M49 model (0.294) and largest in the no-region model (0.437). This supports the same conclusion as the score and prediction-rate checks: the UN M49 specification leaves less unexplained error than the alternatives.
 
+The largest positive and negative relative residuals are reported in `data/support/Relative_residuals_positive_by_model.csv` and `data/support/Relative_residuals_negative_by_model.csv`. These tables use `Prediction_rate`, the ratio of observed approval rate to fitted approval rate, rather than only the absolute residual. This is useful because the same absolute difference can be more consequential when the fitted approval rate is low. The positive table identifies countries where observed approval is high relative to the fitted value; the negative table identifies countries where observed approval is low relative to the fitted value.
+
+The relative-residual tables also show that several countries recur among the largest positive or negative deviations across model specifications. This supports two interpretations. First, the model comparison is stable enough to support the conclusion that the UN M49 specification has the best fit among the current alternatives. Second, the largest country-level deviations are not explained only by the choice of regional classification. Persistent deviations across specifications may indicate omitted country-specific conditions, applicant-composition differences, documentation or verification factors, or other application-level mechanisms not represented in the current country-level dataset.
+
 Additional checks could be added before treating the model interpretation as fully stable:
 
-- inspect residuals by region to see whether one region system leaves systematic unexplained error;
 - test whether results change if approval rate is weighted by total application count;
-- report countries with the largest positive and negative residuals under each regional specification.
 
 These checks would not turn the analysis into a causal design. Their role is narrower: to show whether the descriptive model fit and the comparison between regional classifications are stable under reasonable alternative specifications.
 
