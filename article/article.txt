@@ -1,0 +1,98 @@
+# Title
+
+TODO: Add a specific scientific title naming Immigration New Zealand student visa decisions, the 2022-2025 period, and the main analytical comparison.
+
+# Abstract
+
+TODO: Write after the main analysis is verified. Include the research question, data period, source data, methods, main empirical result, and principal limitation.
+
+# Introduction
+
+TODO: State the empirical problem and research question early. Keep the framing narrow: the article studies observed variation in INZ fee-paying student visa approval rates by applicant nationality and country-level reference data.
+
+# Data
+
+TODO: Describe the source INZ decision files for 2022, 2023, 2024, and 2025. Define the unit of observation, variables, exclusions, country matching, and the distinction between original, prepared, combined, and result files.
+
+TODO: Describe the additional country-level reference tables from the World Bank, WHO, and UN M49. Explain what each table contributes and how countries were joined across sources.
+
+# Methods
+
+TODO: Describe the KNIME and Python workflow. Explain the unification of yearly INZ files, aggregation by country, calculation of approval rate and log10 applications, joins with reference data, correlation analysis, and linear regression models.
+
+TODO: Explain the three regional model specifications: UN M49 regions, WHO regions, and World Bank regions. State that the models are descriptive or explanatory approximations, not causal designs and not operational prediction systems.
+
+# Results
+
+## Descriptive Results
+
+The unified INZ decision table contains 179 countries or applicant nationalities and 148,746 total fee-paying student visa applications across 2022-2025. Across these records, the overall approval rate is approximately 81.3 percent.
+
+Application volume is unevenly distributed across countries. The largest application counts are from China, India, Japan, Nepal, the United States of America, Sri Lanka, Germany, Thailand, the Philippines, and South Korea. These high-volume countries do not all have the same approval rate. For example, China, Japan, the United States of America, Germany, and South Korea have approval rates above 96 percent, while India and Nepal have lower approval rates in the current prepared table.
+
+The relationship between application volume and approval rate is positive but not strong. In the unified country-level table, the Pearson correlation between log10 total applications and approval rate is about 0.27, with p = 0.000254 and 177 degrees of freedom. This supports a limited descriptive statement: countries with more applications tend to have higher approval rates, but application volume alone does not explain most of the variation in approval rates.
+
+## Correlation With Country-Level Indicators
+
+After joining the INZ data with WHO, World Bank, and UN M49 reference data, the combined modelling table contains 110 countries. This reduction reflects the availability of matched country-level reference variables, the removal of rows with missing numerical values, and the exclusion of countries with fewer than 10 total applications across the four-year period.
+
+Several country-level indicators are strongly correlated with approval rate. Approval rate is negatively correlated with WHO under-five mortality per 1,000 live births (r = -0.746, p = 1.24e-30) and WHO maternal mortality per 100,000 live births (r = -0.681, p = 7.97e-24). Approval rate is positively correlated with life expectancy at birth (r = 0.715, p = 4.19e-27), internet users as a percentage of population (r = 0.633, p = 7.62e-20), physician density per 10,000 population (r = 0.552, p = 1.56e-14), GNI per capita using the Atlas method (r = 0.520, p = 8.18e-13), and GDP per capita in current USD (r = 0.501, p = 7.42e-12).
+
+These correlations indicate that approval rates are associated with broad country-level development, health, and income measures. They should not be read as causal effects. The data are aggregated by country, and the variables describe country-level conditions rather than individual applicants.
+
+## Regression Approximation
+
+Three linear regression specifications were estimated using different regional classifications: UN M49, World Bank regions, and WHO regions. In each case, approval rate is the dependent variable, and the model uses selected WHO, World Bank, and regional classification variables as explanatory inputs.
+
+The UN M49 specification has the strongest fit among the three current models. Its R-squared is 0.867, with mean absolute error of 0.069 and root mean squared error of 0.090. The World Bank regional specification has R-squared of 0.812, mean absolute error of 0.082, and root mean squared error of 0.107. The WHO regional specification has R-squared of 0.786, mean absolute error of 0.087, and root mean squared error of 0.114.
+
+These scores suggest that the current country-level variables explain a substantial share of the variation in country-level approval rates, especially when UN M49 regions are included. The better fit of the UN M49 model may reflect the more detailed regional division used in that specification. This interpretation is supported by the robustness and sensitivity checks described below, but it should remain limited to model fit rather than causal explanation.
+
+In the UN M49 coefficient table, several variables have p-values below 0.05. These include urban population percentage, life expectancy at birth, and several UN M49 regional indicators. The signs and magnitudes of these coefficients should be interpreted carefully because the model includes correlated country-level indicators and categorical regional variables. The coefficients show conditional associations within the fitted model, not independent causal effects.
+
+## Prediction Deviations
+
+The UN M49 prediction table compares observed approval rates with fitted approval rates. The mean observed approval rate and mean fitted approval rate are both approximately 0.754 in the modelling table. Most fitted values are close enough to observed values to support the conclusion that the model captures major structure in the data.
+
+Some countries deviate more strongly from the fitted values. Countries where the observed approval rate is lower than 80 percent of the fitted value include Chad, Afghanistan, Uzbekistan, Turkey, Myanmar, Cameroon, Yemen, Tanzania, Algeria, and Ghana. Countries where the observed approval rate is higher than 120 percent of the fitted value include Kazakhstan, Nigeria, Sudan, and the Democratic Republic of Congo.
+
+These cases should not automatically be treated as technical outliers. They show where the current country-level variables and regional classifications do not fit the observed approval rate well. They may point to omitted variables, data quality issues, country-specific applicant composition, policy or processing factors, or other mechanisms not represented in the current dataset.
+
+# Robustness or Sensitivity Checks
+
+The first sensitivity check is already built into the current workflow: the same modelling task is estimated with three alternative regional classifications. The UN M49 model has the strongest fit, followed by the World Bank regional model and the WHO regional model. This comparison supports the statement that the regional classification matters for model fit and that the more detailed UN M49 classification fits the current data best.
+
+The coefficient tables for the WHO and World Bank regional specifications are useful for comparing model outputs across alternative region systems. They are not, by themselves, enough to complete the robustness review. They show whether signs, magnitudes, and statistical significance change across region definitions, but they do not test all modelling assumptions.
+
+Additional checks should be added before treating the model interpretation as stable:
+
+- compare the full score tables across the UN M49, WHO, and World Bank models;
+- inspect whether the same country-level variables remain important across specifications;
+- calculate multicollinearity diagnostics, especially variance inflation factors for numerical predictors;
+- inspect residuals against fitted values to check whether errors are structured rather than random;
+- inspect residuals by region to see whether one region system leaves systematic unexplained error;
+- test sensitivity to the current exclusion rule for countries with fewer than 10 total applications;
+- test whether results change if approval rate is weighted by total application count;
+- report countries with the largest positive and negative residuals under each regional specification.
+
+These checks would not turn the analysis into a causal design. Their role is narrower: to show whether the descriptive model fit and the comparison between regional classifications are stable under reasonable alternative specifications.
+
+# Discussion
+
+TODO: Interpret what the descriptive and model results imply about country-level variation in INZ student visa approval rates. Keep the discussion proportional to the evidence and avoid individual-level or causal claims.
+
+# Limitations
+
+TODO: Address aggregation by country, omitted applicant-level variables, country matching, missing values, regional classification choices, and the limits of linear regression for this question.
+
+# Conclusion
+
+TODO: State the empirical contribution and the next question made visible by the analysis.
+
+# References
+
+TODO: Add INZ source pages and references for World Bank, WHO, and UN M49 data.
+
+# Appendices or Supplementary Material
+
+TODO: Add workflow details, variable definitions, joined-data diagnostics, model diagnostics, and additional result tables.
