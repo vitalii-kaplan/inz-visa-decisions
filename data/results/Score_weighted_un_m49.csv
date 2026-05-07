@@ -1,0 +1,13 @@
+Metric,Value
+weighted_r_squared,0.8550067894932967
+weighted_mae,0.06758801565269548
+weighted_mse,0.007825083370557437
+weighted_rmse,0.08845950130176768
+weighted_mean_signed_error,-4.373263695559676e-16
+unweighted_r_squared,0.8636160182949478
+unweighted_mae,0.07056565778558303
+unweighted_mse,0.008308913610445107
+unweighted_rmse,0.09115324245711233
+unweighted_mean_signed_error,0.0003274626365747778
+weighted_mape,
+unweighted_mape,
