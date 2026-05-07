@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<style>
+text { font-family: Arial, Helvetica, sans-serif; fill: #222; }
+.axis { stroke: #333; stroke-width: 1.2; }
+.grid { stroke: #d8d8d8; stroke-width: 0.8; }
+.zero { stroke: #444; stroke-width: 1.3; }
+.point { fill: #2b6f8f; fill-opacity: 0.82; }
+</style>
+<rect x="0" y="0" width="800" height="600" fill="white"/>
+<text x="400.0" y="28" text-anchor="middle" font-size="18">Residuals vs fitted values: who</text>
+<line class="grid" x1="90.00" y1="55" x2="90.00" y2="520"/>
+<line class="axis" x1="90.00" y1="520" x2="90.00" y2="525"/>
+<text x="90.00" y="544" text-anchor="middle" font-size="12">0.00</text>
+<line class="grid" x1="258.75" y1="55" x2="258.75" y2="520"/>
+<line class="axis" x1="258.75" y1="520" x2="258.75" y2="525"/>
+<text x="258.75" y="544" text-anchor="middle" font-size="12">0.30</text>
+<line class="grid" x1="427.50" y1="55" x2="427.50" y2="520"/>
+<line class="axis" x1="427.50" y1="520" x2="427.50" y2="525"/>
+<text x="427.50" y="544" text-anchor="middle" font-size="12">0.60</text>
+<line class="grid" x1="596.25" y1="55" x2="596.25" y2="520"/>
+<line class="axis" x1="596.25" y1="520" x2="596.25" y2="525"/>
+<text x="596.25" y="544" text-anchor="middle" font-size="12">0.90</text>
+<line class="grid" x1="765.00" y1="55" x2="765.00" y2="520"/>
+<line class="axis" x1="765.00" y1="520" x2="765.00" y2="525"/>
+<text x="765.00" y="544" text-anchor="middle" font-size="12">1.20</text>
+<line class="grid" x1="90" y1="520.00" x2="765" y2="520.00"/>
+<line class="axis" x1="85" y1="520.00" x2="90" y2="520.00"/>
+<text x="80" y="524.00" text-anchor="end" font-size="12">-0.50</text>
+<line class="grid" x1="90" y1="403.75" x2="765" y2="403.75"/>
+<line class="axis" x1="85" y1="403.75" x2="90" y2="403.75"/>
+<text x="80" y="407.75" text-anchor="end" font-size="12">-0.25</text>
+<line class="grid" x1="90" y1="287.50" x2="765" y2="287.50"/>
+<line class="axis" x1="85" y1="287.50" x2="90" y2="287.50"/>
+<text x="80" y="291.50" text-anchor="end" font-size="12">0.00</text>
+<line class="grid" x1="90" y1="171.25" x2="765" y2="171.25"/>
+<line class="axis" x1="85" y1="171.25" x2="90" y2="171.25"/>
+<text x="80" y="175.25" text-anchor="end" font-size="12">0.25</text>
+<line class="grid" x1="90" y1="55.00" x2="765" y2="55.00"/>
+<line class="axis" x1="85" y1="55.00" x2="90" y2="55.00"/>
+<text x="80" y="59.00" text-anchor="end" font-size="12">0.50</text>
+<line class="zero" x1="90" y1="287.50" x2="765" y2="287.50"/>
+<line class="axis" x1="90" y1="55" x2="90" y2="520"/>
+<line class="axis" x1="90" y1="520" x2="765" y2="520"/>
+<text x="427.5" y="572" text-anchor="middle" font-size="14">Prediction (Approval rate)</text>
+<text x="22" y="287.5" text-anchor="middle" font-size="14" transform="rotate(-90 22 287.5)">Prediction delta</text>
+<circle class="point" cx="243.38" cy="348.80" r="3.2"><title>Afghanistan</title></circle>
+<circle class="point" cx="454.46" cy="395.04" r="3.2"><title>Algeria</title></circle>
+<circle class="point" cx="526.13" cy="249.06" r="3.2"><title>Argentina</title></circle>
+<circle class="point" cx="655.64" cy="290.10" r="3.2"><title>Austria</title></circle>
+<circle class="point" cx="471.24" cy="343.42" r="3.2"><title>Bangladesh</title></circle>
+<circle class="point" cx="467.49" cy="250.81" r="3.2"><title>Belarus</title></circle>
+<circle class="point" cx="609.63" cy="254.56" r="3.2"><title>Belgium</title></circle>
+<circle class="point" cx="459.04" cy="298.79" r="3.2"><title>Bhutan</title></circle>
+<circle class="point" cx="506.37" cy="247.57" r="3.2"><title>Bolivia</title></circle>
+<circle class="point" cx="428.80" cy="218.82" r="3.2"><title>Botswana</title></circle>
+<circle class="point" cx="510.90" cy="220.80" r="3.2"><title>Brazil</title></circle>
+<circle class="point" cx="704.81" cy="330.74" r="3.2"><title>Brunei Darussalam</title></circle>
+<circle class="point" cx="542.71" cy="274.24" r="3.2"><title>Bulgaria</title></circle>
+<circle class="point" cx="537.68" cy="231.78" r="3.2"><title>Cambodia</title></circle>
+<circle class="point" cx="313.42" cy="408.05" r="3.2"><title>Cameroon</title></circle>
+<circle class="point" cx="683.87" cy="320.08" r="3.2"><title>Canada</title></circle>
+<circle class="point" cx="175.18" cy="357.92" r="3.2"><title>Chad</title></circle>
+<circle class="point" cx="584.33" cy="277.17" r="3.2"><title>Chile</title></circle>
+<circle class="point" cx="595.64" cy="256.20" r="3.2"><title>China</title></circle>
+<circle class="point" cx="534.32" cy="306.88" r="3.2"><title>Colombia</title></circle>
+<circle class="point" cx="591.51" cy="295.21" r="3.2"><title>Costa Rica</title></circle>
+<circle class="point" cx="638.89" cy="281.05" r="3.2"><title>Czech Republic</title></circle>
+<circle class="point" cx="234.98" cy="320.17" r="3.2"><title>Democratic Republic of Congo</title></circle>
+<circle class="point" cx="624.05" cy="265.44" r="3.2"><title>Denmark</title></circle>
+<circle class="point" cx="513.12" cy="351.13" r="3.2"><title>Dominican Republic</title></circle>
+<circle class="point" cx="581.04" cy="361.28" r="3.2"><title>Ecuador</title></circle>
+<circle class="point" cx="424.61" cy="303.14" r="3.2"><title>Egypt</title></circle>
+<circle class="point" cx="448.47" cy="285.76" r="3.2"><title>Ethiopia</title></circle>
+<circle class="point" cx="495.82" cy="253.50" r="3.2"><title>Fiji</title></circle>
+<circle class="point" cx="648.11" cy="324.75" r="3.2"><title>Finland</title></circle>
+<circle class="point" cx="632.95" cy="281.78" r="3.2"><title>France</title></circle>
+<circle class="point" cx="631.48" cy="271.92" r="3.2"><title>Germany</title></circle>
+<circle class="point" cx="351.17" cy="292.03" r="3.2"><title>Ghana</title></circle>
+<circle class="point" cx="627.03" cy="273.79" r="3.2"><title>Great Britain</title></circle>
+<circle class="point" cx="610.99" cy="291.93" r="3.2"><title>Greece</title></circle>
+<circle class="point" cx="493.13" cy="282.57" r="3.2"><title>Honduras</title></circle>
+<circle class="point" cx="615.17" cy="264.95" r="3.2"><title>Hungary</title></circle>
+<circle class="point" cx="505.72" cy="368.15" r="3.2"><title>India</title></circle>
+<circle class="point" cx="536.09" cy="214.46" r="3.2"><title>Indonesia</title></circle>
+<circle class="point" cx="429.12" cy="321.14" r="3.2"><title>Iran</title></circle>
+<circle class="point" cx="425.99" cy="343.83" r="3.2"><title>Iraq</title></circle>
+<circle class="point" cx="662.94" cy="304.82" r="3.2"><title>Ireland</title></circle>
+<circle class="point" cx="613.55" cy="318.14" r="3.2"><title>Israel</title></circle>
+<circle class="point" cx="648.07" cy="286.17" r="3.2"><title>Italy</title></circle>
+<circle class="point" cx="532.82" cy="227.31" r="3.2"><title>Jamaica</title></circle>
+<circle class="point" cx="706.63" cy="334.27" r="3.2"><title>Japan</title></circle>
+<circle class="point" cx="358.56" cy="232.73" r="3.2"><title>Jordan</title></circle>
+<circle class="point" cx="490.55" cy="264.06" r="3.2"><title>Kazakhstan</title></circle>
+<circle class="point" cx="361.09" cy="295.82" r="3.2"><title>Kenya</title></circle>
+<circle class="point" cx="443.36" cy="217.44" r="3.2"><title>Kiribati</title></circle>
+<circle class="point" cx="550.09" cy="210.25" r="3.2"><title>Kuwait</title></circle>
+<circle class="point" cx="458.59" cy="282.20" r="3.2"><title>Kyrgyzstan</title></circle>
+<circle class="point" cx="537.40" cy="210.83" r="3.2"><title>Laos</title></circle>
+<circle class="point" cx="621.75" cy="300.83" r="3.2"><title>Latvia</title></circle>
+<circle class="point" cx="416.74" cy="234.12" r="3.2"><title>Lebanon</title></circle>
+<circle class="point" cx="387.10" cy="364.01" r="3.2"><title>Libya</title></circle>
+<circle class="point" cx="605.45" cy="248.61" r="3.2"><title>Luxembourg</title></circle>
+<circle class="point" cx="578.89" cy="237.91" r="3.2"><title>Malaysia</title></circle>
+<circle class="point" cx="538.54" cy="273.77" r="3.2"><title>Maldives</title></circle>
+<circle class="point" cx="515.97" cy="237.48" r="3.2"><title>Mauritius</title></circle>
+<circle class="point" cx="541.22" cy="231.13" r="3.2"><title>Mexico</title></circle>
+<circle class="point" cx="558.28" cy="393.51" r="3.2"><title>Mongolia</title></circle>
+<circle class="point" cx="401.96" cy="299.21" r="3.2"><title>Morocco</title></circle>
+<circle class="point" cx="475.59" cy="377.22" r="3.2"><title>Myanmar</title></circle>
+<circle class="point" cx="409.41" cy="371.27" r="3.2"><title>Nepal</title></circle>
+<circle class="point" cx="613.88" cy="260.27" r="3.2"><title>Netherlands</title></circle>
+<circle class="point" cx="226.12" cy="204.73" r="3.2"><title>Nigeria</title></circle>
+<circle class="point" cx="647.43" cy="291.21" r="3.2"><title>Norway</title></circle>
+<circle class="point" cx="558.79" cy="230.40" r="3.2"><title>Oman</title></circle>
+<circle class="point" cx="314.28" cy="290.98" r="3.2"><title>Pakistan</title></circle>
+<circle class="point" cx="645.70" cy="319.59" r="3.2"><title>Panama</title></circle>
+<circle class="point" cx="572.86" cy="285.52" r="3.2"><title>Papua New Guinea</title></circle>
+<circle class="point" cx="538.72" cy="256.85" r="3.2"><title>Paraguay</title></circle>
+<circle class="point" cx="533.89" cy="321.31" r="3.2"><title>Peru</title></circle>
+<circle class="point" cx="562.41" cy="288.41" r="3.2"><title>Philippines</title></circle>
+<circle class="point" cx="576.33" cy="224.53" r="3.2"><title>Poland</title></circle>
+<circle class="point" cx="639.48" cy="293.96" r="3.2"><title>Portugal</title></circle>
+<circle class="point" cx="599.39" cy="284.03" r="3.2"><title>Romania</title></circle>
+<circle class="point" cx="530.39" cy="329.48" r="3.2"><title>Russia</title></circle>
+<circle class="point" cx="249.10" cy="175.45" r="3.2"><title>Rwanda</title></circle>
+<circle class="point" cx="628.42" cy="288.73" r="3.2"><title>Samoa</title></circle>
+<circle class="point" cx="557.24" cy="314.80" r="3.2"><title>Saudi Arabia</title></circle>
+<circle class="point" cx="703.60" cy="346.31" r="3.2"><title>Singapore</title></circle>
+<circle class="point" cx="648.61" cy="284.29" r="3.2"><title>Slovakia</title></circle>
+<circle class="point" cx="553.83" cy="223.00" r="3.2"><title>Solomon Islands</title></circle>
+<circle class="point" cx="456.56" cy="301.55" r="3.2"><title>South Africa</title></circle>
+<circle class="point" cx="723.57" cy="353.36" r="3.2"><title>South Korea</title></circle>
+<circle class="point" cx="627.83" cy="268.40" r="3.2"><title>Spain</title></circle>
+<circle class="point" cx="527.19" cy="287.35" r="3.2"><title>Sri Lanka</title></circle>
+<circle class="point" cx="268.21" cy="268.74" r="3.2"><title>Sudan</title></circle>
+<circle class="point" cx="623.90" cy="269.67" r="3.2"><title>Sweden</title></circle>
+<circle class="point" cx="640.17" cy="286.40" r="3.2"><title>Switzerland</title></circle>
+<circle class="point" cx="217.71" cy="279.96" r="3.2"><title>Syria</title></circle>
+<circle class="point" cx="404.53" cy="350.24" r="3.2"><title>Tanzania</title></circle>
+<circle class="point" cx="542.74" cy="231.45" r="3.2"><title>Thailand</title></circle>
+<circle class="point" cx="426.31" cy="109.13" r="3.2"><title>Timor Leste</title></circle>
+<circle class="point" cx="611.90" cy="317.57" r="3.2"><title>Tonga</title></circle>
+<circle class="point" cx="455.75" cy="426.18" r="3.2"><title>Turkey</title></circle>
+<circle class="point" cx="261.01" cy="215.74" r="3.2"><title>Uganda</title></circle>
+<circle class="point" cx="492.61" cy="221.75" r="3.2"><title>Ukraine</title></circle>
+<circle class="point" cx="576.50" cy="224.68" r="3.2"><title>United Arab Emirates</title></circle>
+<circle class="point" cx="685.08" cy="322.08" r="3.2"><title>United States of America</title></circle>
+<circle class="point" cx="565.51" cy="295.76" r="3.2"><title>Uruguay</title></circle>
+<circle class="point" cx="402.61" cy="429.67" r="3.2"><title>Uzbekistan</title></circle>
+<circle class="point" cx="596.11" cy="297.43" r="3.2"><title>Vanuatu</title></circle>
+<circle class="point" cx="495.95" cy="289.24" r="3.2"><title>Venezuela</title></circle>
+<circle class="point" cx="575.27" cy="308.50" r="3.2"><title>Vietnam</title></circle>
+<circle class="point" cx="285.93" cy="333.22" r="3.2"><title>Yemen</title></circle>
+<circle class="point" cx="377.03" cy="231.10" r="3.2"><title>Zambia</title></circle>
+<circle class="point" cx="342.35" cy="310.11" r="3.2"><title>Zimbabwe</title></circle>
+</svg>

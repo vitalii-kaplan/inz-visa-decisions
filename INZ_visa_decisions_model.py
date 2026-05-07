@@ -23,7 +23,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import re
-import re as _re
 import tempfile
 
 # Simple shared context to pass tabular data between sections (for debugging)
@@ -35,7 +34,7 @@ context = {}  # e.g., {'<node_id>:<port>': df}
 # Output: [Port 1] 1591:1 to 1559 Normalizer #1559
 # comments: Combined
 # https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.reader.CSVTableReaderNodeFactory
-csv_path = Path(r"data/prepared/inz_2022-2025_wb_who_m49_combined.csv")
+csv_path = Path(r"/work/data/prepared/inz_2022-2025_wb_who_m49_combined.csv")
 # Note: escapechar equals quotechar; omitting escapechar and relying on double-quoted escapes.
 df = pd.read_csv(csv_path, sep=',', quotechar='"', header=0, encoding='UTF-8', na_values=['', ' '], keep_default_na=True, skipinitialspace=True)
 _pd_dtypes = {'Country': 'string', 'Approval rate': 'Float64', 'Applications_log10': 'Float64', 'WHO_Region': 'string', 'WHO_Under5_Mortality_per_1000_live_births': 'Float64', 'WHO_Maternal_Mortality_per_100000_live_births': 'Float64', 'WHO_Physician_Density_per_10000_population': 'Float64', 'WHO_DTP3_Immunization_Coverage_pct': 'Int64', 'WB_FY2026_Region': 'string', 'WB_FY2026_Income_Group': 'string', 'WB_FY2026_Lending_Category': 'string', 'GDP_per_capita_current_USD': 'Float64', 'Life_expectancy_at_birth_years': 'Float64', 'Internet_users_pct_population': 'Float64', 'Urban_population_pct': 'Float64', 'GNI_per_capita_Atlas_current_USD': 'Int64', 'UN M49': 'string'}
@@ -325,7 +324,7 @@ context['1577:1'] = out_df
 ## Math Formula # `1578`
 # Node state: `EXECUTED`
 # Input: [Port 1] 1571:1 from Column Filter #1571
-# Output: [Port 1] 1578:1 to 1581 Row Splitter #1581
+# Output: [Port 1] 1578:1 to 1582 Math Formula #1582
 # https://hub.knime.com/knime/extensions/org.knime.features.ext.jep/latest/org.knime.ext.jep.JEPNodeFactory
 df = context['1571:1']  # input table
 out_df = df.copy()
@@ -338,65 +337,12 @@ out_df[_target_col] = _res
 context['1578:1'] = out_df
 
 ################################################################################################################################################################
-## Row Splitter # `1581`
-# Node state: `EXECUTED`
-# Input: [Port 1] 1578:1 from Math Formula #1578
-# Output: [Port 1] 1581:1 to 1582 Math Formula #1582
-# https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.preproc.filter.row3.RowSplitterNodeFactory
-df = context['1578:1']  # input table
-def _rf_norm_name(s):
-    return _re.sub(r'[^a-z0-9]+', '', str(s).lower())
-_RF_LCMAP = {c.lower(): c for c in df.columns}
-_RF_NORMMAP = {_rf_norm_name(c): c for c in df.columns}
-
-def _rf_resolve(name):
-    if name in df.columns:
-        return name
-    if name is None:
-        return None
-    c = _RF_LCMAP.get(str(name).lower())
-    if c is not None:
-        return c
-    key = _rf_norm_name(name)
-    c = _RF_NORMMAP.get(key)
-    if c is not None:
-        return c
-    # Heuristic aliases for common aggregate column names
-    if key in {'occurrencecount','count','rowcount'}:
-        cand = [col for col in df.columns if 'count' in _rf_norm_name(col)]
-        if len(cand) == 1:
-            return cand[0]
-    return None
-
-def _rf_to_num(val):
-    s = pd.Series([val])
-    v = pd.to_numeric(s, errors='coerce').iloc[0]
-    return v
-
-mask = pd.Series(True, index=df.index)
-_col0 = _rf_resolve('Approval rate')
-if _col0 is None:
-    _c0 = pd.Series(True, index=df.index)  # missing column → neutral
-else:
-    _s0 = df[_col0]
-    _c0 = pd.to_numeric(_s0, errors='coerce') < _rf_to_num('0.9')
-mask = (mask & _c0)
-_invert = False
-final_mask = (~mask) if _invert else mask
-out_df = df[final_mask].copy()
-_matching_df = out_df
-_non_matching_df = df.loc[~final_mask].copy() if 'final_mask' in locals() else df.iloc[0:0].copy()
-_port1_df = _matching_df
-_port2_df = _non_matching_df
-context['1581:1'] = _port1_df
-
-################################################################################################################################################################
 ## Math Formula # `1582`
 # Node state: `EXECUTED`
-# Input: [Port 1] 1581:1 from Row Splitter #1581
+# Input: [Port 1] 1578:1 from Math Formula #1578
 # Output: [Port 1] 1582:1 to 1583 Sorter #1583
 # https://hub.knime.com/knime/extensions/org.knime.features.ext.jep/latest/org.knime.ext.jep.JEPNodeFactory
-df = context['1581:1']  # input table
+df = context['1578:1']  # input table
 out_df = df.copy()
 _expr = "df['Approval rate']/df['Prediction (Approval rate)']"  # translated from JEP
 # Evaluate the expression in a restricted namespace
@@ -552,7 +498,7 @@ print(f'[Scatter Plot] Wrote image to: {img_path}')
 # Input: [Port 1] 1576:2 from Linear Regression Learner #1576
 # https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.writer.CSVWriter2NodeFactory
 df = context['1576:2']
-out_path = Path(r"data/results/Coefficients_un_m49_regions.csv")
+out_path = Path(r"/work/data/results/Coefficients.csv")
 df = df.copy()
 for _col in df.select_dtypes(include=['datetime', 'datetimetz']).columns:
     df[_col] = df[_col].dt.strftime('%Y-%m-%dT%H:%M')
@@ -594,7 +540,7 @@ out_path.write_text(_k2p_csv_text, encoding='UTF-8')
 # Input: [Port 1] 1571:1 from Column Filter #1571
 # https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.writer.CSVWriter2NodeFactory
 df = context['1571:1']
-out_path = Path(r"data/results/Prediction_un_m49.csv")
+out_path = Path(r"/work/data/results/Prediction.csv")
 df = df.copy()
 for _col in df.select_dtypes(include=['datetime', 'datetimetz']).columns:
     df[_col] = df[_col].dt.strftime('%Y-%m-%dT%H:%M')
@@ -636,7 +582,7 @@ out_path.write_text(_k2p_csv_text, encoding='UTF-8')
 # Input: [Port 1] 1583:1 from Sorter #1583
 # https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.writer.CSVWriter2NodeFactory
 df = context['1583:1']
-out_path = Path(r"data/results/Prediction_rate_un_m49.csv")
+out_path = Path(r"/work/data/results/Prediction_rate.csv")
 df = df.copy()
 for _col in df.select_dtypes(include=['datetime', 'datetimetz']).columns:
     df[_col] = df[_col].dt.strftime('%Y-%m-%dT%H:%M')
@@ -678,7 +624,7 @@ out_path.write_text(_k2p_csv_text, encoding='UTF-8')
 # Input: [Port 1] 1577:1 from Numeric Scorer #1577
 # https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.writer.CSVWriter2NodeFactory
 df = context['1577:1']
-out_path = Path(r"data/results/Score_un_m49_regions.csv")
+out_path = Path(r"/work/data/results/Score.csv")
 df = df.copy()
 for _col in df.select_dtypes(include=['datetime', 'datetimetz']).columns:
     df[_col] = df[_col].dt.strftime('%Y-%m-%dT%H:%M')

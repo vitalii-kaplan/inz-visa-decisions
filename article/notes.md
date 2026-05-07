@@ -144,3 +144,9 @@ Countries outside the region between `y = 0.8x` and `y = 1.2x` should be discuss
 TODO: Add the list of countries outside this region.
 
 These cases are not outliers in the technical sense. They indicate that additional parameters may influence approval decisions, but this work cannot state what those parameters are. Identifying those parameters can be a topic for future research.
+
+## Note on Multicollinearity Diagnostics
+
+The file [Combined-correlation-output.csv](../data/results/Combined-correlation-output.csv) already shows strong pairwise correlations among several country-level development indicators. This is enough for the current article to state a limitation: the numerical predictors overlap substantially, so individual coefficients should not be overinterpreted as independent effects.
+
+A full variance inflation factor (VIF) analysis would be a stronger multicollinearity diagnostic, especially for the full regression design matrices with categorical variables. However, for the current article this may be more detailed than necessary. The article can use the existing correlation output to explain the limitation and reserve VIF or other full design-matrix diagnostics for a later methodological extension.

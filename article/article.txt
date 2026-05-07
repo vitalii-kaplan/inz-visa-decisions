@@ -38,6 +38,8 @@ After joining the INZ data with WHO, World Bank, and UN M49 reference data, the 
 
 Several country-level indicators are strongly correlated with approval rate. Approval rate is negatively correlated with WHO under-five mortality per 1,000 live births (r = -0.746, p = 1.24e-30) and WHO maternal mortality per 100,000 live births (r = -0.681, p = 7.97e-24). Approval rate is positively correlated with life expectancy at birth (r = 0.715, p = 4.19e-27), internet users as a percentage of population (r = 0.633, p = 7.62e-20), physician density per 10,000 population (r = 0.552, p = 1.56e-14), GNI per capita using the Atlas method (r = 0.520, p = 8.18e-13), and GDP per capita in current USD (r = 0.501, p = 7.42e-12).
 
+The same correlation output also shows that several explanatory variables are strongly correlated with each other. For example, WHO under-five mortality is strongly negatively correlated with life expectancy (r = -0.888) and internet-user percentage (r = -0.770), and strongly positively correlated with WHO maternal mortality (r = 0.881). This means that the numerical country-level indicators partly measure overlapping dimensions of national development, health conditions, and institutional capacity.
+
 These correlations indicate that approval rates are associated with broad country-level development, health, and income measures. They should not be read as causal effects. The data are aggregated by country, and the variables describe country-level conditions rather than individual applicants.
 
 This interpretation is limited to formal and administrative conditions surrounding applications. The analysis does not assert, imply, or test unequal treatment by INZ officers, discriminatory intent, or bias in individual application assessment. The working interpretation is that applicants are assessed under the same formal process, but applicants from different countries may face country-specific evidentiary, documentary, financial, institutional, or verification difficulties when satisfying that process. The observed country-level differences are therefore treated as indicators of variation in application conditions and supporting evidence, not as evidence of unequal person-to-person treatment.
@@ -66,9 +68,9 @@ In the no-region experiment, the model has no regional indicators, so the fit de
 
 The prediction tables compare observed approval rates with fitted approval rates. In all four specifications, the mean observed approval rate and mean fitted approval rate are both approximately 0.754 in the modelling table. Most fitted values are close enough to observed values to support the conclusion that the models capture major structure in the data.
 
-The number of large proportional deviations differs by specification. Using the rule that a country is outside the expected band when the observed approval rate is below 80 percent or above 120 percent of the fitted value, the UN M49 model has 14 such countries, the World Bank regional model has 18, the WHO regional model has 22, and the no-region model has 21. This again suggests that the UN M49 model gives the closest fit among the current specifications.
+The number of large proportional deviations differs by specification. Using the rule that a country is outside the expected band when the observed approval rate is below 80 percent or above 120 percent of the fitted value, the UN M49 model has 15 such countries, the World Bank regional model has 19, the WHO regional model has 25, and the no-region model has 28. This again suggests that the UN M49 model gives the closest fit among the current specifications.
 
-In the UN M49 model, countries where the observed approval rate is lower than 80 percent of the fitted value include Chad, Afghanistan, Uzbekistan, Turkey, Myanmar, Cameroon, Yemen, Tanzania, Algeria, and Ghana. Countries where the observed approval rate is higher than 120 percent of the fitted value include Kazakhstan, Nigeria, Sudan, and the Democratic Republic of Congo.
+In the UN M49 model, countries where the observed approval rate is lower than 80 percent of the fitted value include Chad, Afghanistan, Uzbekistan, Turkey, Myanmar, Cameroon, Yemen, Tanzania, Algeria, and Ghana. Countries where the observed approval rate is higher than 120 percent of the fitted value include Kazakhstan, Timor Leste, Nigeria, Sudan, and the Democratic Republic of Congo.
 
 These cases should not automatically be treated as technical outliers. They show where the current country-level variables and regional classifications do not fit the observed approval rate well. They may point to omitted variables, data quality issues, country-specific applicant composition, policy or processing factors, or other mechanisms not represented in the current dataset.
 
@@ -78,7 +80,7 @@ The first sensitivity check is already built into the current workflow: the same
 
 The score tables support the same ordering across several metrics. R-squared declines from 0.867 in the UN M49 model to 0.812 in the World Bank regional model, 0.786 in the WHO regional model, and 0.706 in the no-region model. Mean absolute error and root mean squared error move in the opposite direction: they are smallest in the UN M49 model and largest in the no-region model.
 
-The prediction-rate tables provide a second check. The UN M49 model produces the fewest countries outside the 80-120 percent fitted-value band. The World Bank and WHO regional models produce more such deviations, and the no-region model also performs worse than the UN M49 model on this check. This supports the view that regional variables improve the fit and that UN M49 is the strongest of the current regional specifications.
+The prediction-rate tables provide a second check. The UN M49 model produces the fewest countries outside the 80-120 percent fitted-value band: 15 countries, compared with 19 in the World Bank regional model, 25 in the WHO regional model, and 28 in the no-region model. This supports the view that regional variables improve the fit and that UN M49 is the strongest of the current regional specifications.
 
 The coefficient tables for the UN M49, WHO, World Bank, and no-region specifications are useful for comparing model outputs across alternative specifications. They show whether signs, magnitudes, and statistical significance change across region definitions. However, they do not test all modelling assumptions by themselves.
 
@@ -88,10 +90,10 @@ The numerical health and development indicators are less stable across specifica
 
 This does not mean that these parameters are substantively unimportant. Their bivariate correlations show that they are part of the broader country-level pattern associated with approval rates. In the multivariable models, however, several indicators describe related dimensions of national income, health systems, infrastructure, and institutional development. Once these variables are entered together with income groups and regional classifications, their separate coefficients become harder to distinguish statistically. Their substantive importance is therefore better understood as part of a shared country-level development profile, rather than as isolated independent predictors.
 
-Additional checks should still be added before treating the model interpretation as stable:
+The residual summaries and residuals-versus-fitted plots in `data/support/` provide an additional model check. Across all four specifications, mean residuals are approximately zero, which is expected for these fitted linear models. The residual spread follows the same ordering as the score tables: the UN M49 model has the smallest residual standard deviation (0.090) and mean absolute residual (0.069), followed by the World Bank regional model (0.108 and 0.082), the WHO regional model (0.115 and 0.087), and the no-region model (0.134 and 0.100). The largest absolute residual is also smallest in the UN M49 model (0.294) and largest in the no-region model (0.437). This supports the same conclusion as the score and prediction-rate checks: the UN M49 specification leaves less unexplained error than the alternatives.
 
-- calculate multicollinearity diagnostics, especially variance inflation factors for numerical predictors;
-- inspect residuals against fitted values to check whether errors are structured rather than random;
+Additional checks could be added before treating the model interpretation as fully stable:
+
 - inspect residuals by region to see whether one region system leaves systematic unexplained error;
 - test whether results change if approval rate is weighted by total application count;
 - report countries with the largest positive and negative residuals under each regional specification.
@@ -104,7 +106,11 @@ TODO: Interpret what the descriptive and model results imply about country-level
 
 # Limitations
 
-TODO: Address aggregation by country, omitted applicant-level variables, country matching, missing values, regional classification choices, and the limits of linear regression for this question.
+The analysis is limited by aggregation at the country level. The unit of observation is country or applicant nationality, not an individual application. The models therefore cannot separate applicant-level characteristics, institutional documentation quality, programme choice, education provider characteristics, or officer-level assessment details.
+
+The country-level predictors also overlap substantially. The correlation table shows strong pairwise correlations among health, income, internet-use, mortality, and life-expectancy indicators. This supports the substantive interpretation that these variables describe a shared country-level development profile, but it limits interpretation of individual regression coefficients. A full variance inflation factor analysis or other design-matrix diagnostic could examine this more formally, but the present article treats the existing correlation output as sufficient evidence that individual coefficients should be interpreted cautiously.
+
+The results are also sensitive to country matching, missing numerical values, regional classification choices, and the exclusion of countries with fewer than 10 total applications across 2022-2025. The comparison across UN M49, World Bank, WHO, and no-region specifications addresses part of this sensitivity, but it does not remove the broader limitations of observational, aggregated data.
 
 # Conclusion
 
