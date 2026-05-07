@@ -2,7 +2,7 @@
 
 This repository is a computational research workspace for studying Immigration New Zealand student visa decision data. It contains data, KNIME workflows, Python support code, intermediate outputs, model results, notes, and article drafts needed to develop a journal article.
 
-The final goal is not a blog post or a general essay. The final goal is a defensible scientific article: a clear research question, reproducible data preparation, transparent statistical analysis, cautious interpretation, and a manuscript suitable for submission to an academic journal.
+The final goal is a defensible scientific article: a clear research question, reproducible data preparation, transparent statistical analysis, cautious interpretation, and a manuscript suitable for submission to an academic journal.
 
 ## Research Purpose
 
@@ -35,9 +35,6 @@ INZ_visa_decisions_combined/
 
 INZ_visa_decisions_model/
   KNIME workflow for statistical modeling and prediction outputs.
-
-src/
-  Python support code for project maintenance and reproducibility.
 
 README.md
   Human-facing project guide.
