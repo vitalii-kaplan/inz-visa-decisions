@@ -4,7 +4,11 @@ TODO: Add a specific scientific title naming Immigration New Zealand student vis
 
 # Abstract
 
-TODO: Write after the main analysis is verified. Include the research question, data period, source data, methods, main empirical result, and principal limitation.
+This article examines country-level variation in Immigration New Zealand fee-paying student visa approval rates for the 2022-2025 period. The study combines published INZ decision data with country-level reference variables from the World Bank, the World Health Organization, and UN M49 regional classifications. The analysis uses descriptive statistics, Pearson correlations, linear regression approximations, alternative regional specifications, residual diagnostics, and a weighted robustness check based on log-transformed application volume.
+
+The results show that approval rates vary systematically across applicant nationalities and are associated with application volume, income classification, regional classification, and broader country-level development indicators. In the modelling table, several health, income, internet-use, mortality, and life-expectancy indicators are strongly correlated with approval rates, although these indicators also overlap substantially with one another. Among the tested regression specifications, the UN M49 regional model has the strongest fit, followed by the World Bank regional model, the WHO regional model, and the no-region model. A weighted UN M49 experiment gives similar overall fit but weakens several individual regional coefficients, supporting the model-fit conclusion while limiting interpretation of particular coefficients.
+
+The findings should be interpreted as country-level descriptive evidence, not as causal evidence about individual visa decisions. The analysis does not test officer behaviour, discriminatory intent, or unequal treatment in individual application assessment. Instead, the results are read as evidence that applicants from different countries may face different formal, documentary, financial, institutional, or verification conditions when satisfying the same visa process. The principal limitation is that the data are aggregated by country and do not include applicant-level records, programme choice, education provider information, documentation quality, or detailed processing factors. The study identifies a reproducible empirical structure and points to further research on other receiving countries, additional country-level variables, and formal inter-country education or migration relationships.
 
 # Introduction
 
