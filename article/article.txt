@@ -153,7 +153,11 @@ The results are also sensitive to country matching, missing numerical values, re
 
 # Conclusion
 
-TODO: State the empirical contribution and the next question made visible by the analysis.
+This article shows that country-level variation in Immigration New Zealand fee-paying student visa approval rates during 2022-2025 is associated with application volume, country-level development indicators, income categories, and regional classification systems. The strongest current model fit is obtained with the UN M49 regional specification, but the results also show that non-region country-level variables carry substantial explanatory information. The analysis should therefore be read as a country-level descriptive and modelling exercise, not as a causal account of individual visa decisions.
+
+The main empirical contribution is to connect INZ student visa decision outcomes with external country-level reference data in a reproducible workflow. This makes visible both broad structure and unexplained country-specific deviations. The broad structure supports cautious interpretation of country-level application conditions. The deviations identify where the current data are insufficient and where more detailed research is needed.
+
+Future work should extend the comparison beyond New Zealand by examining student visa decisions in other receiving countries. It should also add further country-level variables from reliable sources, including measures related to crime, religion, culture, institutional trust, and other social conditions where the definitions and provenance are clear. A further direction is to examine whether inter-country treaties, education-sector relationships, diplomatic communication, scholarship channels, or other formal links between countries help explain why some countries have approval rates above or below the values fitted by the current model.
 
 # References
 
