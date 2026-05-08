@@ -16,6 +16,8 @@ TODO: Describe the source INZ decision files for 2022, 2023, 2024, and 2025. Def
 
 TODO: Describe the additional country-level reference tables from the World Bank, WHO, and UN M49. Explain what each table contributes and how countries were joined across sources.
 
++ Description of data preparation and transformations.
+
 # Methods
 
 TODO: Describe the KNIME and Python workflow. Explain the unification of yearly INZ files, aggregation by country, calculation of approval rate and log10 applications, joins with reference data, correlation analysis, and linear regression models.
@@ -41,6 +43,8 @@ The unified INZ decision table contains 179 countries or applicant nationalities
 Application volume is unevenly distributed across countries. The largest application counts are from China, India, Japan, Nepal, the United States of America, Sri Lanka, Germany, Thailand, the Philippines, and South Korea. These high-volume countries do not all have the same approval rate. For example, China, Japan, the United States of America, Germany, and South Korea have approval rates above 96 percent, while India and Nepal have lower approval rates in the current prepared table.
 
 The relationship between application volume and approval rate is positive but not strong. In the unified country-level table, the Pearson correlation between log10 total applications and approval rate is about 0.27, with p = 0.000254 and 177 degrees of freedom. This supports a limited descriptive statement: countries with more applications tend to have higher approval rates, but application volume alone does not explain most of the variation in approval rates.
+
+(Image of Total Application log10 to Approval rate)
 
 ## Correlation With Country-Level Indicators
 
@@ -74,13 +78,20 @@ In the WHO regional experiment, the significant non-region variables are World B
 
 In the no-region experiment, the model has no regional indicators, so the fit depends only on non-region country-level variables. The significant variables are World Bank low-income status (coefficient = -0.609, p = 2.50e-07), lower-middle-income status (coefficient = -0.224, p = 0.00465), WHO DTP3 immunization coverage (coefficient = -0.204, p = 0.0152), and urban population percentage (coefficient = -0.264, p = 0.0081). This confirms that the non-region variables carry substantial explanatory information, even though the no-region model fits worse than all three regional specifications.
 
+(Table with coefficients)
+(Images of Predicted Approval rate to Approval Rate for different regions division)
+
 ## Prediction Deviations
 
 The prediction tables compare observed approval rates with fitted approval rates. In all four specifications, the mean observed approval rate and mean fitted approval rate are both approximately 0.754 in the modelling table. Most fitted values are close enough to observed values to support the conclusion that the models capture major structure in the data.
 
+(Reference to the table with excluded countries in Appendix)
+
 The number of large proportional deviations differs by specification. Using the rule that a country is outside the expected band when the observed approval rate is below 80 percent or above 120 percent of the fitted value, the UN M49 model has 15 such countries, the World Bank regional model has 19, the WHO regional model has 25, and the no-region model has 28. This again suggests that the UN M49 model gives the closest fit among the current specifications.
 
 In the UN M49 model, countries where the observed approval rate is lower than 80 percent of the fitted value include Chad, Afghanistan, Uzbekistan, Turkey, Myanmar, Cameroon, Yemen, Tanzania, Algeria, and Ghana. Countries where the observed approval rate is higher than 120 percent of the fitted value include Kazakhstan, Timor Leste, Nigeria, Sudan, and the Democratic Republic of Congo.
+
+(Table for these countries)
 
 These cases should not automatically be treated as technical outliers. They show where the current country-level variables and regional classifications do not fit the observed approval rate well. They may point to omitted variables, data quality issues, country-specific applicant composition, policy or processing factors, or other mechanisms not represented in the current dataset.
 
@@ -92,15 +103,19 @@ The score tables support the same ordering across several metrics. R-squared dec
 
 The prediction-rate tables provide a second check. The UN M49 model produces the fewest countries outside the 80-120 percent fitted-value band: 15 countries, compared with 19 in the World Bank regional model, 25 in the WHO regional model, and 28 in the no-region model. This supports the view that regional variables improve the fit and that UN M49 is the strongest of the current regional specifications.
 
+(Table with mertics and number of outliers)
+
 The coefficient tables for the UN M49, WHO, World Bank, and no-region specifications are useful for comparing model outputs across alternative specifications. They show whether signs, magnitudes, and statistical significance change across region definitions. However, they do not test all modelling assumptions by themselves.
 
-The coefficient stability summary in `data/support/Coefficients_stability_summary.csv` answers whether the same country-level variables remain important across specifications. It shows two patterns. First, urban population percentage is significant in all four specifications, with negative coefficients and p-values below 0.05. Second, World Bank income-group variables are especially important when UN M49 regions are not used: low-income status and lower-middle-income status are significant in the World Bank, WHO, and no-region models. In the UN M49 model, low-income status is weaker and does not reach the 0.05 threshold (p = 0.0714), suggesting that some income-related structure may be absorbed by the more detailed UN M49 regional categories.
+The coefficient stability summary in `data/support/Coefficients_stability_summary.csv` (add this table to Appendix) answers whether the same country-level variables remain important across specifications. It shows two patterns. First, urban population percentage is significant in all four specifications, with negative coefficients and p-values below 0.05. Second, World Bank income-group variables are especially important when UN M49 regions are not used: low-income status and lower-middle-income status are significant in the World Bank, WHO, and no-region models. In the UN M49 model, low-income status is weaker and does not reach the 0.05 threshold (p = 0.0714), suggesting that some income-related structure may be absorbed by the more detailed UN M49 regional categories.
 
 The numerical health and development indicators are less stable across specifications. Life expectancy is significant in the UN M49 model (p = 0.0128) but not in the World Bank, WHO, or no-region models. WHO DTP3 immunization coverage is significant only in the no-region model (p = 0.0152). GDP per capita, GNI per capita, physician density, under-five mortality, maternal mortality, and internet-user percentage do not remain statistically significant in the multivariable coefficient tables, even though several of them have strong bivariate correlations with approval rate. This difference is consistent with overlapping information among country-level development indicators.
 
 This does not mean that these parameters are substantively unimportant. Their bivariate correlations show that they are part of the broader country-level pattern associated with approval rates. In the multivariable models, however, several indicators describe related dimensions of national income, health systems, infrastructure, and institutional development. Once these variables are entered together with income groups and regional classifications, their separate coefficients become harder to distinguish statistically. Their substantive importance is therefore better understood as part of a shared country-level development profile, rather than as isolated independent predictors.
 
 The residual summaries and residuals-versus-fitted plots in `data/support/` provide an additional model check. Across all four specifications, mean residuals are approximately zero, which is expected for these fitted linear models. The residual spread follows the same ordering as the score tables: the UN M49 model has the smallest residual standard deviation (0.090) and mean absolute residual (0.069), followed by the World Bank regional model (0.108 and 0.082), the WHO regional model (0.115 and 0.087), and the no-region model (0.134 and 0.100). The largest absolute residual is also smallest in the UN M49 model (0.294) and largest in the no-region model (0.437). This supports the same conclusion as the score and prediction-rate checks: the UN M49 specification leaves less unexplained error than the alternatives.
+
+(Table with these metrics)
 
 The largest positive and negative relative residuals are reported in `data/support/Relative_residuals_positive_by_model.csv` and `data/support/Relative_residuals_negative_by_model.csv`. These tables use `Prediction_rate`, the ratio of observed approval rate to fitted approval rate, rather than only the absolute residual. This is useful because the same absolute difference can be more consequential when the fitted approval rate is low. The positive table identifies countries where observed approval is high relative to the fitted value; the negative table identifies countries where observed approval is low relative to the fitted value.
 
@@ -115,6 +130,14 @@ These checks do not turn the analysis into a causal design. Their role is narrow
 # Discussion
 
 TODO: Interpret what the descriptive and model results imply about country-level variation in INZ student visa approval rates. Keep the discussion proportional to the evidence and avoid individual-level or causal claims.
+
+Countries with many applications have better chanses, possibly because of internal infrastructure of helping organizations and known success stories. If there are many applicants, there will be many helpers and many advisers.
+
+Additional data from WHO, WB and UN M49 shows that Approval ratings connected with country macro-parameters.
+
+Positive deviation from predicted values can be explained by inter-government or inter-educational programms between countries, which can facilitate the process of visa application.
+
+Negative deviation can't not be explained by current data and is a question of next study.
 
 # Limitations
 

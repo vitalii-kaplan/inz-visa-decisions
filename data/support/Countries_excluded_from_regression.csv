@@ -1,0 +1,70 @@
+Country,Number approved,Number declined,Total applications,Approval rate,Applications_log10,exclusion_note
+Hong Kong,1371,26,1397,0.9813886900501074,3.1451964061141817,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Taiwan,1068,26,1094,0.9762340036563071,3.0390173219974117,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Macau,64,5,69,0.927536231884058,1.8388490907372552,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Tuvalu,58,1,59,0.9830508474576272,1.7708520116421442,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Palestine,8,7,15,0.5333333333333333,1.1760912590556811,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Lithuania,9,1,10,0.9,1,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Malawi,6,4,10,0.6,1,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Trinidad and Tobago,8,2,10,0.8,1,not_in_final_regression_table_after_reference_join_or_missing_value_filter
+Iceland,9,0,9,1,0.9542425094393249,fewer_than_10_total_applications
+Liberia,0,9,9,0,0.9542425094393249,fewer_than_10_total_applications
+Namibia,5,4,9,0.5555555555555556,0.9542425094393249,fewer_than_10_total_applications
+Guatemala,6,2,8,0.75,0.9030899869919434,fewer_than_10_total_applications
+Nauru,8,0,8,1,0.9030899869919434,fewer_than_10_total_applications
+Albania,5,2,7,0.7142857142857143,0.8450980400142567,fewer_than_10_total_applications
+Benin,2,5,7,0.2857142857142857,0.8450980400142567,fewer_than_10_total_applications
+Estonia,7,0,7,1,0.8450980400142567,fewer_than_10_total_applications
+Georgia,4,3,7,0.5714285714285714,0.8450980400142567,fewer_than_10_total_applications
+Croatia,6,0,6,1,0.7781512503836435,fewer_than_10_total_applications
+El Salvador,6,0,6,1,0.7781512503836435,fewer_than_10_total_applications
+Guyana,5,1,6,0.8333333333333334,0.7781512503836435,fewer_than_10_total_applications
+Marshall Islands,6,0,6,1,0.7781512503836435,fewer_than_10_total_applications
+South Sudan,2,4,6,0.3333333333333333,0.7781512503836435,fewer_than_10_total_applications
+St Lucia,6,0,6,1,0.7781512503836435,fewer_than_10_total_applications
+Azerbaijan,4,1,5,0.8,0.6989700043360187,fewer_than_10_total_applications
+Gambia,1,4,5,0.2,0.6989700043360187,fewer_than_10_total_applications
+Haiti,1,4,5,0.2,0.6989700043360187,fewer_than_10_total_applications
+Mozambique,4,1,5,0.8,0.6989700043360187,fewer_than_10_total_applications
+Palau,5,0,5,1,0.6989700043360187,fewer_than_10_total_applications
+Suriname,5,0,5,1,0.6989700043360187,fewer_than_10_total_applications
+Swaziland,4,1,5,0.8,0.6989700043360187,fewer_than_10_total_applications
+Tunisia,2,3,5,0.4,0.6989700043360187,fewer_than_10_total_applications
+Armenia,2,2,4,0.5,0.6020599913279623,fewer_than_10_total_applications
+Bahrain,4,0,4,1,0.6020599913279623,fewer_than_10_total_applications
+Belize,4,0,4,1,0.6020599913279623,fewer_than_10_total_applications
+Burundi,0,4,4,0,0.6020599913279623,fewer_than_10_total_applications
+Eritrea,3,1,4,0.75,0.6020599913279623,fewer_than_10_total_applications
+Grenada,3,1,4,0.75,0.6020599913279623,fewer_than_10_total_applications
+Macedonia,4,0,4,1,0.6020599913279623,fewer_than_10_total_applications
+Mali,3,1,4,0.75,0.6020599913279623,fewer_than_10_total_applications
+Moldova,3,1,4,0.75,0.6020599913279623,fewer_than_10_total_applications
+Serbia,3,1,4,0.75,0.6020599913279623,fewer_than_10_total_applications
+Sierra Leone,0,4,4,0,0.6020599913279623,fewer_than_10_total_applications
+Angola,0,3,3,0,0.4771212547196623,fewer_than_10_total_applications
+Barbados,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Congo,0,3,3,0,0.4771212547196623,fewer_than_10_total_applications
+Dominica,2,1,3,0.6666666666666666,0.4771212547196623,fewer_than_10_total_applications
+Federated States of Micronesia,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Liechtenstein,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Malta,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Slovenia,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Somalia,0,3,3,0,0.4771212547196623,fewer_than_10_total_applications
+St Kitts - Nevis,2,1,3,0.6666666666666666,0.4771212547196623,fewer_than_10_total_applications
+St Vincent and the Grenadines,3,0,3,1,0.4771212547196623,fewer_than_10_total_applications
+Tajikistan,2,1,3,0.6666666666666666,0.4771212547196623,fewer_than_10_total_applications
+Australia,2,0,2,1,0.30102999566398114,fewer_than_10_total_applications
+Bermuda,1,1,2,0.5,0.30102999566398114,fewer_than_10_total_applications
+Guinea,0,2,2,0,0.30102999566398114,fewer_than_10_total_applications
+Senegal,0,2,2,0,0.30102999566398114,fewer_than_10_total_applications
+Seychelles,2,0,2,1,0.30102999566398114,fewer_than_10_total_applications
+Bahamas,1,0,1,1,0,fewer_than_10_total_applications
+Bosnia & Herzegovina,1,0,1,1,0,fewer_than_10_total_applications
+Cape Verde,1,0,1,1,0,fewer_than_10_total_applications
+Cuba,1,0,1,1,0,fewer_than_10_total_applications
+Djibouti,0,1,1,0,0,fewer_than_10_total_applications
+Madagascar,0,1,1,0,0,fewer_than_10_total_applications
+Nicaragua,1,0,1,1,0,fewer_than_10_total_applications
+Niger,0,1,1,0,0,fewer_than_10_total_applications
+North Korea,0,1,1,0,0,fewer_than_10_total_applications
+Togo,0,1,1,0,0,fewer_than_10_total_applications
