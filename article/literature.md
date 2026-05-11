@@ -119,63 +119,84 @@ of university, political freedom, GDP per capita at origin and destination, fees
 in post-secondary education. 
 
 # References
-Neumayer E (2006)
-Neumayer, E. (2006). Unequal access to foreign spaces: how states use visa restrictions to regulate mobility in a globalized world. Transactions of the Institute of British Geographers, 31(1), 72-84. https://doi.org/10.1111/j.1475-5661.2006.00194.x
+Abbott A (2016)
+Abbott, A., & Silles, M. (2016). Determinants of International Student Migration. The World Economy, 39(5), 621-635. https://doi.org/10.1111/twec.12319
+
+Bertoli (2013)
+Bertoli, S., & Fernández-Huertas Moraga, J. (2013). Multilateral resistance to migration. Journal of Development Economics, 102, 79-100. https://doi.org/10.1016/j.jdeveco.2012.12.001
+
+Bessey, D. (2012). International student migration to Germany. *Empirical Economics, 42*(1), 345–361. [https://doi.org/10.1007/s00181-010-0417-0](https://doi.org/10.1007/s00181-010-0417-0) https://link.springer.com/article/10.1007/s00181-010-0417-0
+
+Blake, W. (1863). Auguries of innocence. In D. G. Rossetti (Ed.), Poems. Retrieved from Poetry Foundation website: https://www.poetryfoundation.org/poems/43650/auguries-of-innocence
 
 Bonnett G. (2024)
 Bonnett, G. (2024, August 1). INZ’s Visa Processing Systems are ‘Creaking” – Briefing. RNZ, POlitics.
 https://www.rnz.co.nz/news/national/523805/inz-s-visa-processing-systems-are-creaking-briefing
 
-Spoonley P (2025)
-Spoonley, P. (2025). Immigration challenges and changes in New Zealand: Contemporary policy issues. New Zealand Journal of Employment Relations, 49(1). https://doi.org/10.24135/nzjer.v49i1.187
-
-Shachar (2014)
-Shachar, Ayelet, and Rainer Bauböck, eds. 2014. Should Citizenship be for Sale? EUI Working
-Papers RSCAS 1. Florence: European University Institute.
+Chen, M. (2023)
+Chen, M., Howell, J., & Smith, J. (2023). Best and brightest? The impact of student visa restrictiveness on who attends college in the US. Labour Economics, 84, 102385. https://doi.org/10.1016/j.labeco.2023.102385
 
 Craymer, L. (2025)
 https://www.reuters.com/world/asia-paciﬁc/new-zealand-aims-double-foreign-international-education-market-by-2034-2025-07-13/
 
-Steffen Mau (2015)
-Mau, S., Gülzau, F., Laube, L., & Zaun, N. (2015). The Global Mobility Divide: How Visa Policies Have Evolved over Time. Journal of Ethnic and Migration Studies, 41(8), 1192-1213. https://doi.org/10.1080/1369183X.2015.1005007
+Gonnot J. (2025)
+Gonnot, J., & Lanati, M. (2025). Visa policy and international student migration: evidence from Canada. Journal of Economic Geography, 25(2), 255-291. https://doi.org/10.1093/jeg/lbae034
 
 Gulel, D (2025)
 Gülel, D. (2025). Navigating visa inequities: mobility as privilege in academia - 'You are not supposed to be here'. Global Social Challenges Journal, 4(2), 429-438. https://doi.org/10.1332/27523349Y2025D000000050
 
-Weber T (2023)
-Weber, T., & Van Mol, C. (2023). The student migration transition: an empirical investigation into the nexus between development and international student migration. Comparative Migration Studies, 11. https://doi.org/10.1186/s40878-023-00329-0
+Hersch, J. (2008). Profiling the new immigrant worker: The effects of skin color and height. *Journal of Labor Economics, 26*(2), 345–386. (https://ideas.repec.org/a/ucp/jlabec/v26y2008i2p345-386.html)
 
-Bertoli (2013)
-Bertoli, S., & Fernández-Huertas Moraga, J. (2013). Multilateral resistance to migration. Journal of Development Economics, 102, 79-100. https://doi.org/10.1016/j.jdeveco.2012.12.001
+Immigration New Zealand. (n.d.). Providing evidence and documents to support your visa application. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/process-to-apply/applying-for-a-visa/providing-evidence-and-documents-to-support-your-visa-application/
+
+Lanati, M., & Thiele, R. (2020). International student flows from developing countries: Do donors have an impact? *Economics of Education Review, 77*, Article 101997. [https://doi.org/10.1016/j.econedurev.2020.101997](https://doi.org/10.1016/j.econedurev.2020.101997) https://ideas.repec.org/a/eee/ecoedu/v77y2020ics0272775719305369.html
+
+Neumayer E (2006)
+Neumayer, E. (2006). Unequal access to foreign spaces: how states use visa restrictions to regulate mobility in a globalized world. Transactions of the Institute of British Geographers, 31(1), 72-84. https://doi.org/10.1111/j.1475-5661.2006.00194.x
 
 Oduwaye O. (2023)
 Oduwaye, O., Kiraz, A., & Sorakin, Y. (2023). A Trend Analysis of the Challenges of International Students Over 21 Years. Sage Open, 13(4). https://doi.org/10.1177/21582440231210387
-
-Abbott A (2016)
-Abbott, A., & Silles, M. (2016). Determinants of International Student Migration. The World Economy, 39(5), 621-635. https://doi.org/10.1111/twec.12319
-
-Chen, M. (2023)
-Chen, M., Howell, J., & Smith, J. (2023). Best and brightest? The impact of student visa restrictiveness on who attends college in the US. Labour Economics, 84, 102385. https://doi.org/10.1016/j.labeco.2023.102385
-
-Xie, Qianqian (2025)
-Xie, Q., & Yegros-Yegros, A. (2025). A quantitative assessment of potential benefits and challenges of international researcher mobility for home and host countries: evidence from the Chinese Scholarship Council programmes. Scientometrics, 130(8), 4545-4572. https://doi.org/10.1007/s11192-025-05391-2
-
-Gonnot J. (2025)
-Gonnot, J., & Lanati, M. (2025). Visa policy and international student migration: evidence from Canada. Journal of Economic Geography, 25(2), 255-291. https://doi.org/10.1093/jeg/lbae034
-
-Hersch, J. (2008). Profiling the new immigrant worker: The effects of skin color and height. *Journal of Labor Economics, 26*(2), 345–386. (https://ideas.repec.org/a/ucp/jlabec/v26y2008i2p345-386.html)
 
 Oreopoulos, P. (2011). Why do skilled immigrants struggle in the labor market? A field experiment with thirteen thousand resumes. *American Economic Journal: Economic Policy, 3*(4), 148–171. [https://doi.org/10.1257/pol.3.4.148](https://doi.org/10.1257/pol.3.4.148)  https://www.aeaweb.org/articles?id=10.1257%2Fpol.3.4.148 
 
 Perkins, R., & Neumayer, E. (2014). Geographies of educational mobilities: Exploring the uneven flows of international students. *The Geographical Journal, 180*(3), 246–259. [https://doi.org/10.1111/geoj.12045](https://doi.org/10.1111/geoj.12045) 
 https://rgs-ibg.onlinelibrary.wiley.com/doi/abs/10.1111/geoj.12045 
 
-Bessey, D. (2012). International student migration to Germany. *Empirical Economics, 42*(1), 345–361. [https://doi.org/10.1007/s00181-010-0417-0](https://doi.org/10.1007/s00181-010-0417-0) https://link.springer.com/article/10.1007/s00181-010-0417-0 
-
-Lanati, M., & Thiele, R. (2020). International student flows from developing countries: Do donors have an impact? *Economics of Education Review, 77*, Article 101997. [https://doi.org/10.1016/j.econedurev.2020.101997](https://doi.org/10.1016/j.econedurev.2020.101997) https://ideas.repec.org/a/eee/ecoedu/v77y2020ics0272775719305369.html
-
 Sassen, S. (1996). *Losing control? Sovereignty in an age of globalization*. Columbia University Press. https://ciaotest.cc.columbia.edu/book/sassen/sassen11.html
 
-Blake, W. (1863). Auguries of innocence. In D. G. Rossetti (Ed.), Poems. Retrieved from Poetry Foundation website: https://www.poetryfoundation.org/poems/43650/auguries-of-innocence
+Shachar (2014)
+Shachar, Ayelet, and Rainer Bauböck, eds. 2014. Should Citizenship be for Sale? EUI Working
+Papers RSCAS 1. Florence: European University Institute.
 
-Immigration New Zealand. (n.d.). Providing evidence and documents to support your visa application. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/process-to-apply/applying-for-a-visa/providing-evidence-and-documents-to-support-your-visa-application/
+Spoonley P (2025)
+Spoonley, P. (2025). Immigration challenges and changes in New Zealand: Contemporary policy issues. New Zealand Journal of Employment Relations, 49(1). https://doi.org/10.24135/nzjer.v49i1.187
+
+Steffen Mau (2015)
+Mau, S., Gülzau, F., Laube, L., & Zaun, N. (2015). The Global Mobility Divide: How Visa Policies Have Evolved over Time. Journal of Ethnic and Migration Studies, 41(8), 1192-1213. https://doi.org/10.1080/1369183X.2015.1005007
+
+Weber T (2023)
+Weber, T., & Van Mol, C. (2023). The student migration transition: an empirical investigation into the nexus between development and international student migration. Comparative Migration Studies, 11. https://doi.org/10.1186/s40878-023-00329-0
+
+Xie, Qianqian (2025)
+Xie, Q., & Yegros-Yegros, A. (2025). A quantitative assessment of potential benefits and challenges of international researcher mobility for home and host countries: evidence from the Chinese Scholarship Council programmes. Scientometrics, 130(8), 4545-4572. https://doi.org/10.1007/s11192-025-05391-2
+
+
+# For data:
+
+United Nations Statistics Division. (n.d.). Standard country or area codes for statistical use (M49). United Nations. Retrieved May 11, 2026, from https://unstats.un.org/unsd/methodology/m49/
+
+Immigration New Zealand. (n.d.). Offshore student visa application decisions for 2022. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/study/for-education-providers/data-and-processing-times-for-international-student-visas/offshore-student-visa-application-decision-data/offshore-student-visa-application-decisions-for-2022/
+
+Immigration New Zealand. (n.d.). Offshore student visa application decisions for 2023. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/study/for-education-providers/data-and-processing-times-for-international-student-visas/offshore-student-visa-application-decision-data/offshore-student-visa-application-decisions-for-2023/
+
+Immigration New Zealand. (n.d.). Overseas student visa application decisions for 2024. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/study/for-education-providers/data-and-processing-times-for-international-student-visas/offshore-student-visa-application-decision-data/overseas-student-visa-application-decisions-for-2024/
+
+Immigration New Zealand. (n.d.). Overseas student visa application decisions for 2025. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/study/for-education-providers/data-and-processing-times-for-international-student-visas/offshore-student-visa-application-decision-data/overseas-student-visa-application-decisions-for-2025/
+
+World Bank. (2026). World Development Indicators. World Bank DataBank. Retrieved May 11, 2026, from https://databank.worldbank.org/source/world-development-indicators
+
+World Bank. (2026). World Bank Country and Lending Groups. World Bank Data Help Desk. Retrieved May 11, 2026, from https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+
+World Health Organization. (2026). WHO Data. Retrieved May 11, 2026, from https://data.who.int/
+
+World Health Organization. (n.d.). Global Health Observatory. Retrieved May 11, 2026, from https://www.who.int/data/gho
