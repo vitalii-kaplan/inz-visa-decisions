@@ -163,22 +163,19 @@ Xie, Q., & Yegros-Yegros, A. (2025). A quantitative assessment of potential bene
 Gonnot J. (2025)
 Gonnot, J., & Lanati, M. (2025). Visa policy and international student migration: evidence from Canada. Journal of Economic Geography, 25(2), 255-291. https://doi.org/10.1093/jeg/lbae034
 
-Hersch (2008)
-‘Profiling the New Immigrant Worker: The Effects of Skin Color and Height’, Journal of Labor
-Economics, 26: 345–86.
+Hersch, J. (2008). Profiling the new immigrant worker: The effects of skin color and height. *Journal of Labor Economics, 26*(2), 345–386. (https://ideas.repec.org/a/ucp/jlabec/v26y2008i2p345-386.html)
 
-Oreopoulos, P. (2011)
+Oreopoulos, P. (2011). Why do skilled immigrants struggle in the labor market? A field experiment with thirteen thousand resumes. *American Economic Journal: Economic Policy, 3*(4), 148–171. [https://doi.org/10.1257/pol.3.4.148](https://doi.org/10.1257/pol.3.4.148)  https://www.aeaweb.org/articles?id=10.1257%2Fpol.3.4.148 
 
-Perkins and Neumayer (2014)
+Perkins, R., & Neumayer, E. (2014). Geographies of educational mobilities: Exploring the uneven flows of international students. *The Geographical Journal, 180*(3), 246–259. [https://doi.org/10.1111/geoj.12045](https://doi.org/10.1111/geoj.12045) 
+https://rgs-ibg.onlinelibrary.wiley.com/doi/abs/10.1111/geoj.12045 
 
-Bessey (2012)
+Bessey, D. (2012). International student migration to Germany. *Empirical Economics, 42*(1), 345–361. [https://doi.org/10.1007/s00181-010-0417-0](https://doi.org/10.1007/s00181-010-0417-0) https://link.springer.com/article/10.1007/s00181-010-0417-0 
 
-Lanati and Thiele (2020)
+Lanati, M., & Thiele, R. (2020). International student flows from developing countries: Do donors have an impact? *Economics of Education Review, 77*, Article 101997. [https://doi.org/10.1016/j.econedurev.2020.101997](https://doi.org/10.1016/j.econedurev.2020.101997) https://ideas.repec.org/a/eee/ecoedu/v77y2020ics0272775719305369.html
 
-Sassen S (1996)
-Losing control? Sovereignty in an age of globalisation Columbia University Press, New York
+Sassen, S. (1996). *Losing control? Sovereignty in an age of globalization*. Columbia University Press. https://ciaotest.cc.columbia.edu/book/sassen/sassen11.html
 
-Blake W, (1863)
-(reference to William Blake’s poem "Auguries of Innocence")
+Blake, W. (1863). Auguries of innocence. In D. G. Rossetti (Ed.), Poems. Retrieved from Poetry Foundation website: https://www.poetryfoundation.org/poems/43650/auguries-of-innocence
 
-Immigration New Zealand
+Immigration New Zealand. (n.d.). Providing evidence and documents to support your visa application. New Zealand Government. Retrieved May 11, 2026, from https://www.immigration.govt.nz/process-to-apply/applying-for-a-visa/providing-evidence-and-documents-to-support-your-visa-application/
