@@ -10,15 +10,31 @@ This article examines country-level variation in Immigration New Zealand fee-pay
 
 The results show that approval rates vary systematically across applicant nationalities and are associated with application volume, income classification, regional classification, and broader country-level development indicators. In the modelling table, several health, income, internet-use, mortality, and life-expectancy indicators are strongly correlated with approval rates, although these indicators also overlap substantially with one another. Among the tested regression specifications, the UN M49 regional model has the strongest fit, followed by the World Bank regional model, the WHO regional model, and the no-region model. A weighted UN M49 experiment gives similar overall fit but weakens several individual regional coefficients, supporting the model-fit conclusion while limiting interpretation of particular coefficients.
 
-The findings should be interpreted as country-level descriptive evidence, not as causal evidence about individual visa decisions. The analysis is explicitly based on the assumption that INZ applies the same formal decision process to all applicants and does not use the observed country-level differences as evidence of officer behaviour, discriminatory intent, bias, or unequal treatment in individual application assessment. Instead, the results are read as evidence that applicants from different countries may face different formal, documentary, financial, institutional, or verification conditions when satisfying the same visa process. The principal limitation is that the data are aggregated by country and do not include applicant-level records, programme choice, education provider information, documentation quality, or detailed processing factors. The study identifies a reproducible empirical structure and points to further research on other receiving countries, additional country-level variables, and formal inter-country education or migration relationships.
+The findings should be interpreted as country-level descriptive evidence, not as causal evidence about individual visa decisions. The analysis is explicitly based on INZ's published visa instructions, which set out common formal requirements for student visa applicants, including evidence of enrolment, tuition arrangements, sufficient funds, bona fide temporary-entry intent, and relevant health and character requirements. The observed country-level differences are therefore not interpreted as evidence of officer behaviour, discriminatory intent, bias, or unequal treatment in individual application assessment. Rather, they are treated as aggregate descriptive outcomes that may reflect country-level differences in documentary, financial, institutional, and verification conditions under the same formal decision framework. The principal limitation is that the data are aggregated by country and do not include applicant-level records, programme choice, education provider information, documentation quality, or detailed processing factors. The study identifies a reproducible empirical structure and points to further research on other receiving countries, additional country-level variables, and formal inter-country education or migration relationships.
 
 # Introduction
 
-Some are born to Sweet Delight,
-Some are born to Endless Night.
-(reference to William Blake’s poem "Auguries of Innocence")
+Record number of higher education students highlights global need for recognition of qualifications. (2025, June 24). https://www.unesco.org/en/articles/record-number-higher-education-students-highlights-global-need-recognition-qualifications
+This rapid expansion reflects a global broadening of higher education pathways, including online degrees, hybrid courses, and micro-credentials shift, complementing traditional models and reshaping how knowledge is delivered and assessed. Academic mobility is also on the rise, with 6.9 million students studying away from their home country, a number that has tripled since 2000. 
 
 TODO: State the empirical problem and research question early. Keep the framing narrow: the article studies observed variation in INZ fee-paying student visa approval rates by applicant nationality and country-level reference data.
+
+Novelty:
+Prior quantitative studies have combined international student mobility or visa data with country-level development indicators, especially World Bank variables. However, peer-reviewed studies combining student visa decision data with both World Bank development indicators and WHO health indicators appear limited, making the present country-level descriptive design a contribution to the literature.
+
+Previous quantitative research on international student migration has used visa refusal or visa-policy data together with student mobility or enrolment outcomes, particularly in the United States and Canada. Chen examines U.S. F-1 visa restrictiveness and international student enrolment, while Gonnot studies Canadian student visa policy and community-college enrolment. Other work models international student mobility using origin- and destination-country characteristics, including World Bank development indicators. However, the literature contains fewer studies that directly analyse country-level student visa approval rates as the dependent variable and combine them with broader country-level health and development indicators. This article addresses that gap using INZ fee-paying student visa decision data joined with World Bank, WHO, and UN M49 country-level variables.
+
+No works about NZ student visa.
+
+Why NZ in good as example? -- Small, isolated, with big revenue from education exporting.
+Add share of international students in NZ of all international students in the world.
+Hard to apply. Not cheap. No noise applications. 
+No explicit unequility in rules.
+
+# Literature review
+
+International education is often presented as an open global market in which students choose programmes and institutions compete for talent. This framing hides a basic constraint: students cannot simply choose to study abroad unless a state permits them to enter and remain. Cross-border education is therefore not only an academic or economic process; it is also a migration process governed by visa systems.
+This matters because mobility is unevenly distributed. For many applicants, admission to a programme is only one step in a longer chain of documentary, financial, institutional, and immigration requirements.
 
 # Data
 
@@ -40,7 +56,7 @@ The analysis therefore estimates four related experiments. Three models use alte
 
 The analysis uses several descriptive statistics, test statistics, and model diagnostics. Associations between approval rate and individual country-level variables are examined with Pearson correlation coefficients. These correlations are reported with the correlation coefficient, p-value, and degrees of freedom where relevant. This approach is used both for the relationship between application volume and approval rate and for relationships between approval rate and country-level indicators such as mortality, life expectancy, internet use, physician density, GNI per capita, and GDP per capita.
 
-The interpretation of these statistics rests on a formal equality assumption. The article treats INZ decision-making as a uniform administrative process applied to all applicants under the same legal and procedural framework. The models therefore do not use country-level differences to infer unequal treatment, bias, or discriminatory decision-making. They use those differences to study variation in the conditions under which applicants from different countries prepare, document, finance, and verify applications within that common process.
+The interpretation of these statistics rests on INZ's published student visa instructions, which define common formal requirements for applicants. The models therefore do not use country-level differences to infer unequal treatment, bias, or discriminatory decision-making. They use those differences to study variation in the conditions under which applicants from different countries prepare, document, finance, and verify applications within the same formal decision framework.
 
 The regression models are evaluated with standard linear model fit statistics. The main comparison across model specifications uses R-squared, mean absolute error, mean squared error, and root mean squared error. These statistics are used to compare the UN M49, World Bank regional, WHO regional, and no-region specifications. They measure fit within the current country-level modelling table and should not be read as validation of a causal mechanism.
 
@@ -72,7 +88,7 @@ The same correlation output also shows that several explanatory variables are st
 
 These correlations indicate that approval rates are associated with broad country-level development, health, and income measures. They should not be read as causal effects. The data are aggregated by country, and the variables describe country-level conditions rather than individual applicants.
 
-This interpretation is limited to formal and administrative conditions surrounding applications. The analysis does not assert, imply, or test unequal treatment by INZ officers, discriminatory intent, or bias in individual application assessment. For the purposes of this article, the INZ decision process is treated as fair, formally equal, and consistently applied to all applicants. The working interpretation is that applicants are assessed under the same formal process, but applicants from different countries may face country-specific evidentiary, documentary, financial, institutional, or verification difficulties when satisfying that process. The observed country-level differences are therefore treated as indicators of variation in application conditions and supporting evidence, not as evidence of unequal person-to-person treatment.
+This interpretation is limited to formal and administrative conditions surrounding applications. The analysis is explicitly based on INZ's published visa instructions, which set out common formal requirements for student visa applicants, including evidence of enrolment, tuition arrangements, sufficient funds, bona fide temporary-entry intent, and relevant health and character requirements. The observed country-level differences are therefore not interpreted as evidence of officer behaviour, discriminatory intent, bias, or unequal treatment in individual application assessment. Rather, they are treated as aggregate descriptive outcomes that may reflect country-level differences in documentary, financial, institutional, and verification conditions under the same formal decision framework.
 
 ## Regression Approximation
 
@@ -157,7 +173,7 @@ The residual and relative-residual checks show where the current model does not 
 
 Negative deviations require even more caution. Countries with observed approval rates well below fitted values cannot be explained by the current country-level predictors alone. These cases may involve applicant-composition differences, programme choice, documentation problems, financial-evidence issues, verification difficulties, or other application-level factors that are absent from the dataset. They should therefore be treated as questions for further empirical investigation, not as evidence for a specific institutional mechanism.
 
-Overall, the analysis supports a narrow conclusion: country-level approval-rate differences are associated with application volume, national development indicators, income categories, and regional classification systems. Within the interpretive framework of this article, these differences are attributed to different applicant conditions across countries and regions, not to unequal treatment by INZ. The results are useful for describing and modelling variation at the country level, but they do not identify the individual-level reasons why an application is approved or declined.
+Overall, the analysis supports a narrow conclusion: country-level approval-rate differences are associated with application volume, national development indicators, income categories, and regional classification systems. Within the interpretive framework of this article, these differences are treated as possible evidence of different applicant conditions across countries and regions under the same formal decision framework. The results are useful for describing and modelling variation at the country level, but they do not identify the individual-level reasons why an application is approved or declined.
 
 # Limitations
 
@@ -169,13 +185,17 @@ The results are also sensitive to country matching, missing numerical values, re
 
 # Conclusion
 
-This article shows that country-level variation in Immigration New Zealand fee-paying student visa approval rates during 2022-2025 is associated with application volume, country-level development indicators, income categories, and regional classification systems. The strongest current model fit is obtained with the UN M49 regional specification, but the results also show that non-region country-level variables carry substantial explanatory information. The analysis should therefore be read as a country-level descriptive and modelling exercise, not as a causal account of individual visa decisions and not as evidence of unequal treatment in the INZ decision process.
+This article shows that country-level variation in Immigration New Zealand fee-paying student visa approval rates during 2022-2025 is associated with application volume, country-level development indicators, income categories, and regional classification systems. The strongest current model fit is obtained with the UN M49 regional specification, but the results also show that non-region country-level variables carry substantial explanatory information. The analysis should therefore be read as a country-level descriptive and modelling exercise, not as a causal account of individual visa decisions or as evidence about officer-level assessment behaviour.
 
 The main empirical contribution is to connect INZ student visa decision outcomes with external country-level reference data in a reproducible workflow. This makes visible both broad structure and unexplained country-specific deviations. The broad structure supports cautious interpretation of country-level application conditions. The deviations identify where the current data are insufficient and where more detailed research is needed.
 
 It is difficult to assume that WHO and World Bank indicators directly influence visa approval rates. A more cautious interpretation is that these indicators mark broader country-specific conditions that are not directly observed in the present dataset. Such hidden conditions may influence both the measured WHO and World Bank variables and the practical circumstances under which applicants prepare visa evidence. Identifying these country-specific mechanisms is therefore a central task for further research.
 
 Future work should extend the comparison beyond New Zealand by examining student visa decisions in other receiving countries. It should also add further country-level variables from reliable sources, including measures related to crime, religion, culture, institutional trust, and other social conditions where the definitions and provenance are clear. A further direction is to examine whether inter-country treaties, education-sector relationships, diplomatic communication, scholarship channels, or other formal links between countries help explain why some countries have approval rates above or below the values fitted by the current model.
+
+To inform
+our empirical analysis, we propose a basic theoretical model to understand how incomplete informa­
+tion affects the processing of visa applications by immigration officers.
 
 # References
 

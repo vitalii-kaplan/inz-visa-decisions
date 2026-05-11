@@ -31,7 +31,10 @@ The application must also include:
 - medical examination documents from approved medical offices;
 - travel history, including visa scans and booking confirmations for at least five years;
 - confirmation of relationships with relatives, not only through marriage certificates but also through additional evidence such as rental contracts;
-- confirmation of valuable ties to the home country, such as property ownership.
+- confirmation of valuable ties to the home country, such as property ownership;
+- IELTS/TOEFL test results.
+
+All documents not originally in English should be translated by certified translator.
 
 INZ does not give an upper estimate for application assessment time. The mean time is three weeks, but at least one known case took more than five months.
 
