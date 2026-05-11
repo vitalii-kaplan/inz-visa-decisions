@@ -57,11 +57,15 @@ The present article contributes to this literature by analysing publicly availab
 
 # Data
 
-TODO: Describe the source INZ decision files for 2022, 2023, 2024, and 2025. Define the unit of observation, variables, exclusions, country matching, and the distinction between original, prepared, combined, and result files.
+The primary source data are publicly available Immigration New Zealand offshore or overseas student visa decision tables for 2022, 2023, 2024, and 2025. The files are stored in `data/original/` and are not edited manually. They report fee-paying student visa decisions by applicant nationality or country. The yearly files use slightly different column names, but the common information is the country or nationality, number approved, number declined, total or volume of applications, approval rate, and decline rate.
 
-TODO: Describe the additional country-level reference tables from the World Bank, WHO, and UN M49. Explain what each table contributes and how countries were joined across sources.
+The unit of observation in the prepared INZ table is a country or applicant nationality aggregated across the four-year period. The unified prepared file, `data/prepared/inz_student_visa_decisions_2022-2025.csv`, contains 179 countries or applicant nationalities. For each row it reports total approvals, total declines, total applications, approval rate, and `Applications_log10`, the base-10 logarithm of total applications. Approval rate is calculated as approved applications divided by total applications. This table is used for descriptive results on application volume and overall approval rates.
 
-+ Description of data preparation and transformations.
+The modelling dataset joins the prepared INZ table to publicly available country-level reference data from the World Bank, the World Health Organization, and UN M49. The World Bank reference table contributes FY2026 region, income group, lending category, GDP per capita, GNI per capita using the Atlas method, life expectancy, internet-use percentage, and urban-population percentage. The WHO reference table contributes WHO region, under-five mortality, maternal mortality, DTP3 immunization coverage, and physician density. The UN M49 reference table contributes an alternative regional classification.
+
+Country names are harmonised across the INZ, World Bank, WHO, and UN M49 files before modelling. The combined modelling file is `data/prepared/inz_2022-2025_wb_who_m49_combined.csv`. It contains 110 countries after country matching, removal of rows with missing numerical values needed for the models, and exclusion of countries with fewer than 10 total applications across 2022-2025. Countries present in the prepared INZ table but absent from the regression table are reported separately in `data/support/Countries_excluded_from_regression.csv`.
+
+The repository distinguishes source, prepared, combined, and result files. Source files in `data/original/` preserve the downloaded INZ and reference tables. Prepared files in `data/prepared/` contain harmonised and joined datasets used for analysis. Result files in `data/results/` contain model coefficients, scores, predictions, prediction-rate tables, and correlation outputs. Support files in `data/support/` contain derived diagnostic summaries and auxiliary tables used to interpret the results.
 
 # Methods
 
@@ -213,12 +217,9 @@ It is difficult to assume that WHO and World Bank indicators directly influence 
 Future work should extend the comparison beyond New Zealand by examining student visa decisions in other receiving countries. It should also add further country-level variables from reliable sources, including measures related to crime, religion, culture, institutional trust, and other social conditions where the definitions and provenance are clear. A further direction is to examine whether inter-country treaties, education-sector relationships, diplomatic communication, scholarship channels, or other formal links between countries help explain why some countries have approval rates above or below the values fitted by the current model.
 
 To inform
-our empirical analysis, we propose a basic theoretical model to understand how incomplete informa­
-tion affects the processing of visa applications by immigration officers.
+our empirical analysis, we propose a basic theoretical model to understand how incomplete information affects the processing of visa applications by immigration officers.
 
 # References
-
-TODO: Add INZ source pages and references for World Bank, WHO, and UN M49 data.
 
 # Appendices or Supplementary Material
 
