@@ -389,33 +389,107 @@ These cases should not automatically be treated as technical outliers. They show
 
 \section{Robustness or Sensitivity Checks}
 
-The first sensitivity check is already built into the current workflow: the same modelling task is estimated with three alternative regional classifications and with no regional classification. The UN M49 model has the strongest fit, followed by the World Bank regional model, the WHO regional model, and the no-region model. This comparison supports the statement that regional classification matters for model fit and that the more detailed UN M49 classification fits the current data best.
+The first sensitivity check is already built into the current workflow: the same modelling task is estimated with three alternative regional classifications and with no regional classification. As shown in Table~\ref{tab:model-fit-comparison}, the UN M49 model has the strongest fit, followed by the World Bank regional model, the WHO regional model, and the no-region model. This comparison supports the statement that regional classification matters for model fit and that the more detailed UN M49 classification fits the current data best.
 
 The score tables support the same ordering across several metrics. R-squared declines from 0.867 in the UN M49 model to 0.812 in the World Bank regional model, 0.786 in the WHO regional model, and 0.706 in the no-region model. Mean absolute error and root mean squared error move in the opposite direction: they are smallest in the UN M49 model and largest in the no-region model.
 
-The prediction-rate tables provide a second check. The UN M49 model produces the fewest countries outside the 80--120 percent fitted-value band: 15 countries, compared with 19 in the World Bank regional model, 25 in the WHO regional model, and 28 in the no-region model. This supports the view that regional variables improve the fit and that UN M49 is the strongest of the current regional specifications.
-
-(Table with mertics and number of outliers)
+The prediction-rate tables provide a second check. Table~\ref{tab:large-proportional-deviations} shows that the UN M49 model produces the fewest countries outside the 80--120 percent fitted-value band: 15 countries, compared with 19 in the World Bank regional model, 25 in the WHO regional model, and 28 in the no-region model. This supports the view that regional variables improve the fit and that UN M49 is the strongest of the current regional specifications.
 
 The coefficient tables for the UN M49, WHO, World Bank, and no-region specifications are useful for comparing model outputs across alternative specifications. They show whether signs, magnitudes, and statistical significance change across region definitions. However, they do not test all modelling assumptions by themselves.
 
-The coefficient stability summary in \texttt{data/support/Coefficients\_stability\_summary.csv} (add this table to Appendix) answers whether the same country-level variables remain important across specifications. It shows two patterns. First, urban population percentage is significant in all four specifications, with negative coefficients and p-values below 0.05. Second, World Bank income-group variables are especially important when UN M49 regions are not used: low-income status and lower-middle-income status are significant in the World Bank, WHO, and no-region models. In the UN M49 model, low-income status is weaker and does not reach the 0.05 threshold ($p = 0.0714$), suggesting that some income-related structure may be absorbed by the more detailed UN M49 regional categories.
+The coefficient stability summary in Appendix Table~\ref{tab:appendix-coefficient-stability} answers whether the same country-level variables remain important across specifications. It shows two patterns. First, urban population percentage is significant in all four specifications, with negative coefficients and p-values below 0.05. Second, World Bank income-group variables are especially important when UN M49 regions are not used: low-income status and lower-middle-income status are significant in the World Bank, WHO, and no-region models. In the UN M49 model, low-income status is weaker and does not reach the 0.05 threshold ($p = 0.0714$), suggesting that some income-related structure may be absorbed by the more detailed UN M49 regional categories.
 
 The numerical health and development indicators are less stable across specifications. Life expectancy is significant in the UN M49 model ($p = 0.0128$) but not in the World Bank, WHO, or no-region models. WHO DTP3 immunization coverage is significant only in the no-region model ($p = 0.0152$). GDP per capita, GNI per capita, physician density, under-five mortality, maternal mortality, and internet-user percentage do not remain statistically significant in the multivariable coefficient tables, even though several of them have strong bivariate correlations with approval rate. This difference is consistent with overlapping information among country-level development indicators.
 
 This does not mean that these parameters are substantively unimportant. Their bivariate correlations show that they are part of the broader country-level pattern associated with approval rates. In the multivariable models, however, several indicators describe related dimensions of national income, health systems, infrastructure, and institutional development. Once these variables are entered together with income groups and regional classifications, their separate coefficients become harder to distinguish statistically. Their substantive importance is therefore better understood as part of a shared country-level development profile, rather than as isolated independent predictors.
 
-The residual summaries and residuals-versus-fitted plots in \texttt{data/support/} provide an additional model check. Across all four specifications, mean residuals are approximately zero, which is expected for these fitted linear models. The residual spread follows the same ordering as the score tables: the UN M49 model has the smallest residual standard deviation (0.090) and mean absolute residual (0.069), followed by the World Bank regional model (0.108 and 0.082), the WHO regional model (0.115 and 0.087), and the no-region model (0.134 and 0.100). The largest absolute residual is also smallest in the UN M49 model (0.294) and largest in the no-region model (0.437). This supports the same conclusion as the score and prediction-rate checks: the UN M49 specification leaves less unexplained error than the alternatives.
+The residual summaries and residuals-versus-fitted plots provide an additional model check. Across all four specifications, mean residuals are 0.0 after rounding, which is expected for these fitted linear models. Table~\ref{tab:residual-summary-by-model} shows that residual spread follows the same ordering as the score tables: the UN M49 model has the smallest residual standard deviation and mean absolute residual, while the no-region model has the largest values. Figure~\ref{fig:residuals-vs-fitted} shows the same comparison graphically. This supports the same conclusion as the score and prediction-rate checks: the UN M49 specification leaves less unexplained error than the alternatives.
 
-(Table with these metrics)
+\begin{table}
+\caption{Residual summary by regression specification}
+\label{tab:residual-summary-by-model}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lrrr}
+\hline
+Specification & Residual SD & MAE & Max. abs. residual \\
+\hline
+UN M49 regional model & 0.090 & 0.069 & 0.294 \\
+World Bank regional model & 0.108 & 0.082 & 0.314 \\
+WHO regional model & 0.115 & 0.087 & 0.384 \\
+No-region model & 0.134 & 0.100 & 0.437 \\
+\hline
+\end{tabular}
+\end{table}
 
-The largest positive and negative relative residuals are reported in \texttt{data/support/Relative\_residuals\_positive\_by\_model.csv} and \texttt{data/support/Relative\_residuals\_negative\_by\_model.csv}. These tables use \texttt{Prediction\_rate}, the ratio of observed approval rate to fitted approval rate, rather than only the absolute residual. This is useful because the same absolute difference can be more consequential when the fitted approval rate is low. The positive table identifies countries where observed approval is high relative to the fitted value; the negative table identifies countries where observed approval is low relative to the fitted value.
+\begin{figure}
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/residuals_vs_fitted_un_m49.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/residuals_vs_fitted_wb.pdf}
+\end{minipage}
+
+\vspace{0.7em}
+
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/residuals_vs_fitted_who.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/residuals_vs_fitted_no_region.pdf}
+\end{minipage}
+\caption{Residuals against fitted approval rates in the four regression specifications. The figures are generated from \texttt{data/support/residuals\_vs\_fitted\_un\_m49.svg}, \texttt{data/support/residuals\_vs\_fitted\_wb.svg}, \texttt{data/support/residuals\_vs\_fitted\_who.svg}, and \texttt{data/support/residuals\_vs\_fitted\_no\_region.svg}.}
+\label{fig:residuals-vs-fitted}
+\end{figure}
+
+The largest positive and negative relative residuals are reported in Appendix Tables~\ref{tab:appendix-relative-residuals-positive} and \ref{tab:appendix-relative-residuals-negative}. These tables use \texttt{Prediction\_rate}, the ratio of observed approval rate to fitted approval rate, rather than only the absolute residual. This is useful because the same absolute difference can be more consequential when the fitted approval rate is low. The positive table identifies countries where observed approval is high relative to the fitted value; the negative table identifies countries where observed approval is low relative to the fitted value.
 
 The relative-residual tables also show that several countries recur among the largest positive or negative deviations across model specifications. This supports two interpretations. First, the model comparison is stable enough to support the conclusion that the UN M49 specification has the best fit among the current alternatives. Second, the largest country-level deviations are not explained only by the choice of regional classification. Persistent deviations across specifications may indicate omitted country-specific conditions, applicant-composition differences, documentation or verification factors, or other application-level mechanisms not represented in the current country-level dataset.
 
-An additional weighted UN M49 experiment was estimated in Python using \texttt{Applications\_log10} as the observation weight. This gives more influence to countries with larger log-transformed application volumes while preserving the same UN M49 feature structure. The weighted model remains close to the unweighted UN M49 model. Its weighted R-squared is 0.855, compared with the unweighted UN M49 R-squared of 0.867. Its weighted mean absolute error is 0.068 and weighted root mean squared error is 0.088, both close to the unweighted UN M49 values of 0.069 and 0.090. When evaluated without weights, the weighted model has R-squared of 0.864, mean absolute error of 0.071, and root mean squared error of 0.091. These results indicate that the main UN M49 fit result is stable when countries with larger log-transformed application volumes receive more weight.
+An additional weighted UN M49 experiment was estimated in Python using \texttt{Applications\_log10} as the observation weight. This gives more influence to countries with larger log-transformed application volumes while preserving the same UN M49 feature structure. Table~\ref{tab:weighted-un-m49-fit} shows that the weighted model remains close to the unweighted UN M49 model. The mean signed error rounds to 0.0 in all three evaluations. These results indicate that the main UN M49 fit result is stable when countries with larger log-transformed application volumes receive more weight.
 
-The weighted coefficient table also supports a cautious interpretation. Life expectancy at birth and urban population percentage remain statistically significant in the weighted UN M49 model, with p-values of 0.0078 and 0.0051. Other variables that were significant in the unweighted UN M49 model, including several regional indicators and the missing World Bank lending-category term, no longer cross the 0.05 threshold. This pattern is substantively plausible. Weighting by application volume reduces the statistical prominence of several regional terms, suggesting that some region-level coefficient patterns in the unweighted model are influenced by treating each country equally regardless of application volume. When countries with more applications receive more weight, the overall UN M49 model fit remains similar, but the evidence for specific regional coefficients becomes weaker. The weighted experiment therefore strengthens the model-fit conclusion while reinforcing caution about individual coefficients.
+\begin{table}
+\caption{Weighted UN M49 model fit}
+\label{tab:weighted-un-m49-fit}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lrrr}
+\hline
+Evaluation & R-squared & MAE & RMSE \\
+\hline
+Weighted model, weighted metrics & 0.855 & 0.068 & 0.088 \\
+Weighted model, unweighted metrics & 0.864 & 0.071 & 0.091 \\
+Main UN M49 model, unweighted metrics & 0.867 & 0.069 & 0.090 \\
+\hline
+\end{tabular}
+\end{table}
+
+The weighted coefficient table also supports a cautious interpretation. Table~\ref{tab:weighted-un-m49-significant-terms} shows that life expectancy at birth and urban population percentage remain statistically significant in the weighted UN M49 model. Other variables that were significant in the unweighted UN M49 model, including several regional indicators and the missing World Bank lending-category term, no longer cross the 0.05 threshold. This pattern is substantively plausible. Weighting by application volume reduces the statistical prominence of several regional terms, suggesting that some region-level coefficient patterns in the unweighted model are influenced by treating each country equally regardless of application volume. When countries with more applications receive more weight, the overall UN M49 model fit remains similar, but the evidence for specific regional coefficients becomes weaker. The weighted experiment therefore strengthens the model-fit conclusion while reinforcing caution about individual coefficients.
+
+\begin{table}
+\caption{Terms below $p < 0.05$ in the weighted UN M49 specification}
+\label{tab:weighted-un-m49-significant-terms}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lrr}
+\hline
+Term & Coefficient & $p$ \\
+\hline
+Life expectancy at birth & 0.543 & 0.0078 \\
+Urban population percentage & -0.269 & 0.0051 \\
+\hline
+\end{tabular}
+\end{table}
 
 These checks do not turn the analysis into a causal design. Their role is narrower: to show whether the descriptive model fit and the comparison between regional classifications are stable under reasonable alternative specifications.
 
@@ -707,6 +781,141 @@ Life\_expectancy\_at\_birth\_years & 0.0871 & 0.6543 \\
 GDP\_per\_capita\_current\_USD & -0.1465 & 0.6644 \\
 Internet\_users\_pct\_population & 0.0134 & 0.9087 \\
 WHO\_Maternal\_Mortality\_per\_100000\_live\_births & 0.0182 & 0.9329 \\
+\hline
+\end{longtable}
+}
+
+\subsection{Coefficient Stability Summary}
+
+Table~\ref{tab:appendix-coefficient-stability} reports the cross-specification coefficient stability summary from \texttt{data/support/Coefficients\_stability\_summary.csv}. The table gives the number of model specifications in which each term appears, the number of those specifications where $p < 0.05$, and the minimum and maximum p-values observed across the specifications where the term is present.
+
+{\tiny
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{p{0.38\textwidth}p{0.08\textwidth}rr@{\hspace{0.7em}}rrp{0.15\textwidth}}
+\caption{Coefficient stability summary across regression specifications}\label{tab:appendix-coefficient-stability}\\
+\hline
+Term & Type & Models & Sig. & Min. $p$ & Max. $p$ & Stability \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Type & Models & Sig. & Min. $p$ & Max. $p$ & Stability \\
+\hline
+\endhead
+Urban\_population\_pct & Variable & 4 & 4 & 0.0053 & 0.0132 & stable significant \\
+WB\_FY2026\_Income\_Group=Low income & Variable & 4 & 3 & $2.500e{-7}$ & 0.0714 & partly stable \\
+WB\_FY2026\_Income\_Group=Lower middle income & Variable & 4 & 3 & 0.0047 & 0.5992 & partly stable \\
+WB\_FY2026\_Lending\_Category=Missing & Variable & 4 & 3 & 0.0156 & 0.1301 & partly stable \\
+Life\_expectancy\_at\_birth\_years & Variable & 4 & 1 & 0.0128 & 0.6543 & specification dependent \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & Variable & 4 & 1 & 0.0152 & 0.6678 & specification dependent \\
+WB\_FY2026\_Income\_Group=Upper middle income & Variable & 4 & 0 & 0.0680 & 0.7967 & not significant \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & Variable & 4 & 0 & 0.0758 & 0.9164 & not significant \\
+WB\_FY2026\_Lending\_Category=IBRD & Variable & 4 & 0 & 0.0918 & 0.2363 & not significant \\
+WB\_FY2026\_Income\_Group=Missing & Variable & 4 & 0 & 0.1085 & 0.7943 & not significant \\
+WB\_FY2026\_Lending\_Category=IDA & Variable & 4 & 0 & 0.2166 & 0.4213 & not significant \\
+WHO\_Physician\_Density\_per\_10000\_population & Variable & 4 & 0 & 0.2560 & 0.9680 & not significant \\
+Internet\_users\_pct\_population & Variable & 4 & 0 & 0.3553 & 0.9230 & not significant \\
+GNI\_per\_capita\_Atlas\_current\_USD & Variable & 4 & 0 & 0.4372 & 0.6318 & not significant \\
+GDP\_per\_capita\_current\_USD & Variable & 4 & 0 & 0.4888 & 0.7816 & not significant \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & Variable & 4 & 0 & 0.7995 & 0.9689 & not significant \\
+WB\_FY2026\_Region=Middle East, North Africa, Afghanistan \& Pakistan & Region & 1 & 1 & $8.194e{-8}$ & $8.194e{-8}$ & stable significant \\
+WB\_FY2026\_Region=Europe \& Central Asia & Region & 1 & 1 & $3.689e{-4}$ & $3.689e{-4}$ & stable significant \\
+WB\_FY2026\_Region=South Asia & Region & 1 & 1 & $5.548e{-4}$ & $5.548e{-4}$ & stable significant \\
+WHO\_Region=Western Pacific Region & Region & 1 & 1 & $9.745e{-4}$ & $9.745e{-4}$ & stable significant \\
+WB\_FY2026\_Region=Sub-Saharan Africa & Region & 1 & 1 & 0.0042 & 0.0042 & stable significant \\
+UN M49=Northern Africa & Region & 1 & 1 & 0.0109 & 0.0109 & stable significant \\
+UN M49=Middle Africa & Region & 1 & 1 & 0.0219 & 0.0219 & stable significant \\
+UN M49=Southern Asia & Region & 1 & 1 & 0.0336 & 0.0336 & stable significant \\
+WHO\_Region=Region of the Americas & Region & 1 & 0 & 0.0691 & 0.0691 & not significant \\
+UN M49=Melanesia & Region & 1 & 0 & 0.0861 & 0.0861 & not significant \\
+UN M49=Central Asia & Region & 1 & 0 & 0.0902 & 0.0902 & not significant \\
+UN M49=Western Asia & Region & 1 & 0 & 0.0904 & 0.0904 & not significant \\
+WB\_FY2026\_Region=North America & Region & 1 & 0 & 0.1001 & 0.1001 & not significant \\
+WHO\_Region=South-East Asia Region & Region & 1 & 0 & 0.1933 & 0.1933 & not significant \\
+WB\_FY2026\_Region=Latin America \& Caribbean & Region & 1 & 0 & 0.2041 & 0.2041 & not significant \\
+UN M49=South-eastern Asia & Region & 1 & 0 & 0.2368 & 0.2368 & not significant \\
+UN M49=Micronesia & Region & 1 & 0 & 0.3124 & 0.3124 & not significant \\
+WHO\_Region=Eastern Mediterranean Region & Region & 1 & 0 & 0.3817 & 0.3817 & not significant \\
+UN M49=Southern Europe & Region & 1 & 0 & 0.4785 & 0.4785 & not significant \\
+UN M49=Polynesia & Region & 1 & 0 & 0.4848 & 0.4848 & not significant \\
+UN M49=Northern Europe & Region & 1 & 0 & 0.5001 & 0.5001 & not significant \\
+UN M49=Central America & Region & 1 & 0 & 0.5712 & 0.5712 & not significant \\
+UN M49=Eastern Africa & Region & 1 & 0 & 0.6506 & 0.6506 & not significant \\
+UN M49=South America & Region & 1 & 0 & 0.6554 & 0.6554 & not significant \\
+WHO\_Region=European Region & Region & 1 & 0 & 0.6626 & 0.6626 & not significant \\
+UN M49=Western Europe & Region & 1 & 0 & 0.7865 & 0.7865 & not significant \\
+UN M49=Northern America & Region & 1 & 0 & 0.7951 & 0.7951 & not significant \\
+UN M49=Eastern Asia & Region & 1 & 0 & 0.8053 & 0.8053 & not significant \\
+UN M49=Eastern Europe & Region & 1 & 0 & 0.8582 & 0.8582 & not significant \\
+UN M49=Southern Africa & Region & 1 & 0 & 0.8628 & 0.8628 & not significant \\
+UN M49=Western Africa & Region & 1 & 0 & 0.9384 & 0.9384 & not significant \\
+\hline
+\end{longtable}
+}
+
+\subsection{Relative Residual Tables}
+
+Tables~\ref{tab:appendix-relative-residuals-positive} and \ref{tab:appendix-relative-residuals-negative} report the largest positive and negative relative residuals by model specification. Each entry gives the country, \texttt{Prediction\_rate}, and residual delta. The source files are \texttt{data/support/Relative\_residuals\_positive\_by\_model.csv} and \texttt{data/support/Relative\_residuals\_negative\_by\_model.csv}.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}}
+\caption{Largest positive relative residuals by model specification}\label{tab:appendix-relative-residuals-positive}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endhead
+Democratic Republic of Congo (rate=2.375, delta=0.109) & Nigeria (rate=1.940, delta=0.204) & Rwanda (rate=1.852, delta=0.241) & Rwanda (rate=2.191, delta=0.285) \\
+Sudan (rate=1.551, delta=0.127) & Rwanda (rate=1.601, delta=0.197) & Nigeria (rate=1.736, delta=0.178) & Timor Leste (rate=1.804, delta=0.437) \\
+Nigeria (rate=1.392, delta=0.118) & Timor Leste (rate=1.410, delta=0.285) & Timor Leste (rate=1.642, delta=0.384) & Uganda (rate=1.774, delta=0.200) \\
+Timor Leste (rate=1.346, delta=0.252) & Uganda (rate=1.364, delta=0.122) & Uganda (rate=1.508, delta=0.154) & Nigeria (rate=1.659, delta=0.167) \\
+Kazakhstan (rate=1.269, delta=0.161) & Botswana (rate=1.242, delta=0.146) & Jordan (rate=1.247, delta=0.118) & Kiribati (rate=1.624, delta=0.299) \\
+Jamaica (rate=1.198, delta=0.151) & Ukraine (rate=1.233, delta=0.162) & Botswana (rate=1.245, delta=0.148) & Laos (rate=1.360, delta=0.254) \\
+Zambia (rate=1.195, delta=0.103) & Lebanon (rate=1.213, delta=0.122) & Kiribati (rate=1.240, delta=0.151) & Solomon Islands (rate=1.300, delta=0.222) \\
+Lebanon (rate=1.184, delta=0.108) & Kiribati (rate=1.202, delta=0.131) & Zambia (rate=1.238, delta=0.121) & Malaysia (rate=1.287, delta=0.218) \\
+China (rate=1.175, delta=0.144) & Laos (rate=1.196, delta=0.157) & Laos (rate=1.207, delta=0.165) & Fiji (rate=1.282, delta=0.175) \\
+Bolivia (rate=1.171, delta=0.121) & Kuwait (rate=1.185, delta=0.154) & Kuwait (rate=1.203, delta=0.166) & Brazil (rate=1.276, delta=0.193) \\
+Laos (rate=1.169, delta=0.139) & Jordan (rate=1.179, delta=0.090) & Indonesia (rate=1.198, delta=0.157) & Cambodia (rate=1.270, delta=0.195) \\
+Sri Lanka (rate=1.164, delta=0.109) & Brazil (rate=1.176, delta=0.134) & Lebanon (rate=1.198, delta=0.115) & China (rate=1.240, delta=0.187) \\
+Maldives (rate=1.154, delta=0.110) & Jamaica (rate=1.171, delta=0.134) & Ukraine (rate=1.198, delta=0.141) & Jamaica (rate=1.206, delta=0.157) \\
+Oman (rate=1.146, delta=0.122) & Poland (rate=1.166, delta=0.143) & Brazil (rate=1.192, delta=0.143) & Philippines (rate=1.198, delta=0.138) \\
+Rwanda (rate=1.144, delta=0.066) & Zambia (rate=1.165, delta=0.090) & Solomon Islands (rate=1.168, delta=0.139) & Mexico (rate=1.196, delta=0.151) \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}}
+\caption{Largest negative relative residuals by model specification}\label{tab:appendix-relative-residuals-negative}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endhead
+Chad (rate=0.000, delta=-0.032) & Chad (rate=0.000, delta=-0.133) & Chad (rate=0.000, delta=-0.151) & Chad (rate=0.000, delta=-0.073) \\
+Afghanistan (rate=0.495, delta=-0.144) & Cameroon (rate=0.342, delta=-0.266) & Cameroon (rate=0.347, delta=-0.259) & Cameroon (rate=0.334, delta=-0.275) \\
+Uzbekistan (rate=0.522, delta=-0.229) & Uzbekistan (rate=0.443, delta=-0.314) & Uzbekistan (rate=0.450, delta=-0.306) & Uzbekistan (rate=0.423, delta=-0.342) \\
+Turkey (rate=0.597, delta=-0.237) & Turkey (rate=0.550, delta=-0.288) & Afghanistan (rate=0.517, delta=-0.132) & Afghanistan (rate=0.447, delta=-0.174) \\
+Myanmar (rate=0.626, delta=-0.294) & Afghanistan (rate=0.615, delta=-0.088) & Turkey (rate=0.541, delta=-0.298) & Turkey (rate=0.516, delta=-0.330) \\
+Cameroon (rate=0.642, delta=-0.077) & Myanmar (rate=0.619, delta=-0.304) & Algeria (rate=0.643, delta=-0.231) & Libya (rate=0.571, delta=-0.273) \\
+Yemen (rate=0.704, delta=-0.105) & Tanzania (rate=0.710, delta=-0.173) & Nepal (rate=0.683, delta=-0.180) & Algeria (rate=0.587, delta=-0.293) \\
+Tanzania (rate=0.719, delta=-0.166) & Algeria (rate=0.726, delta=-0.157) & Libya (rate=0.688, delta=-0.165) & Yemen (rate=0.610, delta=-0.160) \\
+Algeria (rate=0.794, delta=-0.108) & Democratic Republic of Congo (rate=0.727, delta=-0.070) & Yemen (rate=0.718, delta=-0.098) & Tanzania (rate=0.645, delta=-0.233) \\
+Ghana (rate=0.794, delta=-0.118) & Mongolia (rate=0.727, delta=-0.227) & Myanmar (rate=0.719, delta=-0.193) & Iraq (rate=0.650, delta=-0.256) \\
+Ecuador (rate=0.802, delta=-0.176) & Libya (rate=0.749, delta=-0.122) & Mongolia (rate=0.726, delta=-0.228) & Nepal (rate=0.693, delta=-0.172) \\
+Dominican Republic (rate=0.803, delta=-0.151) & Dominican Republic (rate=0.810, delta=-0.145) & Democratic Republic of Congo (rate=0.727, delta=-0.070) & Myanmar (rate=0.698, delta=-0.213) \\
+Iraq (rate=0.835, delta=-0.094) & Ecuador (rate=0.814, delta=-0.163) & Tanzania (rate=0.759, delta=-0.135) & Iran (rate=0.730, delta=-0.197) \\
+Vietnam (rate=0.851, delta=-0.143) & Nepal (rate=0.827, delta=-0.081) & India (rate=0.765, delta=-0.173) & Democratic Republic of Congo (rate=0.789, delta=-0.050) \\
+Syria (rate=0.853, delta=-0.042) & Yemen (rate=0.842, delta=-0.047) & Iraq (rate=0.797, delta=-0.121) & Zimbabwe (rate=0.790, delta=-0.106) \\
 \hline
 \end{longtable}
 }
