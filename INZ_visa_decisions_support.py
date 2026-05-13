@@ -11,6 +11,7 @@ import pandas as pd
 RESULTS_DIR = Path("data/results")
 SUPPORT_DIR = Path("data/support")
 ARTICLE_IMGS_DIR = Path("article/imgs")
+PREPARED_DIR = Path("data/prepared")
 
 MODELS = {
     "un_m49": RESULTS_DIR / "Prediction_un_m49.csv",
@@ -52,6 +53,39 @@ APPROXIMATION_PLOTS = {
         "title": "No regional classification\nR-squared = 0.706, MAE = 0.100, RMSE = 0.134",
     },
 }
+
+
+def generate_application_volume_plot():
+    input_path = PREPARED_DIR / "inz_student_visa_decisions_2022-2025.csv"
+    svg_path = RESULTS_DIR / "applicationslog10_to_approval_rate.svg"
+    pdf_path = ARTICLE_IMGS_DIR / "applicationslog10_to_approval_rate.pdf"
+
+    df = pd.read_csv(input_path)
+    required = ["Country", "Applications_log10", "Approval rate"]
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        raise ValueError(f"{input_path} is missing required columns: {missing}")
+
+    plot_df = df.copy()
+    x = pd.to_numeric(plot_df["Applications_log10"], errors="coerce")
+    y = pd.to_numeric(plot_df["Approval rate"], errors="coerce")
+    valid = x.notna() & y.notna()
+    x = x.loc[valid]
+    y = y.loc[valid]
+
+    fig, ax = plt.subplots(figsize=(8, 6), dpi=100)
+    ax.scatter(x, y, color="#2b8cbe", s=15, alpha=0.85, edgecolors="none")
+    ax.set_title("Total applications (log10) and approval rate")
+    ax.set_xlabel("Total applications (log10)")
+    ax.set_ylabel("Approval rate")
+    ax.grid(True, linewidth=0.5, alpha=0.35)
+    fig.tight_layout()
+
+    svg_path.parent.mkdir(parents=True, exist_ok=True)
+    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(svg_path, bbox_inches="tight")
+    fig.savefig(pdf_path, bbox_inches="tight")
+    plt.close(fig)
 
 
 def load_prediction(path):
@@ -266,6 +300,7 @@ def relative_residual_table(direction, limit=15):
 
 def main():
     SUPPORT_DIR.mkdir(parents=True, exist_ok=True)
+    generate_application_volume_plot()
     generate_approximation_plots()
 
     summaries = []
