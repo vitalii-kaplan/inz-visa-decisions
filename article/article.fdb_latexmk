@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex article"] 1778683264.16916 "article.aux" "article.bbl" "article" 1778683264.97045 0
-  "./bibliography.bib" 1778584363.47536 12114 5db0601f45f625a5c31cd4c801173f7c ""
+["bibtex article"] 1778688398.02678 "article.aux" "article.bbl" "article" 1778688399.35596 0
+  "./bibliography.bib" 1778687382.36984 12373 67d35f267fcfea1a1e35c5726850b274 ""
   "./splncs04.bst" 1778517217.32973 32146 aadf770ded437d161532035219ea6f45 ""
-  "article.aux" 1778683264.63157 12604 6d6804d2633cccc9a24d49dd97845fc5 "pdflatex"
+  "article.aux" 1778688398.85886 12707 7d6dcf8b963adde815305ebabd3b2720 "pdflatex"
   (generated)
   "article.bbl"
   "article.blg"
   (rewritten before read)
-["pdflatex"] 1778683264.26747 "article.tex" "article.pdf" "article" 1778683264.97059 0
+["pdflatex"] 1778688398.22394 "article.tex" "article.pdf" "article" 1778688399.35619 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -75,9 +75,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1739209689 5466570 e8651e7fa7bb054fee9a07d3f37faf28 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1739209844 3352639 2aa689c226d5667ed0ad838dc122ce61 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "article.aux" 1778683264.63157 12604 6d6804d2633cccc9a24d49dd97845fc5 "pdflatex"
-  "article.bbl" 1778683264.26559 9693 e9622fa1e07889e29d7bc2cdc32aa73a "bibtex article"
-  "article.tex" 1778683238.0366 98275 b047991dbf84cac04c0edc9d4d8b1a4e ""
+  "article.aux" 1778688398.85886 12707 7d6dcf8b963adde815305ebabd3b2720 "pdflatex"
+  "article.bbl" 1778688398.22028 9883 883a550381fe0d782325238f7b54733f "bibtex article"
+  "article.tex" 1778688383.6753 98675 b53579450b82ee0ca7335dc1d453bb91 ""
   "imgs/applicationslog10_to_approval_rate.pdf" 1778654527.37086 33557 14431edd06d61100c1ba29d418793c91 ""
   "imgs/approximation_sp_m49.pdf" 1778677199.21201 23039 849315c9f77ecb7712e33773ef2fc324 ""
   "imgs/approximation_sp_no_region.pdf" 1778677199.50042 22577 98d03f8a80ecf14f4bd924a2406755c4 ""
