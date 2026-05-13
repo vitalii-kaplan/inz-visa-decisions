@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{longtable}
 
 \begin{document}
 
@@ -27,27 +28,22 @@ The findings should be interpreted as country-level descriptive evidence, not as
 
 \section{Introduction}
 
-Record number of higher education students highlights global need for recognition of qualifications \cite{UNESCO2025}. This rapid expansion reflects a global broadening of higher education pathways, including online degrees, hybrid courses, and micro-credentials, complementing traditional models and reshaping how knowledge is delivered and assessed. Academic mobility is also on the rise, with 6.9 million students studying away from their home country, a number that has tripled since 2000.
+International student mobility is now a large but unevenly distributed part of higher education. UNESCO reports that 6.9 million higher-education students study outside their home country, more than three times the number in 2000 \cite{UNESCO2025}. New Zealand is a small destination in this global system, but not a marginal case for its own economy. In 2024 it had 50,300 international tertiary learners, approximately 0.7 percent of the global internationally mobile higher-education population if compared with UNESCO's 6.9 million figure \cite{TEC2024Snapshot,UNESCO2025}. Across all education sectors, New Zealand recorded 83,425 international student enrolments in 2024 \cite{ENZ2025Enrolments}. The Government's international education plan identifies the sector as a major export activity and aims to increase its value from NZ\$3.6 billion in 2024 to NZ\$7.2 billion by 2034 \cite{MoEInternationalEducation}.
 
-TODO: State the empirical problem and research question early. Keep the framing narrow: the article studies observed variation in INZ fee-paying student visa approval rates by applicant nationality and country-level reference data.
+New Zealand is therefore a useful empirical setting for studying student visa decisions. It is geographically isolated, relatively small, and economically interested in international education, so student entry is both commercially important and administratively filtered. A fee-paying student visa application is not a casual expression of interest. INZ's published instructions require evidence and documents concerning enrolment, tuition arrangements, sufficient funds, bona fide temporary-entry intent, and relevant health and character matters \cite{INZEvidence}. The process is costly and document-intensive, so the observed applications are unlikely to be dominated by low-effort or ``noise'' submissions. Applicants usually need to have already assembled institutional, financial, and personal evidence before a decision appears in the published visa statistics.
 
-Prior quantitative studies have combined international student mobility or visa data with country-level development indicators, especially World Bank variables. However, peer-reviewed studies combining student visa decision data with both World Bank development indicators and WHO health indicators appear limited, making the present country-level descriptive design a contribution to the literature.
+The empirical problem is that approval rates differ by applicant nationality, but the reasons for these differences are not visible in the public INZ decision tables. The published rules used in this article state common formal requirements; they do not state separate approval rules by nationality. For this reason, observed country-level differences should not be treated as direct evidence of unequal treatment in individual assessment. They are better framed as an aggregate empirical pattern that may reflect differences in application volume, documentation conditions, financial evidence, institutional context, verification conditions, or other country-level circumstances under a common formal decision framework.
 
-Previous quantitative research on international student migration has used visa refusal or visa-policy data together with student mobility or enrolment outcomes, particularly in the United States and Canada. Chen examines U.S. F-1 visa restrictiveness and international student enrolment, while Gonnot studies Canadian student visa policy and community-college enrolment \cite{Chen2023,Gonnot2025}. Other work models international student mobility using origin- and destination-country characteristics, including World Bank development indicators. However, the literature contains fewer studies that directly analyse country-level student visa approval rates as the dependent variable and combine them with broader country-level health and development indicators. This article addresses that gap using INZ fee-paying student visa decision data joined with World Bank, WHO, and UN M49 country-level variables.
+The research question is narrow: are country-level INZ fee-paying student visa approval rates for 2022--2025 associated with application volume, national development and health indicators, income classification, and alternative regional classifications? The article answers this question by joining public INZ decision data to public World Bank, WHO, and UN M49 reference data and by comparing descriptive statistics, correlations, and regression approximations across alternative regional specifications.
 
-No works about NZ student visa.
-
-Why NZ in good as example? -- Small, isolated, with big revenue from education exporting.
-
-Add share of international students in NZ of all international students in the world.
-
-Hard to apply. Not cheap. No noise applications.
-
-No explicit unequility in rules.
+Previous quantitative research on international student migration has used visa refusal or visa-policy data together with student mobility or enrolment outcomes, particularly in the United States and Canada. Chen examines U.S. F-1 visa restrictiveness and international student enrolment, while Gonnot studies Canadian student visa policy and community-college enrolment \cite{Chen2023,Gonnot2025}. Other work models international student mobility using origin- and destination-country characteristics, including World Bank development indicators. However, peer-reviewed work directly modelling New Zealand student visa approval rates appears limited, and studies combining country-level student visa decision data with both World Bank development indicators and WHO health indicators are also uncommon. This article addresses that gap with a reproducible country-level descriptive design.
 
 \section{Literature Review}
 
-``Some are born to Sweet Delight, Some are born to Endless Night'' \cite{Blake1863}.
+\begin{quote}
+\emph{Some are born to Sweet Delight,\\
+Some are born to Endless Night} \cite{Blake1863}.
+\end{quote}
 
 International education is often presented as an open global market in which students choose programmes and institutions compete for talent. This framing hides a basic constraint: students cannot simply choose to study abroad unless a state permits them to enter and remain. Cross-border education is therefore not only an academic or economic process; it is also a migration process governed by visa systems. Sassen notes that international law does not provide a general right to enter foreign territory \cite{Sassen1996}. Shachar similarly emphasises that the practical value of citizenship is closely tied to mobility rights attached to passports \cite{Shachar2014}. Visa systems therefore sit at the boundary between education markets and state control over entry.
 
@@ -81,25 +77,41 @@ The repository distinguishes source, prepared, combined, and result files. Sourc
 
 \section{Methods}
 
-TODO: Describe the KNIME and Python workflow. Explain the unification of yearly INZ files, aggregation by country, calculation of approval rate and log10 applications, joins with reference data, correlation analysis, and linear regression models.
+\subsection{Computational Workflow}
 
-TODO: Explain the three regional model specifications: UN M49 regions, WHO regions, and World Bank regions. State that the models are descriptive or explanatory approximations, not causal designs and not operational prediction systems.
+The analysis was implemented as a set of KNIME workflows and exported Python workbooks. The repository contains three main KNIME workflows: \texttt{INZ\_visa\_decisions\_unification}, \texttt{INZ\_visa\_decisions\_combined}, and \texttt{INZ\_visa\_decisions\_model}. The workflow directories preserve the original KNIME node structure, while the corresponding \texttt{.py} and \texttt{.ipynb} files provide a text-based computational record. The Python files were generated from the KNIME workflows by the open-source \texttt{knime2py} utility available through \texttt{k2pweb.org}. They are treated here as exported translations of the KNIME workflows rather than as independent alternative analyses.
+
+The unification workflow reads the yearly INZ decision files for 2022, 2023, 2024, and 2025, harmonises differences in column names, keeps the common decision fields, concatenates the yearly tables, and aggregates them by country or applicant nationality. It calculates total approvals, total declines, total applications, approval rate, and \texttt{Applications\_log10}. The combined-data workflow joins this prepared INZ table to the World Bank, WHO, and UN M49 reference tables after country-name harmonisation. It removes unusable columns, records missing string categories where needed, removes rows with missing numerical values required for modelling, and exports the combined modelling table and correlation output.
+
+The modelling workflow reads \texttt{data/prepared/inz\_2022-2025\_wb\_who\_m49\_combined.csv}. Numerical explanatory variables are min--max normalised before fitting. Categorical predictors, including income, lending-category, and regional variables, are represented as indicator variables with one category omitted as the reference level. The dependent variable is country-level approval rate. The model outputs are written to \texttt{data/results/} as coefficient tables, fitted-value tables, prediction-rate tables, and score tables. Additional support scripts produce robustness and residual summaries used in the sensitivity checks.
+
+\subsection{Descriptive Statistics and Regression}
+
+The first stage is descriptive. The unified INZ table is used to report the number of countries or applicant nationalities, total applications, approval rates, and the distribution of application volume. Application volume is represented both as total applications and as \texttt{Applications\_log10}, because application counts are highly uneven across countries.
+
+Associations between approval rate and individual country-level variables are examined with Pearson correlation coefficients. These correlations are reported with the correlation coefficient, p-value, and degrees of freedom where relevant. They are used for the relationship between approval rate and application volume, and for relationships between approval rate and country-level indicators such as mortality, life expectancy, internet use, physician density, GNI per capita, and GDP per capita.
+
+The main modelling step uses ordinary least squares linear regression to approximate country-level approval rate as a function of selected WHO and World Bank indicators, income and lending categories, and, in three specifications, regional classification variables. The models are explanatory approximations. They are not operational prediction systems and are not causal designs. Their purpose is to measure how much of the observed country-level variation can be fitted by the current set of country-level variables.
+
+\subsection{Regional Specifications}
 
 The country-level numerical variables and the regional variables have different methodological status. Health, income, internet-use, mortality, and life-expectancy measures are treated as country-level reference indicators. For a given source and year, these variables have a defined value for a country. Regional classification is different. A region is an external grouping imposed on countries, and the same country can be assigned to different regional systems depending on the classification scheme. For this reason, regional division is treated as a modelling choice rather than as an inherent property of the country.
 
-The analysis therefore estimates four related experiments. Three models use alternative external regional classifications: UN M49 regions, World Bank regions, and WHO regions. A fourth model excludes regional variables. This design allows the analysis to separate two questions: whether country-level reference indicators are associated with approval rates, and whether the choice of regional grouping changes the fitted model.
+The analysis estimates four related specifications. Three models use alternative external regional classifications: UN M49 regions, World Bank FY2026 regions, and WHO regions. A fourth model excludes regional variables. The same dependent variable and the same non-regional country-level predictors are used across the specifications, so the comparison focuses on whether the choice of regional grouping changes model fit. This design separates two questions: whether country-level reference indicators are associated with approval rates, and whether an external regional classification adds explanatory structure beyond those indicators.
 
-The analysis uses several descriptive statistics, test statistics, and model diagnostics. Associations between approval rate and individual country-level variables are examined with Pearson correlation coefficients. These correlations are reported with the correlation coefficient, p-value, and degrees of freedom where relevant. This approach is used both for the relationship between application volume and approval rate and for relationships between approval rate and country-level indicators such as mortality, life expectancy, internet use, physician density, GNI per capita, and GDP per capita.
-
-The interpretation of these statistics rests on INZ's published student visa instructions, which define common formal requirements for applicants. The models therefore do not use country-level differences to infer unequal treatment, bias, or discriminatory decision-making. They use those differences to study variation in the conditions under which applicants from different countries prepare, document, finance, and verify applications within the same formal decision framework.
+\subsection{Model Evaluation and Residuals}
 
 The regression models are evaluated with standard linear model fit statistics. The main comparison across model specifications uses R-squared, mean absolute error, mean squared error, and root mean squared error. These statistics are used to compare the UN M49, World Bank regional, WHO regional, and no-region specifications. They measure fit within the current country-level modelling table and should not be read as validation of a causal mechanism.
 
 Individual regression terms are assessed with coefficient estimates and p-values. The p-values are used to identify variables and regional indicators that cross the conventional $p < 0.05$ threshold within each specification. Because the models include correlated country-level indicators and categorical regional variables, statistical significance is interpreted as conditional association within the fitted model rather than as evidence of an independent causal effect.
 
-Prediction diagnostics are based on residuals and relative fitted error. Residual summaries include the mean residual, residual standard deviation, mean absolute residual, and maximum absolute residual. Residuals are also inspected against fitted values to check whether unexplained error is concentrated in particular fitted-value ranges. Relative residuals are examined with \texttt{Prediction\_rate}, defined as the ratio of observed approval rate to fitted approval rate. Countries with observed approval rates below 80 percent or above 120 percent of the fitted value are treated as large proportional deviations for descriptive comparison.
+Prediction diagnostics are based on residuals and relative fitted error. Residual summaries include the mean residual, residual standard deviation, mean absolute residual, and maximum absolute residual. Residuals are also inspected against fitted values to check whether unexplained error is concentrated in particular fitted-value ranges. Relative residuals are examined with \texttt{Prediction\_rate}, defined as the ratio of observed approval rate to fitted approval rate. Countries with observed approval rates below 80 percent or above 120 percent of the fitted value are treated as large proportional deviations for descriptive comparison. These cases are not treated automatically as technical outliers; they identify countries where the current variables fit observed approval rates poorly.
+
+\subsection{Robustness and Interpretation}
 
 Robustness checks compare the same quantities across alternative regional classifications and a weighted UN M49 specification. The weighted model uses \texttt{Applications\_log10} as the observation weight, giving more influence to countries with larger log-transformed application volumes. It is evaluated with weighted R-squared, weighted mean absolute error, weighted mean squared error, and weighted root mean squared error, and also with unweighted fit statistics for comparison with the main UN M49 model.
+
+The interpretation of these statistics rests on INZ's published student visa instructions, which define common formal requirements for applicants. The models therefore do not use country-level differences to infer unequal treatment, bias, or discriminatory decision-making. They use those differences to study variation in the conditions under which applicants from different countries prepare, document, finance, and verify applications within the same formal decision framework. The analysis is also limited by the aggregation of applications to country level and by overlap among country-level predictors. The correlation output is therefore used not only as descriptive evidence but also as a warning that individual regression coefficients should not be overinterpreted as independent effects.
 
 \section{Results}
 
@@ -109,15 +121,41 @@ The unified INZ decision table contains 179 countries or applicant nationalities
 
 Application volume is unevenly distributed across countries. The largest application counts are from China, India, Japan, Nepal, the United States of America, Sri Lanka, Germany, Thailand, the Philippines, and South Korea. These high-volume countries do not all have the same approval rate. For example, China, Japan, the United States of America, Germany, and South Korea have approval rates above 96 percent, while India and Nepal have lower approval rates in the current prepared table.
 
-The relationship between application volume and approval rate is positive but not strong. In the unified country-level table, the Pearson correlation between log10 total applications and approval rate is about 0.27, with $p = 0.000254$ and 177 degrees of freedom. This supports a limited descriptive statement: countries with more applications tend to have higher approval rates, but application volume alone does not explain most of the variation in approval rates.
+The relationship between application volume and approval rate is positive but not strong. In the unified country-level table, the Pearson correlation between log10 total applications and approval rate is about 0.27, with $p = 0.000254$ and 177 degrees of freedom. This supports a limited descriptive statement: countries with more applications tend to have higher approval rates, but application volume alone does not explain most of the variation in approval rates. Figure~\ref{fig:applications-log10-approval-rate} shows this relationship graphically.
 
-(Image of Total Application log10 to Approval rate)
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{imgs/applicationslog10_to_approval_rate.pdf}
+\caption{Total applications, log10 transformed, and student visa approval rate by country or applicant nationality. The PDF figure is generated from \texttt{data/results/applicationslog10\_to\_approval\_rate.svg}.}
+\label{fig:applications-log10-approval-rate}
+\end{figure}
 
 \subsection{Correlation With Country-Level Indicators}
 
-After joining the INZ data with WHO, World Bank, and UN M49 reference data, the combined modelling table contains 110 countries. This reduction reflects the availability of matched country-level reference variables, the removal of rows with missing numerical values, and the exclusion of countries with fewer than 10 total applications across the four-year period.
+After joining the INZ data with WHO, World Bank, and UN M49 reference data, the combined modelling table contains 110 countries. This reduction reflects the availability of matched country-level reference variables, the removal of rows with missing numerical values, and the exclusion of countries with fewer than 10 total applications across the four-year period. The countries excluded before regression modelling are listed in Appendix Table~\ref{tab:appendix-excluded-countries}.
 
-Several country-level indicators are strongly correlated with approval rate. Approval rate is negatively correlated with WHO under-five mortality per 1,000 live births ($r = -0.746$, $p = 1.24e-30$) and WHO maternal mortality per 100,000 live births ($r = -0.681$, $p = 7.97e-24$). Approval rate is positively correlated with life expectancy at birth ($r = 0.715$, $p = 4.19e-27$), internet users as a percentage of population ($r = 0.633$, $p = 7.62e-20$), physician density per 10,000 population ($r = 0.552$, $p = 1.56e-14$), GNI per capita using the Atlas method ($r = 0.520$, $p = 8.18e-13$), and GDP per capita in current USD ($r = 0.501$, $p = 7.42e-12$).
+Several country-level indicators are strongly correlated with approval rate. The direction of the correlations is consistent with a broad development and administrative-capacity pattern. Approval rates are lower where mortality indicators are higher, and higher where life expectancy, internet use, physician density, and income indicators are higher. Table~\ref{tab:approval-country-correlations} reports the strongest bivariate correlations used in this interpretation.
+
+\begin{table}
+\caption{Correlations between approval rate and selected country-level indicators}
+\label{tab:approval-country-correlations}
+\centering
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lrr}
+\hline
+Indicator & $r$ & $p$ \\
+\hline
+WHO under-five mortality per 1,000 live births & -0.746 & $1.24e{-30}$ \\
+WHO maternal mortality per 100,000 live births & -0.681 & $7.97e{-24}$ \\
+Life expectancy at birth & 0.715 & $4.19e{-27}$ \\
+Internet users as percentage of population & 0.633 & $7.62e{-20}$ \\
+Physician density per 10,000 population & 0.552 & $1.56e{-14}$ \\
+GNI per capita, Atlas method & 0.520 & $8.18e{-13}$ \\
+GDP per capita, current USD & 0.501 & $7.42e{-12}$ \\
+\hline
+\end{tabular}
+\end{table}
 
 The same correlation output also shows that several explanatory variables are strongly correlated with each other. For example, WHO under-five mortality is strongly negatively correlated with life expectancy ($r = -0.888$) and internet-user percentage ($r = -0.770$), and strongly positively correlated with WHO maternal mortality ($r = 0.881$). This means that the numerical country-level indicators partly measure overlapping dimensions of national development, health conditions, and institutional capacity.
 
@@ -129,37 +167,223 @@ This interpretation is limited to formal and administrative conditions surroundi
 
 Four linear regression specifications were estimated. Three specifications use different regional classifications: UN M49, World Bank regions, and WHO regions. A fourth specification excludes regional classification variables. In each case, approval rate is the dependent variable, and the model uses selected WHO and World Bank country-level variables, with or without regional classification variables, as explanatory inputs.
 
-The UN M49 specification has the strongest fit among the current models. Its R-squared is 0.867, with mean absolute error of 0.069 and root mean squared error of 0.090. The World Bank regional specification has R-squared of 0.812, mean absolute error of 0.082, and root mean squared error of 0.107. The WHO regional specification has R-squared of 0.786, mean absolute error of 0.087, and root mean squared error of 0.114. The no-region specification has the weakest fit, with R-squared of 0.706, mean absolute error of 0.100, and root mean squared error of 0.134.
+\begin{table}
+\caption{Regional classification specifications used in the regression models}
+\label{tab:regional-classification-counts}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lr}
+\hline
+Specification & Number of regions in modelling table \\
+\hline
+UN M49 regional classification & 21 \\
+World Bank FY2026 regional classification & 7 \\
+WHO regional classification & 6 \\
+\hline
+\end{tabular}
+\end{table}
+
+The UN M49 specification has the strongest fit among the current models, while the no-region specification has the weakest fit. Table~\ref{tab:model-fit-comparison} reports the fit statistics for all four specifications.
+
+\begin{table}
+\caption{Model fit by regional specification}
+\label{tab:model-fit-comparison}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lrrr}
+\hline
+Specification & R-squared & MAE & RMSE \\
+\hline
+UN M49 regional model & 0.867 & 0.069 & 0.090 \\
+World Bank regional model & 0.812 & 0.082 & 0.107 \\
+WHO regional model & 0.786 & 0.087 & 0.114 \\
+No-region model & 0.706 & 0.100 & 0.134 \\
+\hline
+\end{tabular}
+\end{table}
 
 These scores suggest that the current country-level variables explain a substantial share of the variation in country-level approval rates, and that regional classification adds explanatory structure to the model. The no-region model still fits a large part of the variation, but all three regional specifications improve fit. The better fit of the UN M49 model may reflect the more detailed regional division used in that specification. This interpretation is supported by the robustness and sensitivity checks described below, but it should remain limited to model fit rather than causal explanation.
 
 The coefficient tables show that model fit is not produced by regional variables alone. Other variables from the combined dataset also contribute to the fitted approval rates. The signs and magnitudes of these coefficients should be interpreted carefully because the model includes correlated country-level indicators and categorical variables. The coefficients show conditional associations within the fitted model, not independent causal effects.
 
-In the UN M49 experiment, the non-region variables with p-values below 0.05 are urban population percentage (coefficient = -0.279, $p = 0.0053$), life expectancy at birth (coefficient = 0.499, $p = 0.0128$), and the missing category for World Bank lending category (coefficient = 0.242, $p = 0.0156$). Several UN M49 regional indicators are also below 0.05, including Northern Africa (coefficient = -0.254, $p = 0.0109$), Middle Africa (coefficient = -0.275, $p = 0.0219$), and Southern Asia (coefficient = -0.210, $p = 0.0336$). In this specification, life expectancy remains statistically visible after regional controls are included, while most other numerical country-level indicators do not.
+In the UN M49 experiment, only a small set of non-region variables and regional indicators have p-values below 0.05. Table~\ref{tab:un-m49-significant-terms} lists these terms. In this specification, life expectancy remains statistically visible after regional controls are included, while most other numerical country-level indicators do not.
+
+\begin{table}
+\caption{Terms below $p < 0.05$ in the UN M49 specification}
+\label{tab:un-m49-significant-terms}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{llrr}
+\hline
+Term & Type & Coefficient & $p$ \\
+\hline
+Urban population percentage & Variable & -0.279 & 0.0053 \\
+Life expectancy at birth & Variable & 0.499 & 0.0128 \\
+World Bank lending category: missing & Category & 0.242 & 0.0156 \\
+Northern Africa & Region & -0.254 & 0.0109 \\
+Middle Africa & Region & -0.275 & 0.0219 \\
+Southern Asia & Region & -0.210 & 0.0336 \\
+\hline
+\end{tabular}
+\end{table}
 
 The missing category for World Bank lending category needs a specific interpretation. In the modelling table, all countries in this category are high-income countries. They include countries such as Japan, Singapore, South Korea, Canada, the United States of America, Germany, France, Great Britain, Switzerland, Norway, Sweden, Austria, Belgium, Denmark, Ireland, Italy, Spain, Kuwait, Oman, Saudi Arabia, and the United Arab Emirates. The category therefore should not be read as ordinary data loss. In this dataset, it mainly identifies high-income economies without an assigned World Bank lending category. Its positive coefficient is consistent with the generally high approval rates observed for this group, but it should be interpreted as a proxy for this country group rather than as an effect of missing information.
 
-In the World Bank regional experiment, the significant non-region variables are World Bank low-income status (coefficient = -0.407, $p = 5.48e-05$), lower-middle-income status (coefficient = -0.136, $p = 0.0461$), the missing category for World Bank lending category (coefficient = 0.224, $p = 0.0171$), and urban population percentage (coefficient = -0.255, $p = 0.0061$). Significant World Bank regional indicators include Middle East, North Africa, Afghanistan and Pakistan (coefficient = -0.270, $p = 8.19e-08$), Europe and Central Asia (coefficient = -0.185, $p = 0.000369$), South Asia (coefficient = -0.232, $p = 0.000555$), and Sub-Saharan Africa (coefficient = -0.156, $p = 0.0042$). This model therefore combines income-group effects, urban population percentage, and broad World Bank regional effects.
+The negative regional coefficients in Table~\ref{tab:un-m49-significant-terms} also require a categorical interpretation. Regional variables are entered as indicator variables, so each regional coefficient is estimated relative to the omitted reference region, not relative to zero approval or to the global average. A negative coefficient therefore means that, conditional on the other variables in the model, the fitted approval rate for that region is lower than the fitted approval rate for the reference region. It does not mean that the region has a negative approval rate, and it should not be read as an absolute ranking of regions.
 
-In the WHO regional experiment, the significant non-region variables are World Bank low-income status (coefficient = -0.442, $p = 4.23e-05$), lower-middle-income status (coefficient = -0.178, $p = 0.0127$), the missing category for World Bank lending category (coefficient = 0.231, $p = 0.0198$), and urban population percentage (coefficient = -0.237, $p = 0.0132$). Among WHO regions, the Western Pacific Region is significant (coefficient = 0.198, $p = 0.000975$). The Region of the Americas is close to the 0.05 threshold but does not cross it ($p = 0.0691$). Compared with the World Bank regional model, the WHO regional model has fewer significant region terms and weaker overall fit.
+The World Bank regional experiment combines income-group effects, urban population percentage, lending-category information, and broad World Bank regional effects. Table~\ref{tab:world-bank-significant-terms} lists the terms below $p < 0.05$ in this specification.
 
-In the no-region experiment, the model has no regional indicators, so the fit depends only on non-region country-level variables. The significant variables are World Bank low-income status (coefficient = -0.609, $p = 2.50e-07$), lower-middle-income status (coefficient = -0.224, $p = 0.00465$), WHO DTP3 immunization coverage (coefficient = -0.204, $p = 0.0152$), and urban population percentage (coefficient = -0.264, $p = 0.0081$). This confirms that the non-region variables carry substantial explanatory information, even though the no-region model fits worse than all three regional specifications.
+\begin{table}
+\caption{Terms below $p < 0.05$ in the World Bank regional specification}
+\label{tab:world-bank-significant-terms}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{llrr}
+\hline
+Term & Type & Coefficient & $p$ \\
+\hline
+World Bank low-income status & Category & -0.407 & $5.48e{-05}$ \\
+World Bank lower-middle-income status & Category & -0.136 & 0.0461 \\
+World Bank lending category: missing & Category & 0.224 & 0.0171 \\
+Urban population percentage & Variable & -0.255 & 0.0061 \\
+\begin{tabular}[c]{@{}l@{}}Middle East, North Africa,\\ Afghanistan and Pakistan\end{tabular} & Region & -0.270 & $8.19e{-08}$ \\
+Europe and Central Asia & Region & -0.185 & 0.000369 \\
+South Asia & Region & -0.232 & 0.000555 \\
+Sub-Saharan Africa & Region & -0.156 & 0.0042 \\
+\hline
+\end{tabular}
+\end{table}
 
-(Table with coefficients)
+The WHO regional experiment has fewer significant regional terms than the World Bank regional model and a weaker overall fit. Table~\ref{tab:who-significant-terms} lists the terms below $p < 0.05$ in this specification. The Region of the Americas is close to the 0.05 threshold but does not cross it ($p = 0.0691$).
 
-(Images of Predicted Approval rate to Approval Rate for different regions division)
+\begin{table}
+\caption{Terms below $p < 0.05$ in the WHO regional specification}
+\label{tab:who-significant-terms}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{llrr}
+\hline
+Term & Type & Coefficient & $p$ \\
+\hline
+World Bank low-income status & Category & -0.442 & $4.23e{-05}$ \\
+World Bank lower-middle-income status & Category & -0.178 & 0.0127 \\
+World Bank lending category: missing & Category & 0.231 & 0.0198 \\
+Urban population percentage & Variable & -0.237 & 0.0132 \\
+Western Pacific Region & Region & 0.198 & 0.000975 \\
+\hline
+\end{tabular}
+\end{table}
+
+In the no-region experiment, the model has no regional indicators, so the fit depends only on non-region country-level variables. Table~\ref{tab:no-region-significant-terms} lists the terms below $p < 0.05$ in this specification. These variables carry substantial explanatory information, even though the no-region model fits worse than all three regional specifications.
+
+\begin{table}
+\caption{Terms below $p < 0.05$ in the no-region specification}
+\label{tab:no-region-significant-terms}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{llrr}
+\hline
+Term & Type & Coefficient & $p$ \\
+\hline
+World Bank low-income status & Category & -0.609 & $2.50e{-07}$ \\
+World Bank lower-middle-income status & Category & -0.224 & 0.00465 \\
+WHO DTP3 immunization coverage & Variable & -0.204 & 0.0152 \\
+Urban population percentage & Variable & -0.264 & 0.0081 \\
+\hline
+\end{tabular}
+\end{table}
+
+The full coefficient and p-value outputs for the four regression specifications are reported in Appendix Tables~\ref{tab:appendix-coefficients-un-m49}--\ref{tab:appendix-coefficients-no-region}.
 
 \subsection{Prediction Deviations}
 
-The prediction tables compare observed approval rates with fitted approval rates. In all four specifications, the mean observed approval rate and mean fitted approval rate are both approximately 0.754 in the modelling table. Most fitted values are close enough to observed values to support the conclusion that the models capture major structure in the data.
+The prediction tables and fitted-value plots compare observed approval rates with model-fitted approval rates; the country-level observed and fitted values are reported in Appendix Table~\ref{tab:appendix-prediction-comparison}. In all four specifications, the mean observed approval rate and mean fitted approval rate are both approximately 0.754 in the modelling table. Figure~\ref{fig:fitted-observed-approval-rates} shows the same comparison graphically. The horizontal axis gives the observed approval rate, and the vertical axis gives the fitted approval rate. Points close to the diagonal represent countries where the model fits the observed approval rate closely; points far from the diagonal identify countries where the current country-level variables and regional classification leave more unexplained variation.
 
-(Reference to the table with excluded countries in Appendix)
+\begin{figure}
+\centering
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/approximation_sp_m49.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/approximation_sp_wb.pdf}
+\end{minipage}
 
-The number of large proportional deviations differs by specification. Using the rule that a country is outside the expected band when the observed approval rate is below 80 percent or above 120 percent of the fitted value, the UN M49 model has 15 such countries, the World Bank regional model has 19, the WHO regional model has 25, and the no-region model has 28. This again suggests that the UN M49 model gives the closest fit among the current specifications.
+\vspace{0.7em}
 
-In the UN M49 model, countries where the observed approval rate is lower than 80 percent of the fitted value include Chad, Afghanistan, Uzbekistan, Turkey, Myanmar, Cameroon, Yemen, Tanzania, Algeria, and Ghana. Countries where the observed approval rate is higher than 120 percent of the fitted value include Kazakhstan, Timor Leste, Nigeria, Sudan, and the Democratic Republic of Congo.
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/approximation_sp_who.pdf}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{imgs/approximation_sp_no_region.pdf}
+\end{minipage}
+\caption{Observed approval rate and fitted approval rate in the four regression specifications: UN M49 regions, World Bank regions, WHO regions, and no regional classification. The plots are generated from \texttt{data/results/approximation\_sp\_m49.svg}, \texttt{data/results/approximation\_sp\_wb.svg}, \texttt{data/results/approximation\_sp\_who.svg}, and \texttt{data/results/approximation\_sp\_no\_region.svg}.}
+\label{fig:fitted-observed-approval-rates}
+\end{figure}
 
-(Table for these countries)
+The plots support the model-comparison results reported above. The UN M49 specification produces the closest visual concentration around the fitted-observed diagonal, while the no-region specification leaves a visibly wider spread. The World Bank and WHO regional specifications fall between these two cases. This pattern is consistent with the score table: regional variables improve fit, and the more detailed UN M49 classification gives the strongest approximation among the current models.
+
+The number of large proportional deviations differs by specification. Table~\ref{tab:large-proportional-deviations} uses the rule that a country is outside the expected band when the observed approval rate is below 80 percent or above 120 percent of the fitted value. The UN M49 model has the fewest such countries, again suggesting that it gives the closest fit among the current specifications.
+
+\begin{table}
+\caption{Countries outside the 80--120 percent fitted-value band}
+\label{tab:large-proportional-deviations}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lrrr}
+\hline
+Specification & Below 80\% & Above 120\% & Total \\
+\hline
+UN M49 regional model & 10 & 5 & 15 \\
+World Bank regional model & 11 & 8 & 19 \\
+WHO regional model & 15 & 10 & 25 \\
+No-region model & 15 & 13 & 28 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:un-m49-large-deviations} lists the countries outside this band in the UN M49 model. These are the countries where the best-fitting current specification still leaves the largest proportional fitted-value deviations.
+
+\begin{table}
+\caption{Large proportional deviations in the UN M49 model}
+\label{tab:un-m49-large-deviations}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lrrr}
+\hline
+Country & Observed & Fitted & Ratio \\
+\hline
+Chad & 0.000 & 0.032 & 0.000 \\
+Afghanistan & 0.141 & 0.285 & 0.495 \\
+Uzbekistan & 0.250 & 0.479 & 0.522 \\
+Turkey & 0.352 & 0.589 & 0.597 \\
+Myanmar & 0.493 & 0.786 & 0.626 \\
+Cameroon & 0.138 & 0.215 & 0.642 \\
+Yemen & 0.250 & 0.355 & 0.704 \\
+Tanzania & 0.424 & 0.590 & 0.719 \\
+Algeria & 0.417 & 0.525 & 0.794 \\
+Ghana & 0.455 & 0.573 & 0.794 \\
+... &  &  &  \\
+Kazakhstan & 0.762 & 0.601 & 1.269 \\
+Timor Leste & 0.981 & 0.729 & 1.346 \\
+Nigeria & 0.420 & 0.302 & 1.392 \\
+Sudan & 0.357 & 0.230 & 1.551 \\
+Democratic Republic of Congo & 0.188 & 0.079 & 2.375 \\
+\hline
+\end{tabular}
+\end{table}
 
 These cases should not automatically be treated as technical outliers. They show where the current country-level variables and regional classifications do not fit the observed approval rate well. They may point to omitted variables, data quality issues, country-specific applicant composition, policy or processing factors, or other mechanisms not represented in the current dataset.
 
@@ -227,13 +451,397 @@ The main empirical contribution is to connect INZ student visa decision outcomes
 
 It is difficult to assume that WHO and World Bank indicators directly influence visa approval rates. A more cautious interpretation is that these indicators mark broader country-specific conditions that are not directly observed in the present dataset. Such hidden conditions may influence both the measured WHO and World Bank variables and the practical circumstances under which applicants prepare visa evidence. Identifying these country-specific mechanisms is therefore a central task for further research.
 
-Future work should extend the comparison beyond New Zealand by examining student visa decisions in other receiving countries. It should also add further country-level variables from reliable sources, including measures related to crime, religion, culture, institutional trust, and other social conditions where the definitions and provenance are clear. A further direction is to examine whether inter-country treaties, education-sector relationships, diplomatic communication, scholarship channels, or other formal links between countries help explain why some countries have approval rates above or below the values fitted by the current model.
+Future work should extend the comparison beyond New Zealand by examining student visa decisions in other receiving countries, especially where approval, refusal, enrolment, or policy-restrictiveness data can be linked over time. Studies of the United States and Canada show that visa restrictiveness and approval patterns can affect international student enrolment and mobility \cite{Chen2023,Gonnot2025}. A comparative design would therefore help distinguish patterns that are specific to INZ from broader features of student visa systems in destination countries.
+
+Further models should add country-level variables suggested by the student-mobility literature, provided that their definitions and provenance are clear. Relevant candidates include passport or visa-access measures linked to the global mobility divide \cite{Shachar2014,Neumayer2006,Mau2015,Gulel2025}; language, geographic distance, existing student or migrant networks, institutional quality, political freedom, fees, and origin- or destination-country economic conditions \cite{PerkinsNeumayer2014,Abbott2016,Bessey2012}; and formal education or development channels such as foreign aid projects, scholarship programmes, and structured inter-country education relationships \cite{LanatiThiele2020,Xie2025}. These variables would test whether the countries with approval rates above or below the fitted values are associated with documented mobility channels, application-support structures, or information conditions rather than with region or development indicators alone.
 
 To inform our empirical analysis, we propose a basic theoretical model to understand how incomplete information affects the processing of visa applications by immigration officers.
 
 \section{Appendices or Supplementary Material}
 
-TODO: Add workflow details, variable definitions, joined-data diagnostics, model diagnostics, and additional result tables.
+\subsection{Countries Excluded Before Regression}
+
+Table~\ref{tab:appendix-excluded-countries} reports countries present in the aggregated INZ decision data but not retained in the final regression table. Eight countries were not retained after the reference-data join or missing-value filter. The remaining countries were excluded because they had fewer than 10 total applications across 2022--2025.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{p{0.28\textwidth}rrp{0.36\textwidth}}
+\caption{Countries excluded before regression modelling}\label{tab:appendix-excluded-countries}\\
+\hline
+Country & Applications & Approval rate & Exclusion reason \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Country & Applications & Approval rate & Exclusion reason \\
+\hline
+\endhead
+Hong Kong & 1397 & 0.981 & Not retained after reference join or missing-value filter \\
+Taiwan & 1094 & 0.976 & Not retained after reference join or missing-value filter \\
+Macau & 69 & 0.928 & Not retained after reference join or missing-value filter \\
+Tuvalu & 59 & 0.983 & Not retained after reference join or missing-value filter \\
+Palestine & 15 & 0.533 & Not retained after reference join or missing-value filter \\
+Lithuania & 10 & 0.900 & Not retained after reference join or missing-value filter \\
+Malawi & 10 & 0.600 & Not retained after reference join or missing-value filter \\
+Trinidad and Tobago & 10 & 0.800 & Not retained after reference join or missing-value filter \\
+Iceland & 9 & 1.000 & Fewer than 10 total applications \\
+Liberia & 9 & 0.000 & Fewer than 10 total applications \\
+Namibia & 9 & 0.556 & Fewer than 10 total applications \\
+Guatemala & 8 & 0.750 & Fewer than 10 total applications \\
+Nauru & 8 & 1.000 & Fewer than 10 total applications \\
+Albania & 7 & 0.714 & Fewer than 10 total applications \\
+Benin & 7 & 0.286 & Fewer than 10 total applications \\
+Estonia & 7 & 1.000 & Fewer than 10 total applications \\
+Georgia & 7 & 0.571 & Fewer than 10 total applications \\
+Croatia & 6 & 1.000 & Fewer than 10 total applications \\
+El Salvador & 6 & 1.000 & Fewer than 10 total applications \\
+Guyana & 6 & 0.833 & Fewer than 10 total applications \\
+Marshall Islands & 6 & 1.000 & Fewer than 10 total applications \\
+South Sudan & 6 & 0.333 & Fewer than 10 total applications \\
+St Lucia & 6 & 1.000 & Fewer than 10 total applications \\
+Azerbaijan & 5 & 0.800 & Fewer than 10 total applications \\
+Gambia & 5 & 0.200 & Fewer than 10 total applications \\
+Haiti & 5 & 0.200 & Fewer than 10 total applications \\
+Mozambique & 5 & 0.800 & Fewer than 10 total applications \\
+Palau & 5 & 1.000 & Fewer than 10 total applications \\
+Suriname & 5 & 1.000 & Fewer than 10 total applications \\
+Swaziland & 5 & 0.800 & Fewer than 10 total applications \\
+Tunisia & 5 & 0.400 & Fewer than 10 total applications \\
+Armenia & 4 & 0.500 & Fewer than 10 total applications \\
+Bahrain & 4 & 1.000 & Fewer than 10 total applications \\
+Belize & 4 & 1.000 & Fewer than 10 total applications \\
+Burundi & 4 & 0.000 & Fewer than 10 total applications \\
+Eritrea & 4 & 0.750 & Fewer than 10 total applications \\
+Grenada & 4 & 0.750 & Fewer than 10 total applications \\
+Macedonia & 4 & 1.000 & Fewer than 10 total applications \\
+Mali & 4 & 0.750 & Fewer than 10 total applications \\
+Moldova & 4 & 0.750 & Fewer than 10 total applications \\
+Serbia & 4 & 0.750 & Fewer than 10 total applications \\
+Sierra Leone & 4 & 0.000 & Fewer than 10 total applications \\
+Angola & 3 & 0.000 & Fewer than 10 total applications \\
+Barbados & 3 & 1.000 & Fewer than 10 total applications \\
+Congo & 3 & 0.000 & Fewer than 10 total applications \\
+Dominica & 3 & 0.667 & Fewer than 10 total applications \\
+Federated States of Micronesia & 3 & 1.000 & Fewer than 10 total applications \\
+Liechtenstein & 3 & 1.000 & Fewer than 10 total applications \\
+Malta & 3 & 1.000 & Fewer than 10 total applications \\
+Slovenia & 3 & 1.000 & Fewer than 10 total applications \\
+Somalia & 3 & 0.000 & Fewer than 10 total applications \\
+St Kitts - Nevis & 3 & 0.667 & Fewer than 10 total applications \\
+St Vincent and the Grenadines & 3 & 1.000 & Fewer than 10 total applications \\
+Tajikistan & 3 & 0.667 & Fewer than 10 total applications \\
+Australia & 2 & 1.000 & Fewer than 10 total applications \\
+Bermuda & 2 & 0.500 & Fewer than 10 total applications \\
+Guinea & 2 & 0.000 & Fewer than 10 total applications \\
+Senegal & 2 & 0.000 & Fewer than 10 total applications \\
+Seychelles & 2 & 1.000 & Fewer than 10 total applications \\
+Bahamas & 1 & 1.000 & Fewer than 10 total applications \\
+Bosnia \& Herzegovina & 1 & 1.000 & Fewer than 10 total applications \\
+Cape Verde & 1 & 1.000 & Fewer than 10 total applications \\
+Cuba & 1 & 1.000 & Fewer than 10 total applications \\
+Djibouti & 1 & 0.000 & Fewer than 10 total applications \\
+Madagascar & 1 & 0.000 & Fewer than 10 total applications \\
+Nicaragua & 1 & 1.000 & Fewer than 10 total applications \\
+Niger & 1 & 0.000 & Fewer than 10 total applications \\
+North Korea & 1 & 0.000 & Fewer than 10 total applications \\
+Togo & 1 & 0.000 & Fewer than 10 total applications \\
+\hline
+\end{longtable}
+}
+
+The following tables report the full coefficient and p-value outputs for the four regression specifications discussed in Section~5.3. The source files are \texttt{data/results/Coefficients\_un\_m49.csv}, \texttt{data/results/Coefficients\_wb.csv}, \texttt{data/results/Coefficients\_who.csv}, and \texttt{data/results/Coefficients\_no\_region.csv}.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{8pt}
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the UN M49 regional specification}\label{tab:appendix-coefficients-un-m49}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Urban\_population\_pct & -0.2795 & 0.0053 \\
+UN M49=Northern Africa & -0.2537 & 0.0109 \\
+Life\_expectancy\_at\_birth\_years & 0.4992 & 0.0128 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2425 & 0.0156 \\
+UN M49=Middle Africa & -0.2749 & 0.0219 \\
+UN M49=Southern Asia & -0.2100 & 0.0336 \\
+Intercept & 0.4674 & 0.0492 \\
+WB\_FY2026\_Income\_Group=Low income & -0.1980 & 0.0714 \\
+UN M49=Melanesia & 0.2055 & 0.0861 \\
+UN M49=Central Asia & -0.1989 & 0.0902 \\
+UN M49=Western Asia & -0.1674 & 0.0904 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1036 & 0.1439 \\
+UN M49=South-eastern Asia & 0.1074 & 0.2368 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0600 & 0.3012 \\
+UN M49=Micronesia & 0.1634 & 0.3124 \\
+Internet\_users\_pct\_population & 0.1136 & 0.3553 \\
+UN M49=Southern Europe & -0.0925 & 0.4785 \\
+UN M49=Polynesia & 0.0970 & 0.4848 \\
+GDP\_per\_capita\_current\_USD & -0.1922 & 0.4888 \\
+UN M49=Northern Europe & -0.0755 & 0.5001 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1768 & 0.5223 \\
+UN M49=Central America & 0.0613 & 0.5712 \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.0389 & 0.5992 \\
+UN M49=Eastern Africa & -0.0478 & 0.6506 \\
+UN M49=South America & 0.0438 & 0.6554 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.0355 & 0.6678 \\
+UN M49=Western Europe & -0.0315 & 0.7865 \\
+WB\_FY2026\_Income\_Group=Missing & -0.0290 & 0.7943 \\
+UN M49=Northern America & -0.0335 & 0.7951 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.0148 & 0.7967 \\
+UN M49=Eastern Asia & -0.0261 & 0.8053 \\
+UN M49=Eastern Europe & 0.0192 & 0.8582 \\
+UN M49=Southern Africa & 0.0204 & 0.8628 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0140 & 0.9018 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & 0.0245 & 0.9164 \\
+UN M49=Western Africa & -0.0105 & 0.9384 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0081 & 0.9689 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the World Bank regional specification}\label{tab:appendix-coefficients-wb}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+WB\_FY2026\_Region=Middle East, North Africa, Afghanistan \& Pakistan & -0.2695 & $8.194e{-8}$ \\
+Intercept & 0.9166 & $5.844e{-7}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.4067 & $5.477e{-5}$ \\
+WB\_FY2026\_Region=Europe \& Central Asia & -0.1846 & $3.689e{-4}$ \\
+WB\_FY2026\_Region=South Asia & -0.2322 & $5.548e{-4}$ \\
+WB\_FY2026\_Region=Sub-Saharan Africa & -0.1561 & 0.0042 \\
+Urban\_population\_pct & -0.2545 & 0.0061 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2244 & 0.0171 \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.1355 & 0.0461 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.0914 & 0.0889 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1114 & 0.0918 \\
+WB\_FY2026\_Region=North America & -0.1633 & 0.1001 \\
+Life\_expectancy\_at\_birth\_years & 0.2595 & 0.1672 \\
+WB\_FY2026\_Region=Latin America \& Caribbean & -0.0644 & 0.2041 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.0970 & 0.2097 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0692 & 0.2267 \\
+WB\_FY2026\_Income\_Group=Missing & -0.1243 & 0.2511 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.1944 & 0.3301 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1541 & 0.5663 \\
+GDP\_per\_capita\_current\_USD & -0.1087 & 0.7076 \\
+Internet\_users\_pct\_population & 0.0271 & 0.7942 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0367 & 0.8419 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0041 & 0.9680 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the WHO regional specification}\label{tab:appendix-coefficients-who}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Intercept & 0.8794 & $3.670e{-6}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.4423 & $4.232e{-5}$ \\
+WHO\_Region=Western Pacific Region & 0.1980 & $9.745e{-4}$ \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.1780 & 0.0127 \\
+Urban\_population\_pct & -0.2370 & 0.0132 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2311 & 0.0198 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.1039 & 0.0680 \\
+WHO\_Region=Region of the Americas & 0.1219 & 0.0691 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1173 & 0.0952 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.1333 & 0.1146 \\
+WHO\_Region=South-East Asia Region & 0.0849 & 0.1933 \\
+WB\_FY2026\_Income\_Group=Missing & -0.1484 & 0.1958 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.2102 & 0.3220 \\
+WHO\_Region=Eastern Mediterranean Region & -0.0545 & 0.3817 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0481 & 0.4213 \\
+Life\_expectancy\_at\_birth\_years & 0.1354 & 0.4701 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1327 & 0.6318 \\
+WHO\_Region=European Region & 0.0319 & 0.6626 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0393 & 0.7146 \\
+GDP\_per\_capita\_current\_USD & -0.0843 & 0.7816 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0494 & 0.7995 \\
+Internet\_users\_pct\_population & -0.0107 & 0.9230 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the no-region specification}\label{tab:appendix-coefficients-no-region}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Intercept & 1.1160 & $3.208e{-8}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.6087 & $2.500e{-7}$ \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.2242 & 0.0047 \\
+Urban\_population\_pct & -0.2635 & 0.0081 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.2036 & 0.0152 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.4155 & 0.0758 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.1059 & 0.0958 \\
+WB\_FY2026\_Income\_Group=Missing & -0.2087 & 0.1085 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.1644 & 0.1301 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0833 & 0.2166 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.0930 & 0.2363 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.1130 & 0.2560 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.2416 & 0.4372 \\
+Life\_expectancy\_at\_birth\_years & 0.0871 & 0.6543 \\
+GDP\_per\_capita\_current\_USD & -0.1465 & 0.6644 \\
+Internet\_users\_pct\_population & 0.0134 & 0.9087 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & 0.0182 & 0.9329 \\
+\hline
+\end{longtable}
+}
+
+\subsection{Prediction Table}
+
+Table~\ref{tab:appendix-prediction-comparison} reports the observed approval rate and the fitted approval rates from the four regression specifications for each country in the modelling table. The source files are \texttt{data/results/Prediction\_un\_m49.csv}, \texttt{data/results/Prediction\_wb.csv}, \texttt{data/results/Prediction\_who.csv}, and \texttt{data/results/Prediction\_no\_region.csv}.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.27\textwidth}rrrrr}
+\caption{Observed and fitted approval rates by regression specification}\label{tab:appendix-prediction-comparison}\\
+\hline
+Country & Observed & UN M49 & WB & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Country & Observed & UN M49 & WB & WHO & No region \\
+\hline
+\endhead
+Afghanistan & 0.141 & 0.285 & 0.229 & 0.273 & 0.315 \\
+Algeria & 0.417 & 0.525 & 0.574 & 0.648 & 0.710 \\
+Argentina & 0.858 & 0.803 & 0.797 & 0.775 & 0.721 \\
+Austria & 1.000 & 1.038 & 1.016 & 1.006 & 1.022 \\
+Bangladesh & 0.558 & 0.587 & 0.605 & 0.678 & 0.669 \\
+Belarus & 0.750 & 0.759 & 0.664 & 0.671 & 0.703 \\
+Belgium & 0.995 & 0.982 & 0.946 & 0.924 & 0.909 \\
+Bhutan & 0.632 & 0.572 & 0.588 & 0.656 & 0.669 \\
+Bolivia & 0.826 & 0.705 & 0.728 & 0.740 & 0.696 \\
+Botswana & 0.750 & 0.686 & 0.604 & 0.602 & 0.657 \\
+Brazil & 0.892 & 0.781 & 0.758 & 0.748 & 0.699 \\
+Brunei Darussalam & 1.000 & 1.058 & 1.086 & 1.093 & 0.958 \\
+Bulgaria & 0.833 & 0.803 & 0.783 & 0.805 & 0.841 \\
+Cambodia & 0.916 & 0.834 & 0.818 & 0.796 & 0.721 \\
+Cameroon & 0.138 & 0.215 & 0.403 & 0.397 & 0.413 \\
+Canada & 0.986 & 1.002 & 0.986 & 1.056 & 0.997 \\
+Chad & 0.000 & 0.032 & 0.133 & 0.151 & 0.073 \\
+Chile & 0.901 & 0.891 & 0.908 & 0.879 & 0.824 \\
+China & 0.966 & 0.822 & 0.919 & 0.899 & 0.779 \\
+Colombia & 0.748 & 0.836 & 0.806 & 0.790 & 0.741 \\
+Costa Rica & 0.875 & 0.921 & 0.918 & 0.892 & 0.834 \\
+Czech Republic & 0.990 & 1.032 & 0.968 & 0.976 & 0.990 \\
+Democratic Republic of Congo & 0.188 & 0.079 & 0.258 & 0.258 & 0.238 \\
+Denmark & 0.997 & 0.955 & 0.963 & 0.949 & 0.973 \\
+Dominican Republic & 0.615 & 0.767 & 0.760 & 0.752 & 0.687 \\
+Ecuador & 0.714 & 0.890 & 0.878 & 0.873 & 0.851 \\
+Egypt & 0.561 & 0.526 & 0.588 & 0.595 & 0.694 \\
+Ethiopia & 0.641 & 0.645 & 0.651 & 0.637 & 0.713 \\
+Fiji & 0.795 & 0.783 & 0.687 & 0.721 & 0.620 \\
+Finland & 0.912 & 0.988 & 0.997 & 0.992 & 1.022 \\
+France & 0.978 & 1.018 & 0.971 & 0.965 & 0.981 \\
+Germany & 0.996 & 0.982 & 0.963 & 0.963 & 0.984 \\
+Ghana & 0.455 & 0.573 & 0.516 & 0.464 & 0.555 \\
+Great Britain & 0.984 & 0.941 & 0.953 & 0.955 & 0.979 \\
+Greece & 0.917 & 0.917 & 0.942 & 0.926 & 0.893 \\
+Honduras & 0.727 & 0.756 & 0.746 & 0.717 & 0.721 \\
+Hungary & 0.982 & 0.983 & 0.919 & 0.934 & 0.942 \\
+India & 0.566 & 0.598 & 0.632 & 0.739 & 0.686 \\
+Indonesia & 0.950 & 0.859 & 0.870 & 0.793 & 0.820 \\
+Iran & 0.531 & 0.590 & 0.594 & 0.603 & 0.727 \\
+Iraq & 0.476 & 0.570 & 0.559 & 0.597 & 0.732 \\
+Ireland & 0.981 & 1.004 & 1.027 & 1.019 & 1.049 \\
+Israel & 0.865 & 0.843 & 0.854 & 0.931 & 0.940 \\
+Italy & 0.995 & 0.999 & 1.007 & 0.992 & 1.000 \\
+Jamaica & 0.917 & 0.765 & 0.783 & 0.787 & 0.760 \\
+Japan & 0.996 & 0.994 & 1.119 & 1.096 & 0.942 \\
+Jordan & 0.595 & 0.570 & 0.505 & 0.477 & 0.543 \\
+Kazakhstan & 0.762 & 0.601 & 0.705 & 0.712 & 0.748 \\
+Kenya & 0.464 & 0.487 & 0.494 & 0.482 & 0.547 \\
+Kiribati & 0.779 & 0.779 & 0.648 & 0.628 & 0.479 \\
+Kuwait & 0.984 & 0.865 & 0.830 & 0.818 & 0.914 \\
+Kyrgyzstan & 0.667 & 0.599 & 0.683 & 0.655 & 0.740 \\
+Laos & 0.960 & 0.821 & 0.803 & 0.795 & 0.706 \\
+Latvia & 0.917 & 0.892 & 0.928 & 0.945 & 0.961 \\
+Lebanon & 0.696 & 0.588 & 0.574 & 0.581 & 0.689 \\
+Libya & 0.364 & 0.406 & 0.485 & 0.528 & 0.637 \\
+Luxembourg & 1.000 & 0.923 & 0.916 & 0.916 & 0.936 \\
+Malaysia & 0.976 & 0.910 & 0.878 & 0.869 & 0.758 \\
+Maldives & 0.827 & 0.717 & 0.737 & 0.797 & 0.858 \\
+Mauritius & 0.865 & 0.804 & 0.790 & 0.757 & 0.855 \\
+Mexico & 0.923 & 0.818 & 0.803 & 0.802 & 0.772 \\
+Mongolia & 0.605 & 0.698 & 0.831 & 0.832 & 0.689 \\
+Morocco & 0.529 & 0.541 & 0.566 & 0.555 & 0.652 \\
+Myanmar & 0.493 & 0.786 & 0.796 & 0.685 & 0.706 \\
+Nepal & 0.388 & 0.391 & 0.469 & 0.568 & 0.560 \\
+Netherlands & 0.990 & 0.959 & 0.933 & 0.931 & 0.955 \\
+Nigeria & 0.420 & 0.302 & 0.216 & 0.242 & 0.253 \\
+Norway & 0.983 & 1.009 & 1.014 & 0.991 & 1.031 \\
+Oman & 0.956 & 0.835 & 0.827 & 0.833 & 0.924 \\
+Pakistan & 0.391 & 0.402 & 0.379 & 0.399 & 0.458 \\
+Panama & 0.919 & 0.949 & 0.984 & 0.988 & 0.974 \\
+Papua New Guinea & 0.863 & 0.847 & 0.803 & 0.858 & 0.769 \\
+Paraguay & 0.864 & 0.806 & 0.803 & 0.798 & 0.744 \\
+Peru & 0.716 & 0.826 & 0.796 & 0.789 & 0.751 \\
+Philippines & 0.838 & 0.822 & 0.824 & 0.840 & 0.700 \\
+Poland & 1.000 & 0.902 & 0.857 & 0.865 & 0.913 \\
+Portugal & 0.963 & 0.987 & 0.998 & 0.977 & 0.956 \\
+Romania & 0.913 & 0.909 & 0.882 & 0.906 & 0.976 \\
+Russia & 0.693 & 0.775 & 0.763 & 0.783 & 0.818 \\
+Rwanda & 0.524 & 0.458 & 0.327 & 0.283 & 0.239 \\
+Samoa & 0.955 & 0.880 & 0.940 & 0.957 & 0.927 \\
+Saudi Arabia & 0.772 & 0.808 & 0.826 & 0.831 & 0.928 \\
+Singapore & 0.964 & 1.091 & 1.111 & 1.091 & 0.956 \\
+Slovakia & 1.000 & 1.066 & 0.987 & 0.993 & 1.001 \\
+Solomon Islands & 0.963 & 0.912 & 0.834 & 0.825 & 0.741 \\
+South Africa & 0.621 & 0.685 & 0.639 & 0.652 & 0.744 \\
+South Korea & 0.985 & 1.037 & 1.153 & 1.126 & 0.981 \\
+Spain & 0.997 & 0.969 & 0.972 & 0.956 & 0.957 \\
+Sri Lanka & 0.778 & 0.668 & 0.716 & 0.777 & 0.806 \\
+Sudan & 0.357 & 0.230 & 0.370 & 0.317 & 0.373 \\
+Sweden & 0.988 & 0.973 & 0.967 & 0.949 & 0.962 \\
+Switzerland & 0.980 & 1.037 & 0.999 & 0.978 & 1.008 \\
+Syria & 0.243 & 0.285 & 0.210 & 0.227 & 0.255 \\
+Tanzania & 0.424 & 0.590 & 0.597 & 0.559 & 0.657 \\
+Thailand & 0.925 & 0.949 & 0.916 & 0.805 & 0.827 \\
+Timor Leste & 0.981 & 0.729 & 0.696 & 0.598 & 0.544 \\
+Tonga & 0.863 & 0.937 & 0.944 & 0.928 & 0.895 \\
+Turkey & 0.352 & 0.589 & 0.640 & 0.650 & 0.682 \\
+Uganda & 0.458 & 0.437 & 0.336 & 0.304 & 0.258 \\
+Ukraine & 0.857 & 0.789 & 0.695 & 0.716 & 0.760 \\
+United Arab Emirates & 1.000 & 0.881 & 0.875 & 0.865 & 0.974 \\
+United States of America & 0.984 & 0.967 & 0.983 & 1.058 & 1.011 \\
+Uruguay & 0.828 & 0.812 & 0.866 & 0.845 & 0.783 \\
+Uzbekistan & 0.250 & 0.479 & 0.564 & 0.556 & 0.592 \\
+Vanuatu & 0.878 & 0.957 & 0.901 & 0.900 & 0.843 \\
+Venezuela & 0.718 & 0.714 & 0.708 & 0.722 & 0.646 \\
+Vietnam & 0.818 & 0.961 & 0.893 & 0.863 & 0.701 \\
+Yemen & 0.250 & 0.355 & 0.297 & 0.348 & 0.410 \\
+Zambia & 0.632 & 0.528 & 0.542 & 0.510 & 0.567 \\
+Zimbabwe & 0.400 & 0.458 & 0.459 & 0.449 & 0.506 \\
+\hline
+\end{longtable}
+}
 
 \bibliographystyle{splncs04}
 \bibliography{bibliography}

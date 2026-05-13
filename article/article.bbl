@@ -40,6 +40,12 @@ Craymer, L.: New zealand aims to double foreign international education market
   by 2034. Reuters (2025),
   \url{https://www.reuters.com/world/asia-pacific/new-zealand-aims-double-foreign-international-education-market-by-2034-2025-07-13/}
 
+\bibitem{ENZ2025Enrolments}
+{Education New Zealand}: International student enrolments continue upward
+  surge. Education New Zealand (2025),
+  \url{https://www.enz.govt.nz/news-and-research/ed-news/international-student-enrolments-continue-upward-surge},
+  retrieved May 12, 2026
+
 \bibitem{Gonnot2025}
 Gonnot, J., Lanati, M.: Visa policy and international student migration:
   evidence from canada. Journal of Economic Geography  \textbf{25}(2),
@@ -105,6 +111,18 @@ Neumayer, E.: Unequal access to foreign spaces: how states use visa
   Institute of British Geographers  \textbf{31}(1),  72--84 (2006).
   \doi{10.1111/j.1475-5661.2006.00194.x},
   \url{https://doi.org/10.1111/j.1475-5661.2006.00194.x}
+
+\bibitem{MoEInternationalEducation}
+{New Zealand Ministry of Education}: International education. New Zealand
+  Government (2025),
+  \url{https://www.education.govt.nz/our-work/strategies-policies-and-programmes/tertiary-and-further-education/international-education},
+  retrieved May 12, 2026
+
+\bibitem{TEC2024Snapshot}
+{New Zealand Tertiary Education Commission}: Tertiary learner snapshot 2024.
+  New Zealand Government (2026),
+  \url{https://www.tec.govt.nz/sector-governance-and-performance/monitoring-and-auditing-performance/sector-performance-data/tertiary-learner-snapshot-2024},
+  retrieved May 12, 2026
 
 \bibitem{Oduwaye2023}
 Oduwaye, O., Kiraz, A., Sorakin, Y.: A trend analysis of the challenges of
@@ -173,5 +191,12 @@ Weber, T., Van~Mol, C.: The student migration transition: an empirical
 \bibitem{WHOGHO}
 {World Health Organization}: Global health observatory (nd),
   \url{https://www.who.int/data/gho}, retrieved May 11, 2026
+
+\bibitem{Xie2025}
+Xie, Q., Yegros-Yegros, A.: A quantitative assessment of potential benefits and
+  challenges of international researcher mobility for home and host countries:
+  evidence from the chinese scholarship council programmes. Scientometrics
+  \textbf{130}(8),  4545--4572 (2025). \doi{10.1007/s11192-025-05391-2},
+  \url{https://doi.org/10.1007/s11192-025-05391-2}
 
 \end{thebibliography}

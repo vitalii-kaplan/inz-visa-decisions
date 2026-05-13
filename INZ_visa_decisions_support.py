@@ -1,10 +1,16 @@
 from pathlib import Path
 
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import pandas as pd
 
 
 RESULTS_DIR = Path("data/results")
 SUPPORT_DIR = Path("data/support")
+ARTICLE_IMGS_DIR = Path("article/imgs")
 
 MODELS = {
     "un_m49": RESULTS_DIR / "Prediction_un_m49.csv",
@@ -18,6 +24,33 @@ PREDICTION_RATE_MODELS = {
     "wb": RESULTS_DIR / "Prediction_rate_wb.csv",
     "who": RESULTS_DIR / "Prediction_rate_who.csv",
     "no_region": RESULTS_DIR / "Prediction_rate_no_region.csv",
+}
+
+APPROXIMATION_PLOTS = {
+    "un_m49": {
+        "input": RESULTS_DIR / "Prediction_un_m49.csv",
+        "svg": RESULTS_DIR / "approximation_sp_m49.svg",
+        "pdf": ARTICLE_IMGS_DIR / "approximation_sp_m49.pdf",
+        "title": "UN M49 regions\nR-squared = 0.867, MAE = 0.069, RMSE = 0.090",
+    },
+    "wb": {
+        "input": RESULTS_DIR / "Prediction_wb.csv",
+        "svg": RESULTS_DIR / "approximation_sp_wb.svg",
+        "pdf": ARTICLE_IMGS_DIR / "approximation_sp_wb.pdf",
+        "title": "World Bank regions\nR-squared = 0.812, MAE = 0.082, RMSE = 0.107",
+    },
+    "who": {
+        "input": RESULTS_DIR / "Prediction_who.csv",
+        "svg": RESULTS_DIR / "approximation_sp_who.svg",
+        "pdf": ARTICLE_IMGS_DIR / "approximation_sp_who.pdf",
+        "title": "WHO regions\nR-squared = 0.786, MAE = 0.087, RMSE = 0.114",
+    },
+    "no_region": {
+        "input": RESULTS_DIR / "Prediction_no_region.csv",
+        "svg": RESULTS_DIR / "approximation_sp_no_region.svg",
+        "pdf": ARTICLE_IMGS_DIR / "approximation_sp_no_region.pdf",
+        "title": "No regional classification\nR-squared = 0.706, MAE = 0.100, RMSE = 0.134",
+    },
 }
 
 
@@ -145,6 +178,70 @@ def plot_residuals_vs_fitted(model_name, df, output_path):
     output_path.write_text("\n".join(parts), encoding="utf-8")
 
 
+def plot_observed_vs_fitted(df, title, svg_path, pdf_path):
+    x_col = "Prediction (Approval rate)"
+    y_col = "Approval rate"
+    color_col = "Applications_log10"
+
+    required = ["Country", x_col, y_col, color_col]
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        raise ValueError(f"{svg_path} input is missing required columns: {missing}")
+
+    plot_df = df.copy()
+    x = pd.to_numeric(plot_df[x_col], errors="coerce")
+    y = pd.to_numeric(plot_df[y_col], errors="coerce")
+    color_values = pd.to_numeric(plot_df[color_col], errors="coerce")
+    valid = x.notna() & y.notna()
+    plot_df = plot_df.loc[valid].copy()
+    x = x.loc[valid]
+    y = y.loc[valid]
+    color_values = color_values.loc[valid]
+
+    green_red = LinearSegmentedColormap.from_list(
+        "inz_applications_log10_green_red",
+        ["#2ca25f", "#d73027"],
+    )
+
+    fig, ax = plt.subplots(figsize=(8, 6), dpi=100)
+    sc = ax.scatter(
+        x,
+        y,
+        c=color_values,
+        cmap=green_red,
+        s=30,
+        alpha=0.85,
+        edgecolors="none",
+    )
+    cbar = fig.colorbar(sc, ax=ax)
+    cbar.set_label(color_col)
+
+    ax.set_title(title)
+    ax.set_xlabel(x_col)
+    ax.set_ylabel(y_col)
+    ax.set_xlim(0.0, 1.2)
+    ax.set_ylim(0.0, 1.05)
+    ax.grid(True, linewidth=0.5, alpha=0.35)
+    fig.tight_layout()
+
+    svg_path.parent.mkdir(parents=True, exist_ok=True)
+    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(svg_path, bbox_inches="tight")
+    fig.savefig(pdf_path, bbox_inches="tight")
+    plt.close(fig)
+
+
+def generate_approximation_plots():
+    for spec in APPROXIMATION_PLOTS.values():
+        df = pd.read_csv(spec["input"])
+        plot_observed_vs_fitted(
+            df=df,
+            title=spec["title"],
+            svg_path=spec["svg"],
+            pdf_path=spec["pdf"],
+        )
+
+
 def format_relative_residual_row(row):
     return (
         f"{row['Country']} "
@@ -169,6 +266,7 @@ def relative_residual_table(direction, limit=15):
 
 def main():
     SUPPORT_DIR.mkdir(parents=True, exist_ok=True)
+    generate_approximation_plots()
 
     summaries = []
     for model_name, path in MODELS.items():
