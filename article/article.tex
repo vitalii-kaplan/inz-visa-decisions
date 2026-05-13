@@ -65,15 +65,50 @@ The present article contributes to this literature by analysing publicly availab
 
 \section{Data}
 
-The primary source data are publicly available Immigration New Zealand offshore or overseas student visa decision tables for 2022, 2023, 2024, and 2025 \cite{INZ2022,INZ2023,INZ2024,INZ2025}. The project repository is available on GitHub \cite{KaplanINZRepo}; all file paths in this article are repository-relative paths. The source files are stored in \texttt{data/original/} and are not edited manually. They report fee-paying student visa decisions by applicant nationality or country. The yearly files use slightly different column names, but the common information is the country or nationality, number approved, number declined, total or volume of applications, approval rate, and decline rate.
+The primary source data are publicly available Immigration New Zealand offshore or overseas student visa decision tables for 2022, 2023, 2024, and 2025 \cite{INZ2022,INZ2023,INZ2024,INZ2025}. The project repository is available on GitHub \cite{KaplanINZRepo}, and its internal structure is described in Appendix~\ref{app:repository-structure}. The INZ decision tables report fee-paying student visa decisions by applicant nationality or country. The yearly tables use slightly different column names, but the common information is the country or nationality, number approved, number declined, total or volume of applications, approval rate, and decline rate.
 
-The unit of observation in the prepared INZ table is a country or applicant nationality aggregated across the four-year period. The unified prepared file, \texttt{data/prepared/inz\_student\_visa\_decisions\_2022-2025.csv}, contains 179 countries or applicant nationalities. For each row it reports total approvals, total declines, total applications, approval rate, and \texttt{Applications\_log10}, the base-10 logarithm of total applications. Approval rate is calculated as approved applications divided by total applications. This table is used for descriptive results on application volume and overall approval rates.
+The unit of observation in the prepared INZ data is a country or applicant nationality aggregated across the four-year period. The prepared INZ data contain 179 countries or applicant nationalities. For each country or applicant nationality, the data report total approvals, total declines, total applications, approval rate, and \texttt{Applications\_log10}, the base-10 logarithm of total applications. Approval rate is calculated as approved applications divided by total applications. These fields are used for descriptive results on application volume and overall approval rates.
 
 The modelling dataset joins the prepared INZ table to publicly available country-level reference data from the World Bank, the World Health Organization, and UN M49 \cite{WorldBankWDI,WorldBankCLG,WHOData,WHOGHO,UNM49}. The World Bank reference table contributes FY2026 region, income group, lending category, GDP per capita, GNI per capita using the Atlas method, life expectancy, internet-use percentage, and urban-population percentage. The WHO reference table contributes WHO region, under-five mortality, maternal mortality, DTP3 immunization coverage, and physician density. The UN M49 reference table contributes an alternative regional classification.
 
-Country names are harmonised across the INZ, World Bank, WHO, and UN M49 files before modelling. The combined modelling file is \texttt{data/prepared/inz\_2022-2025\_wb\_who\_m49\_combined.csv}. It contains 110 countries after country matching, removal of rows with missing numerical values needed for the models, and exclusion of countries with fewer than 10 total applications across 2022--2025. Countries present in the prepared INZ table but absent from the regression table are reported separately in \texttt{data/support/Countries\_excluded\_from\_regression.csv}.
+Country names are harmonised across the INZ, World Bank, WHO, and UN M49 data before modelling. The combined modelling data contain 110 countries after country matching, removal of rows with missing numerical values needed for the models, and exclusion of countries with fewer than 10 total applications across 2022--2025. Countries present in the prepared INZ data but absent from the regression data are reported separately in Appendix Table~\ref{tab:appendix-excluded-countries}.
 
-The repository \cite{KaplanINZRepo} distinguishes source, prepared, combined, and result files. Source files in \texttt{data/original/} preserve the downloaded INZ and reference tables. Prepared files in \texttt{data/prepared/} contain harmonised and joined datasets used for analysis. Result files in \texttt{data/results/} contain model coefficients, scores, predictions, prediction-rate tables, and correlation outputs. Support files in \texttt{data/support/} contain derived diagnostic summaries and auxiliary tables used to interpret the results.
+Table~\ref{tab:modelling-data-characteristics} summarises the fields in the combined modelling data. For string fields, only the number of unique values is reported. For numeric fields, the table reports the minimum, maximum, number of unique values, mean, and sample standard deviation.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.38\textwidth}p{0.10\textwidth}r@{\hspace{0.7em}}r@{\hspace{0.7em}}r@{\hspace{0.7em}}r@{\hspace{0.7em}}r}
+\caption{Statistical characteristics of the combined modelling data}\label{tab:modelling-data-characteristics}\\
+\hline
+Column & Type & Min. & Max. & Unique & Mean & SD \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Column & Type & Min. & Max. & Unique & Mean & SD \\
+\hline
+\endhead
+Country & String & -- & -- & 110 & -- & -- \\
+\url{WHO_Region} & String & -- & -- & 6 & -- & -- \\
+\url{WB_FY2026_Region} & String & -- & -- & 7 & -- & -- \\
+\url{WB_FY2026_Income_Group} & String & -- & -- & 5 & -- & -- \\
+\url{WB_FY2026_Lending_Category} & String & -- & -- & 4 & -- & -- \\
+UN M49 & String & -- & -- & 21 & -- & -- \\
+Approval rate & Numeric & 0.000 & 1.000 & 100 & 0.754 & 0.248 \\
+\url{Applications_log10} & Numeric & 1.041 & 4.550 & 92 & 2.201 & 0.857 \\
+\url{WHO_Under5_Mortality_per_1000_live_births} & Numeric & 2.069 & 104.9 & 110 & 19.42 & 19.23 \\
+\url{WHO_Maternal_Mortality_per_100000_live_births} & Numeric & 1.096 & 992.8 & 110 & 86.94 & 142.1 \\
+\url{WHO_Physician_Density_per_10000_population} & Numeric & 0.610 & 65.76 & 109 & 22.07 & 17.02 \\
+\url{WHO_DTP3_Immunization_Coverage_pct} & Numeric & 39.00 & 99.00 & 33 & 87.47 & 13.32 \\
+\url{GDP_per_capita_current_USD} & Numeric & 413.8 & 137,781.7 & 110 & 20,242.7 & 26,831.7 \\
+\url{Life_expectancy_at_birth_years} & Numeric & 54.64 & 84.58 & 107 & 74.85 & 6.456 \\
+\url{Internet_users_pct_population} & Numeric & 8.950 & 100.0 & 108 & 74.20 & 25.91 \\
+\url{Urban_population_pct} & Numeric & 15.41 & 100.0 & 109 & 63.36 & 22.27 \\
+\url{GNI_per_capita_Atlas_current_USD} & Numeric & 370.0 & 98,170.0 & 106 & 18,910.2 & 23,703.6 \\
+\hline
+\end{longtable}
+}
 
 \section{Methods}
 
@@ -534,6 +569,19 @@ To inform our empirical analysis, we propose a basic theoretical model to unders
 \section{Appendices or Supplementary Material}
 
 The appendix tables and figures refer to repository-relative files in the project repository \cite{KaplanINZRepo}.
+
+\subsection{Repository Structure}
+\label{app:repository-structure}
+
+The repository separates source data, prepared data, model results, and support outputs so that the empirical workflow can be inspected without mixing raw inputs with derived files. All paths mentioned in this article are relative to the repository root.
+
+\texttt{data/original/} contains source files downloaded from INZ and from reference-data providers. These files preserve the input record and are not edited manually.
+
+\texttt{data/prepared/} contains cleaned, harmonised, aggregated, and joined datasets. These files are used as intermediate research tables and as modelling inputs after country-name harmonisation and filtering.
+
+\texttt{data/results/} contains outputs produced by the modelling workflow, including coefficient tables, score tables, fitted-value tables, prediction-rate tables, correlation outputs, and source figure files used for the main results.
+
+\texttt{data/support/} contains derived diagnostic summaries and auxiliary tables used to interpret or document the modelling results. These include excluded-country records, residual summaries, coefficient-stability summaries, and source figure files for robustness and residual diagnostics.
 
 \subsection{Student Visa Application Preparation}
 \label{app:student-visa-preparation}
