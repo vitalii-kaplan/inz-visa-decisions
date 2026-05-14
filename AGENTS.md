@@ -50,13 +50,14 @@ src/
   Python support code for cleaning, validation, automation, or reproducibility.
 ```
 
-All project-relevant files should live here. If adding manuscript material, prefer a clear structure such as:
+All project-relevant files should live here. Manuscript work is a LaTeX project under `article/`. Treat `article/article.tex` as the active manuscript source, `article/bibliography.bib` as the bibliography source, and `article/imgs/` or `article/figures/` as the place for manuscript figures. `article/article.txt` may be used as notes or legacy drafting material, but do not treat it as the source of record when `article/article.tex` exists.
 
 ```text
 article/
-  draft.md
+  article.tex
+  bibliography.bib
   notes.md
-  references.bib
+  imgs/
   figures/
   tables/
 ```
