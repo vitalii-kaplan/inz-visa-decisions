@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex article"] 1778755086.61621 "article.aux" "article.bbl" "article" 1778759028.46188 0
+["bibtex article"] 1778755086.61621 "article.aux" "article.bbl" "article" 1778761041.27652 0
   "./bibliography.bib" 1778694202.59313 13272 50bf4099edd001b5cc536e8a235cc4a7 ""
   "./splncs04.bst" 1778517217.32973 32146 aadf770ded437d161532035219ea6f45 ""
-  "article.aux" 1778759028.18167 13605 1106a482284a0f641367d5aff83a2acd "pdflatex"
+  "article.aux" 1778761040.97637 13605 1106a482284a0f641367d5aff83a2acd "pdflatex"
   (generated)
   "article.bbl"
   "article.blg"
   (rewritten before read)
-["pdflatex"] 1778759027.71182 "/Users/vitaly/Home/git_proj/2026-04-INZ-Visa-decisions/article/article.tex" "article.pdf" "article" 1778759028.46205 0
-  "/Users/vitaly/Home/git_proj/2026-04-INZ-Visa-decisions/article/article.tex" 1778758831.31021 109121 84bb2d509c416cc201fbf2424e3da863 ""
+["pdflatex"] 1778761040.50728 "/Users/vitaly/Home/git_proj/2026-04-INZ-Visa-decisions/article/article.tex" "article.pdf" "article" 1778761041.27666 0
+  "/Users/vitaly/Home/git_proj/2026-04-INZ-Visa-decisions/article/article.tex" 1778761040.2655 109119 f2b20484b2216633f01908e0d1109e14 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -78,9 +78,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1739209689 5466570 e8651e7fa7bb054fee9a07d3f37faf28 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1739209844 3352639 2aa689c226d5667ed0ad838dc122ce61 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "article.aux" 1778759028.18167 13605 1106a482284a0f641367d5aff83a2acd "pdflatex"
+  "article.aux" 1778761040.97637 13605 1106a482284a0f641367d5aff83a2acd "pdflatex"
   "article.bbl" 1778755086.71963 10523 361ea58a5d76d387b67fa1842820a304 "bibtex article"
-  "article.tex" 1778758831.31021 109121 84bb2d509c416cc201fbf2424e3da863 ""
+  "article.tex" 1778761040.2655 109119 f2b20484b2216633f01908e0d1109e14 ""
   "imgs/applicationslog10_to_approval_rate.pdf" 1778694510.44913 15005 9a631047d863603a8008df21ed442729 ""
   "imgs/approximation_sp_m49.pdf" 1778677199.21201 23039 849315c9f77ecb7712e33773ef2fc324 ""
   "imgs/approximation_sp_no_region.pdf" 1778677199.50042 22577 98d03f8a80ecf14f4bd924a2406755c4 ""
