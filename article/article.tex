@@ -17,11 +17,14 @@
 \maketitle
 
 \begin{abstract}
-This article examines country-level variation in Immigration New Zealand fee-paying student visa approval rates for the 2022--2025 period. The study combines publicly available INZ decision data with country-level reference variables from the World Bank, the World Health Organization, and UN M49 regional classifications. The analysis uses descriptive statistics, Pearson correlations, ordinary least squares regression approximations, alternative regional specifications, residual diagnostics, and a weighted robustness check based on log-transformed application volume.
-The results show that approval rates vary systematically across applicant nationalities and are associated with application volume, income classification, regional classification, and broader country-level development indicators. Approval rates are strongly correlated with multiple country-level indicators, including income measures, internet use, mortality, life expectancy, and other public-health variables. In addition to country-level characteristics, three regional specifications are examined; the regional models improve the explanation of approval-rate variation compared with the no-region specification.
-The findings are interpreted as country-level descriptive evidence, not as causal evidence about individual visa decisions, officer behaviour, discriminatory intent, or unequal treatment in individual application assessment. The principal limitation is that the data are aggregated by country and do not include applicant-level records, programme choice, education provider information, documentation quality, or detailed processing factors. The study identifies a reproducible empirical structure and points to further research on other receiving countries, additional country-level variables, and formal inter-country education or migration relationships.
+This article examines country-level variation in Immigration New Zealand fee-paying student visa approval rates for the 2022--2025 period. The study combines publicly available INZ decision data with country-level reference variables from the World Bank, the World Health Organization, and UN M49 regional classifications. 
+The analysis uses descriptive statistics, Pearson correlations, ordinary least squares regression approximations, alternative regional specifications, residual diagnostics, and a weighted robustness check based on log-transformed application volume.
+The results show that approval rates vary systematically across applicant nationalities and are associated with application volume, income classification, regional classification, and broader country-level development indicators. 
+Approval rates are strongly correlated with multiple country-level indicators, including income measures, internet use, mortality, life expectancy, and other public-health variables. In addition to country-level characteristics, three regional specifications are examined. The regional models improve the explanation of approval-rate variation compared with the no-region specification.
+The findings are interpreted as country-level descriptive evidence, not as causal evidence about individual visa decisions, discriminatory intent, or unequal treatment in individual application assessment.  
+The study identifies a reproducible empirical structure and points to further research on other receiving countries, additional country-level variables, and formal inter-country education or migration relationships.
 
-\keywords{student visas \and international education \and Immigration New Zealand \and statistical analysis \and regional classification}
+\keywords{student visa \and international education \and Immigration New Zealand \and statistical analysis \and regional classification}
 \end{abstract}
 
 \section{Introduction}
@@ -67,7 +70,7 @@ The present article contributes to this literature by analysing publicly availab
 
 \section{Data}
 
-The primary source data are publicly available Immigration New Zealand offshore or overseas student visa decision tables for 2022, 2023, 2024, and 2025 \cite{INZ2022,INZ2023,INZ2024,INZ2025}. The project repository is available on GitHub \cite{KaplanINZRepo}, and its internal structure is described in Appendix~\ref{app:repository-structure}. The INZ decision tables report fee-paying student visa decisions by applicant nationality or country. The yearly tables use slightly different column names, but the common information is the country or nationality, number approved, number declined, total or volume of applications, approval rate, and decline rate.
+The primary source data are publicly available Immigration New Zealand offshore or overseas student visa decision tables for 2022, 2023, 2024, and 2025 \cite{INZ2022,INZ2023,INZ2024,INZ2025}. These INZ data can be obtained directly from Immigration New Zealand. They are also included, together with the other files used in this project, in the project repository on GitHub \cite{KaplanINZRepo}. The repository structure is described in Appendix~\ref{app:repository-structure}. The INZ decision tables report fee-paying student visa decisions by applicant nationality or country. The yearly tables use slightly different column names, but the common information is the country or nationality, number approved, number declined, total or volume of applications, approval rate, and decline rate.
 
 The unit of observation in the prepared INZ data is a country or applicant nationality aggregated across the four-year period. The prepared INZ data contain 179 countries or applicant nationalities. For each country or applicant nationality, the data report total approvals, total declines, total applications, approval rate, and the base-10 logarithm of total applications. Approval rate is calculated as approved applications divided by total applications. These fields are used for descriptive results on application volume and overall approval rates.
 
@@ -194,7 +197,7 @@ The relationship between application volume and approval rate is positive but no
 
 After joining the INZ data with WHO, World Bank, and UN M49 reference data, the combined modelling table contains 110 countries. This reduction reflects the availability of matched country-level reference variables, the removal of rows with missing numerical values, and the exclusion of countries with fewer than 10 total applications across the four-year period. The countries excluded before regression modelling are listed in Appendix Table~\ref{tab:appendix-excluded-countries}.
 
-Several country-level indicators are strongly correlated with approval rate. The direction of the correlations is consistent with a broad development and administrative-capacity pattern. Approval rates are lower where mortality indicators are higher, and higher where life expectancy, internet use, physician density, and income indicators are higher. Table~\ref{tab:approval-country-correlations} reports the strongest bivariate correlations used in this interpretation.
+Several country-level indicators are strongly correlated with approval rate. The direction of the correlations is consistent with a broad development and administrative-capacity pattern. Approval rates are lower where mortality indicators are higher, and higher where life expectancy, internet use, physician density, and income indicators are higher. Table~\ref{tab:approval-country-correlations} reports the bivariate correlations used in this interpretation where the absolute correlation coefficient is greater than 0.5; the full pairwise correlation output is reported in Appendix Table~\ref{tab:appendix-full-correlations}.
 
 \begin{table}
 \caption{Correlations between approval rate and selected country-level indicators}
@@ -722,6 +725,73 @@ Nicaragua & 1 & 1.000 & Fewer than 10 total applications \\
 Niger & 1 & 0.000 & Fewer than 10 total applications \\
 North Korea & 1 & 0.000 & Fewer than 10 total applications \\
 Togo & 1 & 0.000 & Fewer than 10 total applications \\
+\hline
+\end{longtable}
+}
+
+\subsection{Full Correlation Table}
+
+Table~\ref{tab:appendix-full-correlations} reports all pairwise Pearson correlations among approval rate and the numerical country-level indicators used in the correlation output.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{p{0.30\textwidth}p{0.30\textwidth}r@{\hspace{0.8em}}r@{\hspace{0.8em}}r}
+\caption{Full pairwise correlation table}\label{tab:appendix-full-correlations}\\
+\hline
+First variable & Second variable & $r$ & $p$ & df \\
+\hline
+\endfirsthead
+\multicolumn{5}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+First variable & Second variable & $r$ & $p$ & df \\
+\hline
+\endhead
+Approval rate & Under-five mortality & -0.746 & $1.24e{-30}$ & 163 \\
+Approval rate & Maternal mortality & -0.681 & $7.97e{-24}$ & 163 \\
+Approval rate & Physician density & 0.552 & $1.56e{-14}$ & 163 \\
+Approval rate & DTP3 immunization coverage & 0.371 & $9e{-7}$ & 163 \\
+Approval rate & GDP per capita & 0.501 & $7.42e{-12}$ & 163 \\
+Approval rate & Life expectancy & 0.715 & $4.19e{-27}$ & 163 \\
+Approval rate & Internet users & 0.633 & $7.62e{-20}$ & 163 \\
+Approval rate & Urban population & 0.340 & $8.12e{-6}$ & 163 \\
+Approval rate & GNI per capita & 0.520 & $8.18e{-13}$ & 163 \\
+Under-five mortality & Maternal mortality & 0.881 & $9.52e{-55}$ & 163 \\
+Under-five mortality & Physician density & -0.652 & $2.36e{-21}$ & 163 \\
+Under-five mortality & DTP3 immunization coverage & -0.487 & $3.39e{-11}$ & 163 \\
+Under-five mortality & GDP per capita & -0.488 & $3.12e{-11}$ & 163 \\
+Under-five mortality & Life expectancy & -0.888 & $7.59e{-57}$ & 163 \\
+Under-five mortality & Internet users & -0.770 & $1.19e{-33}$ & 163 \\
+Under-five mortality & Urban population & -0.521 & $7.37e{-13}$ & 163 \\
+Under-five mortality & GNI per capita & -0.504 & $5.16e{-12}$ & 163 \\
+Maternal mortality & Physician density & -0.569 & $1.48e{-15}$ & 163 \\
+Maternal mortality & DTP3 immunization coverage & -0.455 & $8.61e{-10}$ & 163 \\
+Maternal mortality & GDP per capita & -0.398 & $1.21e{-7}$ & 163 \\
+Maternal mortality & Life expectancy & -0.813 & $3.93e{-40}$ & 163 \\
+Maternal mortality & Internet users & -0.723 & $5.36e{-28}$ & 163 \\
+Maternal mortality & Urban population & -0.448 & $1.63e{-9}$ & 163 \\
+Maternal mortality & GNI per capita & -0.413 & $3.66e{-8}$ & 163 \\
+Physician density & DTP3 immunization coverage & 0.382 & $4.27e{-7}$ & 163 \\
+Physician density & GDP per capita & 0.554 & $1.2e{-14}$ & 163 \\
+Physician density & Life expectancy & 0.717 & $2.62e{-27}$ & 163 \\
+Physician density & Internet users & 0.670 & $7e{-23}$ & 163 \\
+Physician density & Urban population & 0.559 & $6.23e{-15}$ & 163 \\
+Physician density & GNI per capita & 0.580 & $3.05e{-16}$ & 163 \\
+DTP3 immunization coverage & GDP per capita & 0.352 & $3.52e{-6}$ & 163 \\
+DTP3 immunization coverage & Life expectancy & 0.500 & $8.48e{-12}$ & 163 \\
+DTP3 immunization coverage & Internet users & 0.501 & $7.14e{-12}$ & 163 \\
+DTP3 immunization coverage & Urban population & 0.284 & $2.14e{-4}$ & 163 \\
+DTP3 immunization coverage & GNI per capita & 0.363 & $1.6e{-6}$ & 163 \\
+GDP per capita & Life expectancy & 0.671 & $6.45e{-23}$ & 163 \\
+GDP per capita & Internet users & 0.546 & $3.16e{-14}$ & 163 \\
+GDP per capita & Urban population & 0.548 & $2.67e{-14}$ & 163 \\
+GDP per capita & GNI per capita & 0.980 & $7.41e{-116}$ & 163 \\
+Life expectancy & Internet users & 0.804 & $1.32e{-38}$ & 163 \\
+Life expectancy & Urban population & 0.657 & $9.55e{-22}$ & 163 \\
+Life expectancy & GNI per capita & 0.694 & $4.51e{-25}$ & 163 \\
+Internet users & Urban population & 0.724 & $4e{-28}$ & 163 \\
+Internet users & GNI per capita & 0.566 & $2.33e{-15}$ & 163 \\
+Urban population & GNI per capita & 0.573 & $8.94e{-16}$ & 163 \\
 \hline
 \end{longtable}
 }
