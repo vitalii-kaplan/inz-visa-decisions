@@ -1,0 +1,9 @@
+cff-version: 1.1.0
+message: "If you use these data or scripts, please cite them as below."
+authors:
+- family-names: Kaplan
+  given-names: Vitalii
+orcid: https://orcid.org/0009-0009-8181-2863
+title:vitalii-kaplan/inz-visa-decisions: v1.0.0
+version: academia.edu-2026-05-14
+date-released: 2026-06-17
