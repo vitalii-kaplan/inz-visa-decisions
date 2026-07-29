@@ -1,0 +1,679 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{longtable}
+
+\begin{document}
+
+\title{Supplementary Appendix to ``Modelling New Zealand Student Visa Approval Rates with Country-Level Indicators''}
+\titlerunning{Supplementary Appendix: INZ Student Visa Approval Rates}
+
+\author{Vitalii Kaplan\orcidID{0009-0009-8181-2863}}
+\authorrunning{V. Kaplan}
+\institute{\email{vitalii.v.kaplan@gmail.com}}
+
+\maketitle
+\appendix
+
+The appendix tables refer to repository-relative files in the project repository \cite{KaplanINZRepo}. The source and current PDF of this supplementary appendix are stored in the repository's \texttt{appendix/} directory.
+
+\section{Repository Structure}
+\label{app:repository-structure}
+
+The repository separates source data, prepared data, model results, and support outputs so that the empirical workflow can be inspected without mixing raw inputs with derived files. All paths mentioned in this article are relative to the repository root.
+
+\texttt{data/original/} contains source files downloaded from INZ and from reference-data providers. These files preserve the input record and are not edited manually.
+
+\texttt{data/prepared/} contains cleaned, harmonised, aggregated, and joined datasets. These files are used as intermediate research tables and as modelling inputs after country-name harmonisation and filtering.
+
+\texttt{data/results/} contains outputs produced by the modelling workflow, including coefficient tables, score tables, fitted-value tables, prediction-rate tables, correlation outputs, and source figure files used for the main results.
+
+\texttt{data/support/} contains derived diagnostic summaries and auxiliary tables used to interpret or document the modelling results. These include excluded-country records, residual summaries, coefficient-stability summaries, and source figure files for robustness and residual diagnostics.
+
+\section{Student Visa Application Preparation}
+\label{app:student-visa-preparation}
+
+The INZ student visa decision data are useful for this analysis partly because a fee-paying student visa application is unlikely to be a casual or spontaneous action. Before an application can be assessed, the applicant normally has to assemble educational, financial, personal, health, and documentary evidence. This does not prove that every application is strong, complete, or equally supported. It does mean that the published decision records represent applications that passed through a substantial preparation process before reaching a formal decision.
+
+\begin{table}
+\caption{Typical preparation requirements before a fee-paying student visa decision}
+\label{tab:appendix-student-visa-preparation}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{p{0.28\textwidth}p{0.58\textwidth}}
+\hline
+Preparation area & Examples of required or commonly relevant evidence \\
+\hline
+Education pathway & Identifying an education provider, submitting documents to that provider, receiving an offer of place, and documenting previous education. \\
+Tuition and insurance & Paying tuition or documenting tuition arrangements, receiving confirmation from the education provider, and arranging medical or travel insurance where required. \\
+Financial capacity & Providing bank statements or other evidence of funds for study and living costs, together with explanations of source of funds and relevant incoming transfers. \\
+Personal and travel history & Providing previous education and work history, explaining gaps in education or employment, and documenting travel history where requested. \\
+Health and character & Providing relevant health information, medical examination material where required, and character-related information required by the visa process. \\
+Home-country ties and translations & Documenting family relationships, property or other ties where relevant, and providing certified translations for documents not originally in English. \\
+\hline
+\end{tabular}
+\end{table}
+
+This preparation burden matters for interpretation. The observed INZ application counts are not treated as a simple measure of abstract interest in New Zealand study. They are better understood as counts of completed applications that were submitted after applicants had already undertaken a costly and document-intensive process. For this reason, variation in approval rates may reflect differences in the practical conditions under which applicants can assemble convincing evidence, not only differences in demand for study.
+
+\section{Countries Excluded Before Regression}
+
+Table~\ref{tab:appendix-excluded-countries} reports countries present in the aggregated INZ decision data but not retained in the final regression table. Eight countries were not retained after the reference-data join or missing-value filter. The remaining countries were excluded because they had fewer than 10 total applications across 2022--2025.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{p{0.28\textwidth}rrp{0.36\textwidth}}
+\caption{Countries excluded before regression modelling}\label{tab:appendix-excluded-countries}\\
+\hline
+Country & Applications & Approval rate & Exclusion reason \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Country & Applications & Approval rate & Exclusion reason \\
+\hline
+\endhead
+Hong Kong & 1397 & 0.981 & Not retained after reference join or missing-value filter \\
+Taiwan & 1094 & 0.976 & Not retained after reference join or missing-value filter \\
+Macau & 69 & 0.928 & Not retained after reference join or missing-value filter \\
+Tuvalu & 59 & 0.983 & Not retained after reference join or missing-value filter \\
+Palestine & 15 & 0.533 & Not retained after reference join or missing-value filter \\
+Lithuania & 10 & 0.900 & Not retained after reference join or missing-value filter \\
+Malawi & 10 & 0.600 & Not retained after reference join or missing-value filter \\
+Trinidad and Tobago & 10 & 0.800 & Not retained after reference join or missing-value filter \\
+Iceland & 9 & 1.000 & Fewer than 10 total applications \\
+Liberia & 9 & 0.000 & Fewer than 10 total applications \\
+Namibia & 9 & 0.556 & Fewer than 10 total applications \\
+Guatemala & 8 & 0.750 & Fewer than 10 total applications \\
+Nauru & 8 & 1.000 & Fewer than 10 total applications \\
+Albania & 7 & 0.714 & Fewer than 10 total applications \\
+Benin & 7 & 0.286 & Fewer than 10 total applications \\
+Estonia & 7 & 1.000 & Fewer than 10 total applications \\
+Georgia & 7 & 0.571 & Fewer than 10 total applications \\
+Croatia & 6 & 1.000 & Fewer than 10 total applications \\
+El Salvador & 6 & 1.000 & Fewer than 10 total applications \\
+Guyana & 6 & 0.833 & Fewer than 10 total applications \\
+Marshall Islands & 6 & 1.000 & Fewer than 10 total applications \\
+South Sudan & 6 & 0.333 & Fewer than 10 total applications \\
+St Lucia & 6 & 1.000 & Fewer than 10 total applications \\
+Azerbaijan & 5 & 0.800 & Fewer than 10 total applications \\
+Gambia & 5 & 0.200 & Fewer than 10 total applications \\
+Haiti & 5 & 0.200 & Fewer than 10 total applications \\
+Mozambique & 5 & 0.800 & Fewer than 10 total applications \\
+Palau & 5 & 1.000 & Fewer than 10 total applications \\
+Suriname & 5 & 1.000 & Fewer than 10 total applications \\
+Swaziland & 5 & 0.800 & Fewer than 10 total applications \\
+Tunisia & 5 & 0.400 & Fewer than 10 total applications \\
+Armenia & 4 & 0.500 & Fewer than 10 total applications \\
+Bahrain & 4 & 1.000 & Fewer than 10 total applications \\
+Belize & 4 & 1.000 & Fewer than 10 total applications \\
+Burundi & 4 & 0.000 & Fewer than 10 total applications \\
+Eritrea & 4 & 0.750 & Fewer than 10 total applications \\
+Grenada & 4 & 0.750 & Fewer than 10 total applications \\
+Macedonia & 4 & 1.000 & Fewer than 10 total applications \\
+Mali & 4 & 0.750 & Fewer than 10 total applications \\
+Moldova & 4 & 0.750 & Fewer than 10 total applications \\
+Serbia & 4 & 0.750 & Fewer than 10 total applications \\
+Sierra Leone & 4 & 0.000 & Fewer than 10 total applications \\
+Angola & 3 & 0.000 & Fewer than 10 total applications \\
+Barbados & 3 & 1.000 & Fewer than 10 total applications \\
+Congo & 3 & 0.000 & Fewer than 10 total applications \\
+Dominica & 3 & 0.667 & Fewer than 10 total applications \\
+Federated States of Micronesia & 3 & 1.000 & Fewer than 10 total applications \\
+Liechtenstein & 3 & 1.000 & Fewer than 10 total applications \\
+Malta & 3 & 1.000 & Fewer than 10 total applications \\
+Slovenia & 3 & 1.000 & Fewer than 10 total applications \\
+Somalia & 3 & 0.000 & Fewer than 10 total applications \\
+St Kitts - Nevis & 3 & 0.667 & Fewer than 10 total applications \\
+St Vincent and the Grenadines & 3 & 1.000 & Fewer than 10 total applications \\
+Tajikistan & 3 & 0.667 & Fewer than 10 total applications \\
+Australia & 2 & 1.000 & Fewer than 10 total applications \\
+Bermuda & 2 & 0.500 & Fewer than 10 total applications \\
+Guinea & 2 & 0.000 & Fewer than 10 total applications \\
+Senegal & 2 & 0.000 & Fewer than 10 total applications \\
+Seychelles & 2 & 1.000 & Fewer than 10 total applications \\
+Bahamas & 1 & 1.000 & Fewer than 10 total applications \\
+Bosnia \& Herzegovina & 1 & 1.000 & Fewer than 10 total applications \\
+Cape Verde & 1 & 1.000 & Fewer than 10 total applications \\
+Cuba & 1 & 1.000 & Fewer than 10 total applications \\
+Djibouti & 1 & 0.000 & Fewer than 10 total applications \\
+Madagascar & 1 & 0.000 & Fewer than 10 total applications \\
+Nicaragua & 1 & 1.000 & Fewer than 10 total applications \\
+Niger & 1 & 0.000 & Fewer than 10 total applications \\
+North Korea & 1 & 0.000 & Fewer than 10 total applications \\
+Togo & 1 & 0.000 & Fewer than 10 total applications \\
+\hline
+\end{longtable}
+}
+
+\section{Full Correlation Table}
+
+Table~\ref{tab:appendix-full-correlations} reports all pairwise Pearson correlations among approval rate and the numerical country-level indicators used in the correlation output.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{p{0.30\textwidth}p{0.30\textwidth}r@{\hspace{0.8em}}r@{\hspace{0.8em}}r}
+\caption{Full pairwise correlation table}\label{tab:appendix-full-correlations}\\
+\hline
+First variable & Second variable & $r$ & $p$ & df \\
+\hline
+\endfirsthead
+\multicolumn{5}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+First variable & Second variable & $r$ & $p$ & df \\
+\hline
+\endhead
+Approval rate & Under-five mortality & -0.746 & $1.24e{-30}$ & 163 \\
+Approval rate & Maternal mortality & -0.681 & $7.97e{-24}$ & 163 \\
+Approval rate & Physician density & 0.552 & $1.56e{-14}$ & 163 \\
+Approval rate & DTP3 immunization coverage & 0.371 & $9e{-7}$ & 163 \\
+Approval rate & GDP per capita & 0.501 & $7.42e{-12}$ & 163 \\
+Approval rate & Life expectancy & 0.715 & $4.19e{-27}$ & 163 \\
+Approval rate & Internet users & 0.633 & $7.62e{-20}$ & 163 \\
+Approval rate & Urban population & 0.340 & $8.12e{-6}$ & 163 \\
+Approval rate & GNI per capita & 0.520 & $8.18e{-13}$ & 163 \\
+Under-five mortality & Maternal mortality & 0.881 & $9.52e{-55}$ & 163 \\
+Under-five mortality & Physician density & -0.652 & $2.36e{-21}$ & 163 \\
+Under-five mortality & DTP3 immunization coverage & -0.487 & $3.39e{-11}$ & 163 \\
+Under-five mortality & GDP per capita & -0.488 & $3.12e{-11}$ & 163 \\
+Under-five mortality & Life expectancy & -0.888 & $7.59e{-57}$ & 163 \\
+Under-five mortality & Internet users & -0.770 & $1.19e{-33}$ & 163 \\
+Under-five mortality & Urban population & -0.521 & $7.37e{-13}$ & 163 \\
+Under-five mortality & GNI per capita & -0.504 & $5.16e{-12}$ & 163 \\
+Maternal mortality & Physician density & -0.569 & $1.48e{-15}$ & 163 \\
+Maternal mortality & DTP3 immunization coverage & -0.455 & $8.61e{-10}$ & 163 \\
+Maternal mortality & GDP per capita & -0.398 & $1.21e{-7}$ & 163 \\
+Maternal mortality & Life expectancy & -0.813 & $3.93e{-40}$ & 163 \\
+Maternal mortality & Internet users & -0.723 & $5.36e{-28}$ & 163 \\
+Maternal mortality & Urban population & -0.448 & $1.63e{-9}$ & 163 \\
+Maternal mortality & GNI per capita & -0.413 & $3.66e{-8}$ & 163 \\
+Physician density & DTP3 immunization coverage & 0.382 & $4.27e{-7}$ & 163 \\
+Physician density & GDP per capita & 0.554 & $1.2e{-14}$ & 163 \\
+Physician density & Life expectancy & 0.717 & $2.62e{-27}$ & 163 \\
+Physician density & Internet users & 0.670 & $7e{-23}$ & 163 \\
+Physician density & Urban population & 0.559 & $6.23e{-15}$ & 163 \\
+Physician density & GNI per capita & 0.580 & $3.05e{-16}$ & 163 \\
+DTP3 immunization coverage & GDP per capita & 0.352 & $3.52e{-6}$ & 163 \\
+DTP3 immunization coverage & Life expectancy & 0.500 & $8.48e{-12}$ & 163 \\
+DTP3 immunization coverage & Internet users & 0.501 & $7.14e{-12}$ & 163 \\
+DTP3 immunization coverage & Urban population & 0.284 & $2.14e{-4}$ & 163 \\
+DTP3 immunization coverage & GNI per capita & 0.363 & $1.6e{-6}$ & 163 \\
+GDP per capita & Life expectancy & 0.671 & $6.45e{-23}$ & 163 \\
+GDP per capita & Internet users & 0.546 & $3.16e{-14}$ & 163 \\
+GDP per capita & Urban population & 0.548 & $2.67e{-14}$ & 163 \\
+GDP per capita & GNI per capita & 0.980 & $7.41e{-116}$ & 163 \\
+Life expectancy & Internet users & 0.804 & $1.32e{-38}$ & 163 \\
+Life expectancy & Urban population & 0.657 & $9.55e{-22}$ & 163 \\
+Life expectancy & GNI per capita & 0.694 & $4.51e{-25}$ & 163 \\
+Internet users & Urban population & 0.724 & $4e{-28}$ & 163 \\
+Internet users & GNI per capita & 0.566 & $2.33e{-15}$ & 163 \\
+Urban population & GNI per capita & 0.573 & $8.94e{-16}$ & 163 \\
+\hline
+\end{longtable}
+}
+
+The following tables report the full coefficient and p-value outputs for the four regression specifications discussed in Section~5.3.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{8pt}
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the UN M49 regional specification}\label{tab:appendix-coefficients-un-m49}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Urban\_population\_pct & -0.2795 & 0.0053 \\
+UN M49=Northern Africa & -0.2537 & 0.0109 \\
+Life\_expectancy\_at\_birth\_years & 0.4992 & 0.0128 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2425 & 0.0156 \\
+UN M49=Middle Africa & -0.2749 & 0.0219 \\
+UN M49=Southern Asia & -0.2100 & 0.0336 \\
+Intercept & 0.4674 & 0.0492 \\
+WB\_FY2026\_Income\_Group=Low income & -0.1980 & 0.0714 \\
+UN M49=Melanesia & 0.2055 & 0.0861 \\
+UN M49=Central Asia & -0.1989 & 0.0902 \\
+UN M49=Western Asia & -0.1674 & 0.0904 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1036 & 0.1439 \\
+UN M49=South-eastern Asia & 0.1074 & 0.2368 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0600 & 0.3012 \\
+UN M49=Micronesia & 0.1634 & 0.3124 \\
+Internet\_users\_pct\_population & 0.1136 & 0.3553 \\
+UN M49=Southern Europe & -0.0925 & 0.4785 \\
+UN M49=Polynesia & 0.0970 & 0.4848 \\
+GDP\_per\_capita\_current\_USD & -0.1922 & 0.4888 \\
+UN M49=Northern Europe & -0.0755 & 0.5001 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1768 & 0.5223 \\
+UN M49=Central America & 0.0613 & 0.5712 \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.0389 & 0.5992 \\
+UN M49=Eastern Africa & -0.0478 & 0.6506 \\
+UN M49=South America & 0.0438 & 0.6554 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.0355 & 0.6678 \\
+UN M49=Western Europe & -0.0315 & 0.7865 \\
+WB\_FY2026\_Income\_Group=Missing & -0.0290 & 0.7943 \\
+UN M49=Northern America & -0.0335 & 0.7951 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.0148 & 0.7967 \\
+UN M49=Eastern Asia & -0.0261 & 0.8053 \\
+UN M49=Eastern Europe & 0.0192 & 0.8582 \\
+UN M49=Southern Africa & 0.0204 & 0.8628 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0140 & 0.9018 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & 0.0245 & 0.9164 \\
+UN M49=Western Africa & -0.0105 & 0.9384 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0081 & 0.9689 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the World Bank regional specification}\label{tab:appendix-coefficients-wb}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+WB\_FY2026\_Region=Middle East, North Africa, Afghanistan \& Pakistan & -0.2695 & $8.194e{-8}$ \\
+Intercept & 0.9166 & $5.844e{-7}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.4067 & $5.477e{-5}$ \\
+WB\_FY2026\_Region=Europe \& Central Asia & -0.1846 & $3.689e{-4}$ \\
+WB\_FY2026\_Region=South Asia & -0.2322 & $5.548e{-4}$ \\
+WB\_FY2026\_Region=Sub-Saharan Africa & -0.1561 & 0.0042 \\
+Urban\_population\_pct & -0.2545 & 0.0061 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2244 & 0.0171 \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.1355 & 0.0461 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.0914 & 0.0889 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1114 & 0.0918 \\
+WB\_FY2026\_Region=North America & -0.1633 & 0.1001 \\
+Life\_expectancy\_at\_birth\_years & 0.2595 & 0.1672 \\
+WB\_FY2026\_Region=Latin America \& Caribbean & -0.0644 & 0.2041 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.0970 & 0.2097 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0692 & 0.2267 \\
+WB\_FY2026\_Income\_Group=Missing & -0.1243 & 0.2511 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.1944 & 0.3301 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1541 & 0.5663 \\
+GDP\_per\_capita\_current\_USD & -0.1087 & 0.7076 \\
+Internet\_users\_pct\_population & 0.0271 & 0.7942 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0367 & 0.8419 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0041 & 0.9680 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the WHO regional specification}\label{tab:appendix-coefficients-who}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Intercept & 0.8794 & $3.670e{-6}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.4423 & $4.232e{-5}$ \\
+WHO\_Region=Western Pacific Region & 0.1980 & $9.745e{-4}$ \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.1780 & 0.0127 \\
+Urban\_population\_pct & -0.2370 & 0.0132 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.2311 & 0.0198 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.1039 & 0.0680 \\
+WHO\_Region=Region of the Americas & 0.1219 & 0.0691 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.1173 & 0.0952 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.1333 & 0.1146 \\
+WHO\_Region=South-East Asia Region & 0.0849 & 0.1933 \\
+WB\_FY2026\_Income\_Group=Missing & -0.1484 & 0.1958 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.2102 & 0.3220 \\
+WHO\_Region=Eastern Mediterranean Region & -0.0545 & 0.3817 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0481 & 0.4213 \\
+Life\_expectancy\_at\_birth\_years & 0.1354 & 0.4701 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.1327 & 0.6318 \\
+WHO\_Region=European Region & 0.0319 & 0.6626 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.0393 & 0.7146 \\
+GDP\_per\_capita\_current\_USD & -0.0843 & 0.7816 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & -0.0494 & 0.7995 \\
+Internet\_users\_pct\_population & -0.0107 & 0.9230 \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.58\textwidth}r@{\hspace{1.5em}}r}
+\caption{Full coefficient table for the no-region specification}\label{tab:appendix-coefficients-no-region}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endfirsthead
+\multicolumn{3}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Coefficient & $p$ \\
+\hline
+\endhead
+Intercept & 1.1160 & $3.208e{-8}$ \\
+WB\_FY2026\_Income\_Group=Low income & -0.6087 & $2.500e{-7}$ \\
+WB\_FY2026\_Income\_Group=Lower middle income & -0.2242 & 0.0047 \\
+Urban\_population\_pct & -0.2635 & 0.0081 \\
+WHO\_DTP3\_Immunization\_Coverage\_pct & -0.2036 & 0.0152 \\
+WHO\_Under5\_Mortality\_per\_1000\_live\_births & -0.4155 & 0.0758 \\
+WB\_FY2026\_Income\_Group=Upper middle income & -0.1059 & 0.0958 \\
+WB\_FY2026\_Income\_Group=Missing & -0.2087 & 0.1085 \\
+WB\_FY2026\_Lending\_Category=Missing & 0.1644 & 0.1301 \\
+WB\_FY2026\_Lending\_Category=IDA & 0.0833 & 0.2166 \\
+WB\_FY2026\_Lending\_Category=IBRD & 0.0930 & 0.2363 \\
+WHO\_Physician\_Density\_per\_10000\_population & -0.1130 & 0.2560 \\
+GNI\_per\_capita\_Atlas\_current\_USD & 0.2416 & 0.4372 \\
+Life\_expectancy\_at\_birth\_years & 0.0871 & 0.6543 \\
+GDP\_per\_capita\_current\_USD & -0.1465 & 0.6644 \\
+Internet\_users\_pct\_population & 0.0134 & 0.9087 \\
+WHO\_Maternal\_Mortality\_per\_100000\_live\_births & 0.0182 & 0.9329 \\
+\hline
+\end{longtable}
+}
+
+\section{Coefficient Stability Summary}
+
+Table~\ref{tab:appendix-coefficient-stability} reports the cross-specification coefficient stability summary derived from the four coefficient tables. The table gives the number of model specifications in which each term appears, the number of those specifications where $p < 0.05$, and the minimum and maximum p-values observed across the specifications where the term is present.
+
+{\tiny
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{p{0.38\textwidth}p{0.08\textwidth}rr@{\hspace{0.7em}}rrp{0.15\textwidth}}
+\caption{Coefficient stability summary across regression specifications}\label{tab:appendix-coefficient-stability}\\
+\hline
+Term & Type & Models & Sig. & Min. $p$ & Max. $p$ & Stability \\
+\hline
+\endfirsthead
+\multicolumn{7}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Term & Type & Models & Sig. & Min. $p$ & Max. $p$ & Stability \\
+\hline
+\endhead
+Urban\_population\_pct & Variable & 4 & 4 & 0.0053 & 0.0132 & stable significant \\
+\shortstack[l]{WB\_FY2026\_Income\_Group=\\ Low income} & Variable & 4 & 3 & $2.5e{-7}$ & 0.0714 & partly stable \\
+\shortstack[l]{WB\_FY2026\_Income\_Group=\\ Lower middle income} & Variable & 4 & 3 & 0.0047 & 0.5992 & partly stable \\
+\shortstack[l]{WB\_FY2026\_Lending\_Category=\\ Missing} & Variable & 4 & 3 & 0.0156 & 0.1301 & partly stable \\
+Life\_expectancy\_at\_birth\_years & Variable & 4 & 1 & 0.0128 & 0.6543 & specification dependent \\
+\shortstack[l]{WHO\_DTP3\_Immunization\\ \_Coverage\_pct} & Variable & 4 & 1 & 0.0152 & 0.6678 & specification dependent \\
+\shortstack[l]{WB\_FY2026\_Income\_Group=\\ Upper middle income} & Variable & 4 & 0 & 0.0680 & 0.7967 & not significant \\
+\shortstack[l]{WHO\_Under5\_Mortality\\ \_per\_1000\_live\_births} & Variable & 4 & 0 & 0.0758 & 0.9164 & not significant \\
+\shortstack[l]{WB\_FY2026\_Lending\_Category=\\ IBRD} & Variable & 4 & 0 & 0.0918 & 0.2363 & not significant \\
+\shortstack[l]{WB\_FY2026\_Income\_Group=\\ Missing} & Variable & 4 & 0 & 0.1085 & 0.7943 & not significant \\
+\shortstack[l]{WB\_FY2026\_Lending\_Category=\\ IDA} & Variable & 4 & 0 & 0.2166 & 0.4213 & not significant \\
+\shortstack[l]{WHO\_Physician\_Density\\ \_per\_10000\_population} & Variable & 4 & 0 & 0.2560 & 0.9680 & not significant \\
+Internet\_users\_pct\_population & Variable & 4 & 0 & 0.3553 & 0.9230 & not significant \\
+GNI\_per\_capita\_Atlas\_current\_USD & Variable & 4 & 0 & 0.4372 & 0.6318 & not significant \\
+GDP\_per\_capita\_current\_USD & Variable & 4 & 0 & 0.4888 & 0.7816 & not significant \\
+\shortstack[l]{WHO\_Maternal\_Mortality\\ \_per\_100000\_live\_births} & Variable & 4 & 0 & 0.7995 & 0.9689 & not significant \\
+\shortstack[l]{WB\_FY2026\_Region=Middle East,\\ North Africa, Afghanistan \& Pakistan} & Region & 1 & 1 & $8.19e{-8}$ & $8.19e{-8}$ & stable significant \\
+\shortstack[l]{WB\_FY2026\_Region=Europe\\ \& Central Asia} & Region & 1 & 1 & $3.69e{-4}$ & $3.69e{-4}$ & stable significant \\
+WB\_FY2026\_Region=South Asia & Region & 1 & 1 & $5.55e{-4}$ & $5.55e{-4}$ & stable significant \\
+WHO\_Region=Western Pacific Region & Region & 1 & 1 & $9.75e{-4}$ & $9.75e{-4}$ & stable significant \\
+WB\_FY2026\_Region=Sub-Saharan Africa & Region & 1 & 1 & 0.0042 & 0.0042 & stable significant \\
+UN M49=Northern Africa & Region & 1 & 1 & 0.0109 & 0.0109 & stable significant \\
+UN M49=Middle Africa & Region & 1 & 1 & 0.0219 & 0.0219 & stable significant \\
+UN M49=Southern Asia & Region & 1 & 1 & 0.0336 & 0.0336 & stable significant \\
+WHO\_Region=Region of the Americas & Region & 1 & 0 & 0.0691 & 0.0691 & not significant \\
+UN M49=Melanesia & Region & 1 & 0 & 0.0861 & 0.0861 & not significant \\
+UN M49=Central Asia & Region & 1 & 0 & 0.0902 & 0.0902 & not significant \\
+UN M49=Western Asia & Region & 1 & 0 & 0.0904 & 0.0904 & not significant \\
+WB\_FY2026\_Region=North America & Region & 1 & 0 & 0.1001 & 0.1001 & not significant \\
+WHO\_Region=South-East Asia Region & Region & 1 & 0 & 0.1933 & 0.1933 & not significant \\
+\shortstack[l]{WB\_FY2026\_Region=Latin\\ America \& Caribbean} & Region & 1 & 0 & 0.2041 & 0.2041 & not significant \\
+UN M49=South-eastern Asia & Region & 1 & 0 & 0.2368 & 0.2368 & not significant \\
+UN M49=Micronesia & Region & 1 & 0 & 0.3124 & 0.3124 & not significant \\
+WHO\_Region=Eastern Mediterranean Region & Region & 1 & 0 & 0.3817 & 0.3817 & not significant \\
+UN M49=Southern Europe & Region & 1 & 0 & 0.4785 & 0.4785 & not significant \\
+UN M49=Polynesia & Region & 1 & 0 & 0.4848 & 0.4848 & not significant \\
+UN M49=Northern Europe & Region & 1 & 0 & 0.5001 & 0.5001 & not significant \\
+UN M49=Central America & Region & 1 & 0 & 0.5712 & 0.5712 & not significant \\
+UN M49=Eastern Africa & Region & 1 & 0 & 0.6506 & 0.6506 & not significant \\
+UN M49=South America & Region & 1 & 0 & 0.6554 & 0.6554 & not significant \\
+WHO\_Region=European Region & Region & 1 & 0 & 0.6626 & 0.6626 & not significant \\
+UN M49=Western Europe & Region & 1 & 0 & 0.7865 & 0.7865 & not significant \\
+UN M49=Northern America & Region & 1 & 0 & 0.7951 & 0.7951 & not significant \\
+UN M49=Eastern Asia & Region & 1 & 0 & 0.8053 & 0.8053 & not significant \\
+UN M49=Eastern Europe & Region & 1 & 0 & 0.8582 & 0.8582 & not significant \\
+UN M49=Southern Africa & Region & 1 & 0 & 0.8628 & 0.8628 & not significant \\
+UN M49=Western Africa & Region & 1 & 0 & 0.9384 & 0.9384 & not significant \\
+\hline
+\end{longtable}
+}
+
+\section{Relative Residual Tables}
+
+Tables~\ref{tab:appendix-relative-residuals-positive} and \ref{tab:appendix-relative-residuals-negative} report the largest positive and negative relative residuals by model specification. Each entry gives the country, \texttt{Prediction\_rate}, and residual delta. The tables are derived from the model-specific fitted-value outputs.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}}
+\caption{Largest positive relative residuals by model specification}\label{tab:appendix-relative-residuals-positive}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endhead
+\shortstack[l]{Democratic Republic\\ of Congo\\ rate=2.375\\ delta=0.109} &\shortstack[l]{Nigeria\\ rate=1.940\\ delta=0.204} &\shortstack[l]{Rwanda\\ rate=1.852\\ delta=0.241} &\shortstack[l]{Rwanda\\ rate=2.191\\ delta=0.285} \\
+\hline
+\shortstack[l]{Sudan\\ rate=1.551\\ delta=0.127} &\shortstack[l]{Rwanda\\ rate=1.601\\ delta=0.197} &\shortstack[l]{Nigeria\\ rate=1.736\\ delta=0.178} &\shortstack[l]{Timor Leste\\ rate=1.804\\ delta=0.437} \\
+\hline
+\shortstack[l]{Nigeria\\ rate=1.392\\ delta=0.118} &\shortstack[l]{Timor Leste\\ rate=1.410\\ delta=0.285} &\shortstack[l]{Timor Leste\\ rate=1.642\\ delta=0.384} &\shortstack[l]{Uganda\\ rate=1.774\\ delta=0.200} \\
+\hline
+\shortstack[l]{Timor Leste\\ rate=1.346\\ delta=0.252} &\shortstack[l]{Uganda\\ rate=1.364\\ delta=0.122} &\shortstack[l]{Uganda\\ rate=1.508\\ delta=0.154} &\shortstack[l]{Nigeria\\ rate=1.659\\ delta=0.167} \\
+\hline
+\shortstack[l]{Kazakhstan\\ rate=1.269\\ delta=0.161} &\shortstack[l]{Botswana\\ rate=1.242\\ delta=0.146} &\shortstack[l]{Jordan\\ rate=1.247\\ delta=0.118} &\shortstack[l]{Kiribati\\ rate=1.624\\ delta=0.299} \\
+\hline
+\shortstack[l]{Jamaica\\ rate=1.198\\ delta=0.151} &\shortstack[l]{Ukraine\\ rate=1.233\\ delta=0.162} &\shortstack[l]{Botswana\\ rate=1.245\\ delta=0.148} &\shortstack[l]{Laos\\ rate=1.360\\ delta=0.254} \\
+\hline
+\shortstack[l]{Zambia\\ rate=1.195\\ delta=0.103} &\shortstack[l]{Lebanon\\ rate=1.213\\ delta=0.122} &\shortstack[l]{Kiribati\\ rate=1.240\\ delta=0.151} &\shortstack[l]{Solomon\\ Islands\\ rate=1.300\\ delta=0.222} \\
+\hline
+\shortstack[l]{Lebanon\\ rate=1.184\\ delta=0.108} &\shortstack[l]{Kiribati\\ rate=1.202\\ delta=0.131} &\shortstack[l]{Zambia\\ rate=1.238\\ delta=0.121} &\shortstack[l]{Malaysia\\ rate=1.287\\ delta=0.218} \\
+\hline
+\shortstack[l]{China\\ rate=1.175\\ delta=0.144} &\shortstack[l]{Laos\\ rate=1.196\\ delta=0.157} &\shortstack[l]{Laos\\ rate=1.207\\ delta=0.165} &\shortstack[l]{Fiji\\ rate=1.282\\ delta=0.175} \\
+\hline
+\shortstack[l]{Bolivia\\ rate=1.171\\ delta=0.121} &\shortstack[l]{Kuwait\\ rate=1.185\\ delta=0.154} &\shortstack[l]{Kuwait\\ rate=1.203\\ delta=0.166} &\shortstack[l]{Brazil\\ rate=1.276\\ delta=0.193} \\
+\hline
+\shortstack[l]{Laos\\ rate=1.169\\ delta=0.139} &\shortstack[l]{Jordan\\ rate=1.179\\ delta=0.090} &\shortstack[l]{Indonesia\\ rate=1.198\\ delta=0.157} &\shortstack[l]{Cambodia\\ rate=1.270\\ delta=0.195} \\
+\hline
+\shortstack[l]{Sri Lanka\\ rate=1.164\\ delta=0.109} &\shortstack[l]{Brazil\\ rate=1.176\\ delta=0.134} &\shortstack[l]{Lebanon\\ rate=1.198\\ delta=0.115} &\shortstack[l]{China\\ rate=1.240\\ delta=0.187} \\
+\hline
+\shortstack[l]{Maldives\\ rate=1.154\\ delta=0.110} &\shortstack[l]{Jamaica\\ rate=1.171\\ delta=0.134} &\shortstack[l]{Ukraine\\ rate=1.198\\ delta=0.141} &\shortstack[l]{Jamaica\\ rate=1.206\\ delta=0.157} \\
+\hline
+\shortstack[l]{Oman\\ rate=1.146\\ delta=0.122} &\shortstack[l]{Poland\\ rate=1.166\\ delta=0.143} &\shortstack[l]{Brazil\\ rate=1.192\\ delta=0.143} &\shortstack[l]{Philippines\\ rate=1.198\\ delta=0.138} \\
+\hline
+\shortstack[l]{Rwanda\\ rate=1.144\\ delta=0.066} &\shortstack[l]{Zambia\\ rate=1.165\\ delta=0.090} &\shortstack[l]{Solomon\\ Islands\\ rate=1.168\\ delta=0.139} &\shortstack[l]{Mexico\\ rate=1.196\\ delta=0.151} \\
+\hline
+\end{longtable}
+
+\begin{longtable}{p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}p{0.24\textwidth}}
+\caption{Largest negative relative residuals by model specification}\label{tab:appendix-relative-residuals-negative}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{4}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+UN M49 & World Bank & WHO & No region \\
+\hline
+\endhead
+\shortstack[l]{Chad\\ rate=0.000\\ delta=-0.032} &\shortstack[l]{Chad\\ rate=0.000\\ delta=-0.133} &\shortstack[l]{Chad\\ rate=0.000\\ delta=-0.151} &\shortstack[l]{Chad\\ rate=0.000\\ delta=-0.073} \\
+\hline
+\shortstack[l]{Afghanistan\\ rate=0.495\\ delta=-0.144} &\shortstack[l]{Cameroon\\ rate=0.342\\ delta=-0.266} &\shortstack[l]{Cameroon\\ rate=0.347\\ delta=-0.259} &\shortstack[l]{Cameroon\\ rate=0.334\\ delta=-0.275} \\
+\hline
+\shortstack[l]{Uzbekistan\\ rate=0.522\\ delta=-0.229} &\shortstack[l]{Uzbekistan\\ rate=0.443\\ delta=-0.314} &\shortstack[l]{Uzbekistan\\ rate=0.450\\ delta=-0.306} &\shortstack[l]{Uzbekistan\\ rate=0.423\\ delta=-0.342} \\
+\hline
+\shortstack[l]{Turkey\\ rate=0.597\\ delta=-0.237} &\shortstack[l]{Turkey\\ rate=0.550\\ delta=-0.288} &\shortstack[l]{Afghanistan\\ rate=0.517\\ delta=-0.132} &\shortstack[l]{Afghanistan\\ rate=0.447\\ delta=-0.174} \\
+\hline
+\shortstack[l]{Myanmar\\ rate=0.626\\ delta=-0.294} &\shortstack[l]{Afghanistan\\ rate=0.615\\ delta=-0.088} &\shortstack[l]{Turkey\\ rate=0.541\\ delta=-0.298} &\shortstack[l]{Turkey\\ rate=0.516\\ delta=-0.330} \\
+\hline
+\shortstack[l]{Cameroon\\ rate=0.642\\ delta=-0.077} &\shortstack[l]{Myanmar\\ rate=0.619\\ delta=-0.304} &\shortstack[l]{Algeria\\ rate=0.643\\ delta=-0.231} &\shortstack[l]{Libya\\ rate=0.571\\ delta=-0.273} \\
+\hline
+\shortstack[l]{Yemen\\ rate=0.704\\ delta=-0.105} &\shortstack[l]{Tanzania\\ rate=0.710\\ delta=-0.173} &\shortstack[l]{Nepal\\ rate=0.683\\ delta=-0.180} &\shortstack[l]{Algeria\\ rate=0.587\\ delta=-0.293} \\
+\hline
+\shortstack[l]{Tanzania\\ rate=0.719\\ delta=-0.166} &\shortstack[l]{Algeria\\ rate=0.726\\ delta=-0.157} &\shortstack[l]{Libya\\ rate=0.688\\ delta=-0.165} &\shortstack[l]{Yemen\\ rate=0.610\\ delta=-0.160} \\
+\hline
+\shortstack[l]{Algeria\\ rate=0.794\\ delta=-0.108} &\shortstack[l]{Democratic Republic\\ of Congo\\ rate=0.727\\ delta=-0.070} &\shortstack[l]{Yemen\\ rate=0.718\\ delta=-0.098} &\shortstack[l]{Tanzania\\ rate=0.645\\ delta=-0.233} \\
+\hline
+\shortstack[l]{Ghana\\ rate=0.794\\ delta=-0.118} &\shortstack[l]{Mongolia\\ rate=0.727\\ delta=-0.227} &\shortstack[l]{Myanmar\\ rate=0.719\\ delta=-0.193} &\shortstack[l]{Iraq\\ rate=0.650\\ delta=-0.256} \\
+\hline
+\shortstack[l]{Ecuador\\ rate=0.802\\ delta=-0.176} &\shortstack[l]{Libya\\ rate=0.749\\ delta=-0.122} &\shortstack[l]{Mongolia\\ rate=0.726\\ delta=-0.228} &\shortstack[l]{Nepal\\ rate=0.693\\ delta=-0.172} \\
+\hline
+\shortstack[l]{Dominican\\ Republic\\ rate=0.803\\ delta=-0.151} &\shortstack[l]{Dominican\\ Republic\\ rate=0.810\\ delta=-0.145} &\shortstack[l]{Democratic Republic\\ of Congo\\ rate=0.727\\ delta=-0.070} &\shortstack[l]{Myanmar\\ rate=0.698\\ delta=-0.213} \\
+\hline
+\shortstack[l]{Iraq\\ rate=0.835\\ delta=-0.094} &\shortstack[l]{Ecuador\\ rate=0.814\\ delta=-0.163} &\shortstack[l]{Tanzania\\ rate=0.759\\ delta=-0.135} &\shortstack[l]{Iran\\ rate=0.730\\ delta=-0.197} \\
+\hline
+\shortstack[l]{Vietnam\\ rate=0.851\\ delta=-0.143} &\shortstack[l]{Nepal\\ rate=0.827\\ delta=-0.081} &\shortstack[l]{India\\ rate=0.765\\ delta=-0.173} &\shortstack[l]{Democratic Republic\\ of Congo\\ rate=0.789\\ delta=-0.050} \\
+\hline
+\shortstack[l]{Syria\\ rate=0.853\\ delta=-0.042} &\shortstack[l]{Yemen\\ rate=0.842\\ delta=-0.047} &\shortstack[l]{Iraq\\ rate=0.797\\ delta=-0.121} &\shortstack[l]{Zimbabwe\\ rate=0.790\\ delta=-0.106} \\
+\hline
+\end{longtable}
+}
+
+\section{Prediction Table}
+
+Table~\ref{tab:appendix-prediction-comparison} reports the observed approval rate and the fitted approval rates from the four regression specifications for each country in the modelling table. The table is derived from the fitted-value outputs for the UN M49, World Bank, WHO, and no-region specifications.
+
+{\scriptsize
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.27\textwidth}rrrrr}
+\caption{Observed and fitted approval rates by regression specification}\label{tab:appendix-prediction-comparison}\\
+\hline
+Country & Observed & UN M49 & WB & WHO & No region \\
+\hline
+\endfirsthead
+\multicolumn{6}{l}{\tablename\ \thetable{} -- continued from previous page}\\
+\hline
+Country & Observed & UN M49 & WB & WHO & No region \\
+\hline
+\endhead
+Afghanistan & 0.141 & 0.285 & 0.229 & 0.273 & 0.315 \\
+Algeria & 0.417 & 0.525 & 0.574 & 0.648 & 0.710 \\
+Argentina & 0.858 & 0.803 & 0.797 & 0.775 & 0.721 \\
+Austria & 1.000 & 1.038 & 1.016 & 1.006 & 1.022 \\
+Bangladesh & 0.558 & 0.587 & 0.605 & 0.678 & 0.669 \\
+Belarus & 0.750 & 0.759 & 0.664 & 0.671 & 0.703 \\
+Belgium & 0.995 & 0.982 & 0.946 & 0.924 & 0.909 \\
+Bhutan & 0.632 & 0.572 & 0.588 & 0.656 & 0.669 \\
+Bolivia & 0.826 & 0.705 & 0.728 & 0.740 & 0.696 \\
+Botswana & 0.750 & 0.686 & 0.604 & 0.602 & 0.657 \\
+Brazil & 0.892 & 0.781 & 0.758 & 0.748 & 0.699 \\
+Brunei Darussalam & 1.000 & 1.058 & 1.086 & 1.093 & 0.958 \\
+Bulgaria & 0.833 & 0.803 & 0.783 & 0.805 & 0.841 \\
+Cambodia & 0.916 & 0.834 & 0.818 & 0.796 & 0.721 \\
+Cameroon & 0.138 & 0.215 & 0.403 & 0.397 & 0.413 \\
+Canada & 0.986 & 1.002 & 0.986 & 1.056 & 0.997 \\
+Chad & 0.000 & 0.032 & 0.133 & 0.151 & 0.073 \\
+Chile & 0.901 & 0.891 & 0.908 & 0.879 & 0.824 \\
+China & 0.966 & 0.822 & 0.919 & 0.899 & 0.779 \\
+Colombia & 0.748 & 0.836 & 0.806 & 0.790 & 0.741 \\
+Costa Rica & 0.875 & 0.921 & 0.918 & 0.892 & 0.834 \\
+Czech Republic & 0.990 & 1.032 & 0.968 & 0.976 & 0.990 \\
+Democratic Republic of Congo & 0.188 & 0.079 & 0.258 & 0.258 & 0.238 \\
+Denmark & 0.997 & 0.955 & 0.963 & 0.949 & 0.973 \\
+Dominican Republic & 0.615 & 0.767 & 0.760 & 0.752 & 0.687 \\
+Ecuador & 0.714 & 0.890 & 0.878 & 0.873 & 0.851 \\
+Egypt & 0.561 & 0.526 & 0.588 & 0.595 & 0.694 \\
+Ethiopia & 0.641 & 0.645 & 0.651 & 0.637 & 0.713 \\
+Fiji & 0.795 & 0.783 & 0.687 & 0.721 & 0.620 \\
+Finland & 0.912 & 0.988 & 0.997 & 0.992 & 1.022 \\
+France & 0.978 & 1.018 & 0.971 & 0.965 & 0.981 \\
+Germany & 0.996 & 0.982 & 0.963 & 0.963 & 0.984 \\
+Ghana & 0.455 & 0.573 & 0.516 & 0.464 & 0.555 \\
+Great Britain & 0.984 & 0.941 & 0.953 & 0.955 & 0.979 \\
+Greece & 0.917 & 0.917 & 0.942 & 0.926 & 0.893 \\
+Honduras & 0.727 & 0.756 & 0.746 & 0.717 & 0.721 \\
+Hungary & 0.982 & 0.983 & 0.919 & 0.934 & 0.942 \\
+India & 0.566 & 0.598 & 0.632 & 0.739 & 0.686 \\
+Indonesia & 0.950 & 0.859 & 0.870 & 0.793 & 0.820 \\
+Iran & 0.531 & 0.590 & 0.594 & 0.603 & 0.727 \\
+Iraq & 0.476 & 0.570 & 0.559 & 0.597 & 0.732 \\
+Ireland & 0.981 & 1.004 & 1.027 & 1.019 & 1.049 \\
+Israel & 0.865 & 0.843 & 0.854 & 0.931 & 0.940 \\
+Italy & 0.995 & 0.999 & 1.007 & 0.992 & 1.000 \\
+Jamaica & 0.917 & 0.765 & 0.783 & 0.787 & 0.760 \\
+Japan & 0.996 & 0.994 & 1.119 & 1.096 & 0.942 \\
+Jordan & 0.595 & 0.570 & 0.505 & 0.477 & 0.543 \\
+Kazakhstan & 0.762 & 0.601 & 0.705 & 0.712 & 0.748 \\
+Kenya & 0.464 & 0.487 & 0.494 & 0.482 & 0.547 \\
+Kiribati & 0.779 & 0.779 & 0.648 & 0.628 & 0.479 \\
+Kuwait & 0.984 & 0.865 & 0.830 & 0.818 & 0.914 \\
+Kyrgyzstan & 0.667 & 0.599 & 0.683 & 0.655 & 0.740 \\
+Laos & 0.960 & 0.821 & 0.803 & 0.795 & 0.706 \\
+Latvia & 0.917 & 0.892 & 0.928 & 0.945 & 0.961 \\
+Lebanon & 0.696 & 0.588 & 0.574 & 0.581 & 0.689 \\
+Libya & 0.364 & 0.406 & 0.485 & 0.528 & 0.637 \\
+Luxembourg & 1.000 & 0.923 & 0.916 & 0.916 & 0.936 \\
+Malaysia & 0.976 & 0.910 & 0.878 & 0.869 & 0.758 \\
+Maldives & 0.827 & 0.717 & 0.737 & 0.797 & 0.858 \\
+Mauritius & 0.865 & 0.804 & 0.790 & 0.757 & 0.855 \\
+Mexico & 0.923 & 0.818 & 0.803 & 0.802 & 0.772 \\
+Mongolia & 0.605 & 0.698 & 0.831 & 0.832 & 0.689 \\
+Morocco & 0.529 & 0.541 & 0.566 & 0.555 & 0.652 \\
+Myanmar & 0.493 & 0.786 & 0.796 & 0.685 & 0.706 \\
+Nepal & 0.388 & 0.391 & 0.469 & 0.568 & 0.560 \\
+Netherlands & 0.990 & 0.959 & 0.933 & 0.931 & 0.955 \\
+Nigeria & 0.420 & 0.302 & 0.216 & 0.242 & 0.253 \\
+Norway & 0.983 & 1.009 & 1.014 & 0.991 & 1.031 \\
+Oman & 0.956 & 0.835 & 0.827 & 0.833 & 0.924 \\
+Pakistan & 0.391 & 0.402 & 0.379 & 0.399 & 0.458 \\
+Panama & 0.919 & 0.949 & 0.984 & 0.988 & 0.974 \\
+Papua New Guinea & 0.863 & 0.847 & 0.803 & 0.858 & 0.769 \\
+Paraguay & 0.864 & 0.806 & 0.803 & 0.798 & 0.744 \\
+Peru & 0.716 & 0.826 & 0.796 & 0.789 & 0.751 \\
+Philippines & 0.838 & 0.822 & 0.824 & 0.840 & 0.700 \\
+Poland & 1.000 & 0.902 & 0.857 & 0.865 & 0.913 \\
+Portugal & 0.963 & 0.987 & 0.998 & 0.977 & 0.956 \\
+Romania & 0.913 & 0.909 & 0.882 & 0.906 & 0.976 \\
+Russia & 0.693 & 0.775 & 0.763 & 0.783 & 0.818 \\
+Rwanda & 0.524 & 0.458 & 0.327 & 0.283 & 0.239 \\
+Samoa & 0.955 & 0.880 & 0.940 & 0.957 & 0.927 \\
+Saudi Arabia & 0.772 & 0.808 & 0.826 & 0.831 & 0.928 \\
+Singapore & 0.964 & 1.091 & 1.111 & 1.091 & 0.956 \\
+Slovakia & 1.000 & 1.066 & 0.987 & 0.993 & 1.001 \\
+Solomon Islands & 0.963 & 0.912 & 0.834 & 0.825 & 0.741 \\
+South Africa & 0.621 & 0.685 & 0.639 & 0.652 & 0.744 \\
+South Korea & 0.985 & 1.037 & 1.153 & 1.126 & 0.981 \\
+Spain & 0.997 & 0.969 & 0.972 & 0.956 & 0.957 \\
+Sri Lanka & 0.778 & 0.668 & 0.716 & 0.777 & 0.806 \\
+Sudan & 0.357 & 0.230 & 0.370 & 0.317 & 0.373 \\
+Sweden & 0.988 & 0.973 & 0.967 & 0.949 & 0.962 \\
+Switzerland & 0.980 & 1.037 & 0.999 & 0.978 & 1.008 \\
+Syria & 0.243 & 0.285 & 0.210 & 0.227 & 0.255 \\
+Tanzania & 0.424 & 0.590 & 0.597 & 0.559 & 0.657 \\
+Thailand & 0.925 & 0.949 & 0.916 & 0.805 & 0.827 \\
+Timor Leste & 0.981 & 0.729 & 0.696 & 0.598 & 0.544 \\
+Tonga & 0.863 & 0.937 & 0.944 & 0.928 & 0.895 \\
+Turkey & 0.352 & 0.589 & 0.640 & 0.650 & 0.682 \\
+Uganda & 0.458 & 0.437 & 0.336 & 0.304 & 0.258 \\
+Ukraine & 0.857 & 0.789 & 0.695 & 0.716 & 0.760 \\
+United Arab Emirates & 1.000 & 0.881 & 0.875 & 0.865 & 0.974 \\
+United States of America & 0.984 & 0.967 & 0.983 & 1.058 & 1.011 \\
+Uruguay & 0.828 & 0.812 & 0.866 & 0.845 & 0.783 \\
+Uzbekistan & 0.250 & 0.479 & 0.564 & 0.556 & 0.592 \\
+Vanuatu & 0.878 & 0.957 & 0.901 & 0.900 & 0.843 \\
+Venezuela & 0.718 & 0.714 & 0.708 & 0.722 & 0.646 \\
+Vietnam & 0.818 & 0.961 & 0.893 & 0.863 & 0.701 \\
+Yemen & 0.250 & 0.355 & 0.297 & 0.348 & 0.410 \\
+Zambia & 0.632 & 0.528 & 0.542 & 0.510 & 0.567 \\
+Zimbabwe & 0.400 & 0.458 & 0.459 & 0.449 & 0.506 \\
+\hline
+\end{longtable}
+}
+
+\bibliographystyle{splncs04}
+\bibliography{../article/bibliography}
+
+\end{document}
